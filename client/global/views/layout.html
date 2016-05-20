@@ -1,0 +1,11 @@
+<template name="layout">
+    {{> navbar }}
+    <div class="container">
+        {{#if loggingIn}}
+            {{> loading}}
+        {{else}}
+            {{> alerts }}
+            {{> yield}}
+        {{/if}}
+    </div>
+</template>
