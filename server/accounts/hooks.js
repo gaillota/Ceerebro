@@ -20,3 +20,10 @@ Accounts.validateLoginAttempt(function(obj) {
 
     return true;
 });
+
+// Generate public name property
+Accounts.onCreateUser(function(options, user) {
+    console.log("options " + options);
+    console.log("user " + user);
+    return user;
+});

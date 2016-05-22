@@ -10,14 +10,15 @@ Meteor.methods({
             return 'Application already booted';
         }
 
-        var adminEmailAddress = Meteor.settings.admin.emailAddress;
-
-        if (!adminEmailAddress) {
-            return 'Please fill the settings.json file';
+        if (!Meteor.settings.admin || !Meteor.settings.admin.emailAddress || !Meteor.settings.admin.username) {
+            return 'Please complete the settings.json file';
         }
 
+        var adminEmailAddress = Meteor.settings.admin.emailAddress;
+        var username = Meteor.settings.admin.username;
+
         // Create first user
-        var userId = Accounts.createUser({ email: adminEmailAddress });
+        var userId = Accounts.createUser({ username: username, email: adminEmailAddress });
         // Set newly created user as admin
         Roles.addUsersToRoles(userId, 'admin');
 

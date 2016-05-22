@@ -3,9 +3,10 @@ Router.map(function() {
     this.route('/register', {
         name: 'register'
     });
-    // Reset password
+    // Verify email
     this.route('/verify-email/:token', {
-        action: function() {
+        name: 'verify.email',
+        onRun: function() {
             Accounts.verifyEmail(this.params.token, function(error) {
                 if (error) {
                     throwAlert(error.reason);
@@ -16,11 +17,16 @@ Router.map(function() {
             });
         }
     });
+    // Enroll
+    this.route('/enroll/:token', {
+        name: 'enroll'
+    });
     // Login
     this.route('/login', {
         // Only route without default template
         layoutTemplate: 'login'
     });
+    // Change password
     this.route('/change-password', {
         name: 'change.password'
     });

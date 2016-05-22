@@ -1,4 +1,4 @@
-Template.index.helpers({
+Template.credentials.helpers({
     credentials: function() {
         return Credentials.find({}, {
             sort: {

@@ -1,4 +1,4 @@
-AutoForm.addHooks('changePasswordForm', {
+AutoForm.addHooks('profileChangePassword', {
     onSubmit: function(doc) {
         this.event.preventDefault();
         var self = this;
