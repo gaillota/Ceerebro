@@ -6,25 +6,22 @@ Router.route('/boot', function() {
 
 Meteor.methods({
     bootstrap: function() {
-        if (Meteor.users.find().count()) {
-            return 'Application already booted';
+        if (!Meteor.users.find().count()) {
+            return 'No user registered';
         }
 
-        if (!Meteor.settings.admin || !Meteor.settings.admin.emailAddress || !Meteor.settings.admin.username) {
-            return 'Please complete the settings.json file';
+        if (Roles.getUsersInRole('admin').count()) {
+            return 'An admin user already exists';
         }
 
-        var adminEmailAddress = Meteor.settings.admin.emailAddress;
-        var username = Meteor.settings.admin.username;
+        var firstUser = Meteor.users.findOne({}, {
+            sort: {
+                createdAt: 1
+            }
+        });
 
-        // Create first user
-        var userId = Accounts.createUser({ username: username, email: adminEmailAddress });
-        // Set newly created user as admin
-        Roles.addUsersToRoles(userId, 'admin');
+        Roles.addUsersToRoles(firstUser._id, 'admin');
 
-        // Send enrollment email
-        Accounts.sendEnrollmentEmail(userId);
-
-        return "First user successfully created !";
+        return "First user set as admin !";
     }
 });
