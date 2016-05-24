@@ -9,39 +9,39 @@ Accounts.urls.enrollAccount = function(token) {
 /**
  * Emails settings
  */
-Accounts.emailTemplates.from = "Cerebro <no-reply@cerebro.com>";
+Accounts.emailTemplates.from = "Ceerebro <no-reply@ceerebro.com>";
 
-Accounts.emailTemplates.siteName = "Cerebro";
+Accounts.emailTemplates.siteName = "Ceerebro";
 
 // Email verifying email
 Accounts.emailTemplates.verifyEmail = {
     subject: function() {
-        return "Activate your Cerebro account.";
+        return "Activate your Ceerebro account.";
     },
     text: function(user, url) {
         return "Hi " + user.username + ",\n\n"
-            + "Welcome on Cerebro ! :)\n\n"
+            + "Welcome on Ceerebro ! :)\n\n"
             + "Before you can begin, we just need you to do one last thing...\n"
             + "Please follow this link in order to verify your e-mail address and complete your registration :\n\n"
             + url + ".\n\n"
-            + "If you didn't register on PenBudies, please ignore this e-mail.\n\n"
+            + "If you didn't register on Ceerebro, please ignore this e-mail.\n\n"
             + "Have an amazing day !\n"
-            + "The PenBudies Team.";
+            + "The Ceerebro Team.";
     }
 };
 
 // Enrollment email
 Accounts.emailTemplates.enrollAccount = {
     subject: function() {
-        return "Activate your Cerebro account.";
+        return "Activate your Ceerebro account.";
     },
     text: function(user, url) {
         return "Hi,\n\n"
-            + "Welcome on Cerebro ! :)\n"
+            + "Welcome on Ceerebro ! :)\n"
             + "Please follow this link in order to setup a password and complete your registration :\n\n"
             + url + ".\n\n"
             + "Have an amazing day !\n"
-            + "The Cerebro Team.";
+            + "The Ceerebro Team.";
     }
 };
 
