@@ -17,10 +17,6 @@ Router.map(function() {
             });
         }
     });
-    // Enroll
-    this.route('/enroll/:token', {
-        name: 'enroll'
-    });
     // Login
     this.route('/login', {
         // Only route without default template

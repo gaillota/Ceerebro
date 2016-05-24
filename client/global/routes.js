@@ -1,5 +1,8 @@
 Router.map(function() {
     this.route('/', {
-        name: 'index'
+        name: 'index',
+        onBeforeAction: function() {
+            this.redirect('credentials');
+        }
     });
 });

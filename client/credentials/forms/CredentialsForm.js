@@ -1,17 +1,25 @@
 CredentialsForm = new SimpleSchema({
     domain: {
         type: String,
-        label: 'Domain'
+        label: 'Domain',
+        autoform: {
+            autofocus: true,
+            autocomplete: false
+        }
     },
     identifier: {
         type: String,
-        label: 'Identifier'
+        label: 'Identifier',
+        autoform: {
+            autocomplete: false
+        }
     },
     password: {
         type: String,
         label: 'Password',
         autoform: {
-            type: 'password'
+            type: 'password',
+            autocomplete: false
         }
     }
 });

@@ -22,5 +22,5 @@ var onBeforeHooks = {
 
 // User must be logged in routes
 Router.onBeforeAction(onBeforeHooks.isLoggedIn, {
-    except: 'register verify.email login enroll'.split(' ')
+    except: 'register verify.email login'.split(' ')
 });

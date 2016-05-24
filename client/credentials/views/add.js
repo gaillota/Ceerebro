@@ -23,3 +23,12 @@ AutoForm.addHooks('addCredentials', {
         Router.go('credentials');
     }
 });
+
+Template.credentialsAdd.events({
+    'click .js-submit': function(event) {
+        if (!Session.get('masterKey')) {
+            event.preventDefault();
+            Modal.show('masterPasswordModal');
+        }
+    }
+});
