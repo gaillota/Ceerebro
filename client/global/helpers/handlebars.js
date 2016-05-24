@@ -44,3 +44,14 @@ Template.registerHelper('accountStatus', function(user) {
 Template.registerHelper('masterKeyIsSet', function() {
     return Session.get('masterKey');
 });
+
+Template.registerHelper('isEmpty', function(data) {
+    if (!data) {
+        return true;
+    }
+    if (_.isArray(data) || _.isString(data)) {
+        return !data.length;
+    }
+
+    return !data.count();
+});
