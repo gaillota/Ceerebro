@@ -40,3 +40,7 @@ Template.registerHelper('accountStatus', function(user) {
         }
     }
 });
+
+Template.registerHelper('masterKeyIsSet', function() {
+    return Session.get('masterKey');
+});

@@ -2,6 +2,8 @@ Meteor.methods({
     insertCredentials: function (credentials) {
         checkUser();
 
+        log(credentials);
+
         credentials.owner = Meteor.userId();
         Credentials.insert(credentials);
     },

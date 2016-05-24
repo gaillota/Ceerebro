@@ -1,14 +1,4 @@
 Template.navbar.helpers({
-    photo: function() {
-        return Photos.findOne(Meteor.user().profile.photo) || { url: '/img/defaultPhoto.png' };
-    },
-    notifications: function() {
-        return Notifications.find({}, {
-            sort: {
-                createdAt: -1
-            }
-        });
-    }
 });
 
 Template.navbar.events({
@@ -22,5 +12,15 @@ Template.navbar.events({
                 Router.go('index');
             }
         });
+    },
+    'click .js-set-key': function(event) {
+        event.preventDefault();
+
+        Modal.show('masterPasswordModal');
+    },
+    'click .js-forget-key': function(event) {
+        event.preventDefault();
+
+        Session.set('masterKey', undefined);
     }
 });
