@@ -22,8 +22,4 @@ Router.map(function() {
         // Only route without default template
         layoutTemplate: 'login'
     });
-    // Change password
-    this.route('/change-password', {
-        name: 'change.password'
-    });
 });
