@@ -38,7 +38,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{pathFor 'profile'}}">{{{fa 'user'}}} Profile</a></li>
-                                <li><a href="{{pathFor 'profile.change.password'}}">{{{fa 'lock'}}} Change password</a></li>
                                 {{#if isInRole 'admin'}}
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">{{{fa 'terminal'}}} Administration</a></li>

@@ -4,7 +4,7 @@ Router.map(function() {
         name: 'profile'
     });
     // Change password
-    this.route('/profile/change-password', {
-        name: 'profile.change.password'
-    });
+    //this.route('/profile/change-password', {
+    //    name: 'profile.change.password'
+    //});
 });
