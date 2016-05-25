@@ -3,7 +3,7 @@ AutoForm.addHooks('registrationForm', {
         this.event.preventDefault();
         var self = this;
 
-        doc.keychain = EncryptionService.setupUserEncryptionKeychain(doc.password);
+        doc.keychain = EncryptionService.setupUserKeychain(doc.password);
         Meteor.call('registerUser', doc, function(error) {
             self.done(error);
         });

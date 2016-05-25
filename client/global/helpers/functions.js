@@ -10,3 +10,7 @@ throwAlert = function(text, type, time) {
         Alerts.remove(alertId);
     }, time);
 };
+
+removeMasterKey = function() {
+    Session.set('masterKey', undefined);
+};

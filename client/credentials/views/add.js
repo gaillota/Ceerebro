@@ -25,7 +25,7 @@ AutoForm.addHooks('addCredentials', {
 });
 
 Template.credentialsAdd.events({
-    'click .js-submit': function(event) {
+    'click .js-set-key': function(event) {
         if (!Session.get('masterKey')) {
             event.preventDefault();
             Modal.show('masterPasswordModal');

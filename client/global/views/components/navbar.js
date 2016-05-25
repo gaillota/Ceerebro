@@ -9,18 +9,17 @@ Template.navbar.events({
             if (error) {
                 throwAlert(error.reason);
             } else {
+                removeMasterKey();
                 Router.go('index');
             }
         });
     },
     'click .js-set-key': function(event) {
         event.preventDefault();
-
         Modal.show('masterPasswordModal');
     },
-    'click .js-forget-key': function(event) {
+    'click .js-remove-key': function(event) {
         event.preventDefault();
-
-        Session.set('masterKey', undefined);
+        removeMasterKey();
     }
 });

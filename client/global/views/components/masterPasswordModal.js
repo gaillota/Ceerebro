@@ -20,5 +20,8 @@ AutoForm.addHooks('masterPasswordForm', {
                 Session.set('passwordOnHold', undefined);
             }, 500);
         }
+    },
+    onError: function(doc) {
+
     }
 });

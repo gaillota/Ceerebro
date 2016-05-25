@@ -17,6 +17,10 @@ var onBeforeHooks = {
                 this.next();
             }
         }
+    },
+    clearAlerts: function() {
+        Alerts.remove({});
+        this.next();
     }
 };
 
@@ -24,3 +28,6 @@ var onBeforeHooks = {
 Router.onBeforeAction(onBeforeHooks.isLoggedIn, {
     except: 'register verify.email login'.split(' ')
 });
+
+// Clear alerts when route changes
+Router.onBeforeAction(onBeforeHooks.clearAlerts);

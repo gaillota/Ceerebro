@@ -2,7 +2,7 @@ Template.credentials.helpers({
     credentials: function() {
         return Credentials.find({}, {
             sort: {
-                createdAt: -1
+                domain: 1
             }
         });
     }
