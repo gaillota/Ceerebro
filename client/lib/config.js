@@ -8,8 +8,8 @@ Meteor.startup(function() {
             'apple-mobile-web-app-capable': 'yes'
         },
         link: {
-            'icon': 'img/icons/favicon.ico',
-            'apple-touch-icon': 'img/icons/favicon.ico',
+            'icon': 'favicon.png',
+            'apple-touch-icon': 'apple-touch-icon-precomposed.png',
             'manifest': 'manifest.json'
         }
     });
