@@ -1,7 +1,10 @@
 LoginForm = new SimpleSchema({
     email: {
         type: String,
-        label: 'E-mail address / Username'
+        label: 'E-mail address / Username',
+        autoform: {
+            type: 'email'
+        }
     },
     password: {
         type: String,
@@ -10,4 +13,11 @@ LoginForm = new SimpleSchema({
             type: 'password'
         }
     }
+    //remember: {
+    //    type: Boolean,
+    //    label: 'Remember me',
+    //    autoform: {
+    //        type: 'boolean-checkbox'
+    //    }
+    //}
 });
