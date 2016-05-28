@@ -10,13 +10,5 @@ Template.navbar.events({
                 FlowRouter.go('index');
             }
         });
-    },
-    'click .js-set-key': function(event) {
-        event.preventDefault();
-        Modal.show('masterPasswordModal');
-    },
-    'click .js-remove-key': function(event) {
-        event.preventDefault();
-        removeMasterKey();
     }
 });

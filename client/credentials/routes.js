@@ -1,4 +1,9 @@
-FlowRouter.route('/credentials', {
+var credentials = FlowRouter.group({
+    prefix: '/credentials',
+    name: 'credentialsGroup'
+});
+
+credentials.route('/', {
     name: 'credentials',
     subscriptions: function() {
         this.register('myCredentials', Meteor.subscribe('credentials'));
@@ -8,7 +13,7 @@ FlowRouter.route('/credentials', {
     }
 });
 
-FlowRouter.route('/credentials/add', {
+credentials.route('/add', {
     name: 'credentials.add',
     action: function() {
         BlazeLayout.render('layout', { page: 'credentialsAdd' });
