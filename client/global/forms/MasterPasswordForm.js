@@ -1,7 +1,7 @@
 MasterPasswordForm = new SimpleSchema({
     password: {
         type: String,
-        label: "Your master password",
+        label: "Your password",
         autoform: {
             type: "password",
             autofocus: true

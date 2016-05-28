@@ -1,21 +1,19 @@
 <template name="login">
-    <div class="container">
-        <h2 class="text-center">{{{fa 'sign-in'}}} Log in</h2>
-        <div class="row">
-            <div class="col-md-4 center-block" style="float: none;">
-                <hr>
-                {{> alerts }}
-                {{#autoForm schema="LoginForm" id="loginForm"}}
-                    {{> afQuickField name="email" autofocus=true }}
-                    {{> afQuickField name="password" }}
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-success">Log in</button>
-                    </div>
-                {{/autoForm}}
-                <div class="row">
-                    <div class="col-xs-12 text-center">
-                        <a href="{{pathFor 'register'}}">Create an account now for free.</a>
-                    </div>
+    <h2 class="text-center">{{{fa 'sign-in'}}} Log in</h2>
+    <div class="row">
+        <div class="col-md-4 center-block" style="float: none;">
+            <hr>
+            {{> alerts }}
+            {{#autoForm schema="LoginForm" id="loginForm"}}
+                {{> afQuickField name="email"}}
+                {{> afQuickField name="password"}}
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-success">Log in</button>
+                </div>
+            {{/autoForm}}
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a href="{{pathFor 'register'}}">Create an account now for free.</a>
                 </div>
             </div>
         </div>

@@ -3,7 +3,8 @@ LoginForm = new SimpleSchema({
         type: String,
         label: 'E-mail address / Username',
         autoform: {
-            type: 'email'
+            type: 'email',
+            autofocus: true
         }
     },
     password: {

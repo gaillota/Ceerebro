@@ -22,6 +22,6 @@ FlowRouter.route('/verify-email/:token', {
 FlowRouter.route('/login', {
     name: 'login',
     action: function() {
-        BlazeLayout.render('login');
+        BlazeLayout.render('layout', { page: 'login' });
     }
 });
