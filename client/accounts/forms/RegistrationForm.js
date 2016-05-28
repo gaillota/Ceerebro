@@ -15,7 +15,7 @@ RegistrationForm = new SimpleSchema({
     },
     password: {
         type: String,
-        label: "Master password / Account password",
+        label: "Password",
         min: 5,
         autoform: {
             type: "password"
