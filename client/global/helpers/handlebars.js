@@ -49,6 +49,7 @@ Template.registerHelper('isEmpty', function(data) {
     if (!data) {
         return true;
     }
+    
     if (_.isArray(data) || _.isString(data)) {
         return !data.length;
     }

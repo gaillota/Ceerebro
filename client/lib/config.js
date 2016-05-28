@@ -28,7 +28,7 @@ AutoForm.addHooks(null, {
     }
 });
 
-// Hide spinner with for NProgress bar
+// Hide spinner for NProgress bar
 NProgress.configure({
     showSpinner: false
 });

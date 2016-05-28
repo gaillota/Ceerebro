@@ -26,7 +26,6 @@ dburles:collection-helpers
 matb33:collection-hooks
 email
 aldeed:autoform
-iron:router
 settinghead:auto-nprogress
 zimme:active-route
 raix:handlebar-helpers
@@ -43,3 +42,6 @@ fortawesome:fontawesome
 jparker:crypto-aes
 peppelg:bootstrap-3-modal
 manuelschoebel:ms-seo
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
