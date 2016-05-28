@@ -19,6 +19,9 @@
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
                         <li class="{{isActiveRoute regex='credentials'}}"><a href="{{pathFor 'credentials'}}">{{{fa 'key'}}} Credentials</a></li>
+                        {{#if isInRole 'admin'}}
+                            <li class="{{isActiveRoute regex='admin'}}"><a href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a></li>
+                        {{/if}}
                     {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -29,10 +32,6 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{pathFor 'profile'}}">{{{fa 'user'}}} Profile</a></li>
-                                {{#if isInRole 'admin'}}
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a></li>
-                                {{/if}}
                                 <li role="separator" class="divider"></li>
                                 <li><a class="js-logout" href="#">{{{fa 'sign-out'}}} Logout</a></li>
                             </ul>

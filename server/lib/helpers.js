@@ -1,10 +1,26 @@
 /**
- * Check if passed user or current user is admin
+ * Check if user has specified role
+ *
+ * @param role
+ * @param userId
+ * @returns {*|Boolean}
+ */
+hasRole = function(role, userId) {
+    if (!role){
+        return false;
+    }
+    userId = userId || this.userId || Meteor.userId();
+
+    return Roles.userIsInRole(userId, role);
+};
+
+/**
+ * Check if user is admin
  *
  * @param userId
  * @returns {*|Boolean}
  */
 isAdmin = function(userId) {
-    userId = userId || Meteor.userId();
-    return Roles.userIsInRole(userId, 'admin');
+    userId = userId || this.userId || Meteor.userId();
+    return hasRole(userId, 'admin');
 };

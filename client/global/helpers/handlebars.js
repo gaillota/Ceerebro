@@ -19,7 +19,8 @@ Template.registerHelper('formatDateRelative', function(date, defaultValue) {
     return moment(date).fromNow();
 });
 
-Template.registerHelper('accountStatus', function(user) {
+Template.registerHelper('userStatus', function(user) {
+    user = user || this;
     if (user.disabled) {
         return {
             type: 'danger',
