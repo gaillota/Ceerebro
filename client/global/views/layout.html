@@ -6,7 +6,9 @@
         {{else}}
             {{#if Template.subscriptionsReady}}
                 {{> alerts}}
-                {{> masterKeyButton}}
+                {{#if currentUser}}
+                    {{> masterKeyButton}}
+                {{/if}}
                 {{> Template.dynamic template=page}}
             {{else}}
                 {{> loading}}
