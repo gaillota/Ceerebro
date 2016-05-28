@@ -1,3 +1,12 @@
+Template.credentialsAdd.events({
+    'click .js-set-key': function(event) {
+        if (!Session.get('masterKey')) {
+            event.preventDefault();
+            Modal.show('masterPasswordModal');
+        }
+    }
+});
+
 AutoForm.addHooks('addCredentials', {
     onSubmit: function(doc) {
         this.event.preventDefault();
@@ -21,14 +30,5 @@ AutoForm.addHooks('addCredentials', {
     onSuccess: function() {
         throwAlert('Credentials successfully added', 'success');
         FlowRouter.go('credentials');
-    }
-});
-
-Template.credentialsAdd.events({
-    'click .js-set-key': function(event) {
-        if (!Session.get('masterKey')) {
-            event.preventDefault();
-            Modal.show('masterPasswordModal');
-        }
     }
 });

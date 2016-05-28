@@ -4,9 +4,13 @@
         {{#if loggingIn}}
             {{> loading}}
         {{else}}
-            {{> alerts}}
-            {{> masterKeyButton}}
-            {{> Template.dynamic template=page}}
+            {{#if Template.subscriptionsReady}}
+                {{> alerts}}
+                {{> masterKeyButton}}
+                {{> Template.dynamic template=page}}
+            {{else}}
+                {{> loading}}
+            {{/if}}
         {{/if}}
     </div>
 </template>

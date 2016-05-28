@@ -5,6 +5,9 @@ Template.credentials.helpers({
                 domain: 1
             }
         });
+    },
+    editButtonState: function() {
+        return Session.get('masterKey') ? '' : 'disabled';
     }
 });
 
