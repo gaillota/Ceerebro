@@ -1,25 +1,27 @@
-Router.map(function() {
-    // Register
-    this.route('/register', {
-        name: 'register'
-    });
-    // Verify email
-    this.route('/verify-email/:token', {
-        name: 'verify.email',
-        onRun: function() {
-            Accounts.verifyEmail(this.params.token, function(error) {
-                if (error) {
-                    throwAlert(error.reason);
-                } else {
-                    throwAlert('Your account is now activated. Thanks !', 'success');
-                }
-                Router.go('index');
-            });
-        }
-    });
-    // Login
-    this.route('/login', {
-        // Only route without default template
-        layoutTemplate: 'login'
-    });
+FlowRouter.route('/register', {
+    name: 'register',
+    action: function() {
+        BlazeLayout.render('layout', { page: 'register' });
+    }
+});
+
+FlowRouter.route('/verify-email/:token', {
+    name: 'verify.email',
+    action: function(params) {
+        Accounts.verifyEmail(params.token, function(error) {
+            if (error) {
+                throwAlert(error.reason);
+            } else {
+                throwAlert('Your account is now activated. Thanks !', 'success');
+            }
+            FlowRouter.go('index');
+        });
+    }
+});
+
+FlowRouter.route('/login', {
+    name: 'login',
+    action: function() {
+        BlazeLayout.render('login');
+    }
 });

@@ -1,14 +1,16 @@
-Router.map(function() {
-    this.route('/credentials', {
-        name: 'credentials',
-        waitOn: function() {
-            return Meteor.subscribe('credentials');
-        }
-    });
-    this.route('/credentials/add', {
-        name: 'credentials.add'
-    });
-    //this.route('/credentials/edit/:_id', {
-    //    name: 'credentials.edit'
-    //});
+FlowRouter.route('/credentials', {
+    name: 'credentials',
+    subscriptions: function() {
+        this.register('myCredentials', Meteor.subscribe('credentials'));
+    },
+    action: function() {
+        BlazeLayout.render('layout', { page: 'credentials' });
+    }
+});
+
+FlowRouter.route('/credentials/add', {
+    name: 'credentials.add',
+    action: function() {
+        BlazeLayout.render('layout', { page: 'credentialsAdd' });
+    }
 });

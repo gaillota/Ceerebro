@@ -1,8 +1,6 @@
-Router.map(function() {
-    this.route('/', {
-        name: 'index',
-        onBeforeAction: function() {
-            this.redirect('credentials');
-        }
-    });
+FlowRouter.route('/', {
+    name: 'index',
+    action: function() {
+        FlowRouter.go('credentials');
+    }
 });

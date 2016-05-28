@@ -1,6 +1,3 @@
-Template.navbar.helpers({
-});
-
 Template.navbar.events({
     'click .js-logout': function(event) {
         event.preventDefault();
@@ -10,7 +7,7 @@ Template.navbar.events({
                 throwAlert(error.reason);
             } else {
                 removeMasterKey();
-                Router.go('index');
+                FlowRouter.go('index');
             }
         });
     },

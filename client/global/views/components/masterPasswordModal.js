@@ -1,9 +1,3 @@
-Template.showCredentialsModal.hooks({
-    rendered: function() {
-
-    }
-});
-
 AutoForm.addHooks('masterPasswordForm', {
     onSubmit: function(doc) {
         this.event.preventDefault();
@@ -28,3 +22,9 @@ AutoForm.addHooks('masterPasswordForm', {
         }
     }
 });
+
+//Template.showCredentialsModal.hooks({
+//    rendered: function() {
+//
+//    }
+//});

@@ -1,7 +1,5 @@
-var routerConfig = {
-    layoutTemplate: 'layout',
-    loadingTemplate: 'loading',
-    notFoundTemplate: 'notFound'
+FlowRouter.notFound = {
+    action: function() {
+        BlazeLayout.render('notFound');
+    }
 };
-
-Router.configure(routerConfig);

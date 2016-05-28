@@ -1,33 +1,31 @@
-var onBeforeHooks = {
-    isLoggedIn: function() {
+var triggers = {
+    isLoggedIn: function(context, redirect) {
         if (!Meteor.userId()) {
-            this.redirect('login');
-        } else {
-            this.next();
+            redirect('login');
         }
     },
-    isAdmin: function() {
-        if (!Meteor.userId()) {
-            this.redirect('login');
-        } else {
-            if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
-                throwAlert("You can't access this section !");
-                this.redirect('index');
-            } else {
-                this.next();
-            }
-        }
-    },
+    //isAdmin: function(context, redirect) {
+    //    if (!Meteor.userId()) {
+    //        redirect('login');
+    //        stop();
+    //    } else {
+    //        if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
+    //            throwAlert("You can't access this section !");
+    //            redirect('index');
+    //        }
+    //    }
+    //},
     clearAlerts: function() {
         Alerts.remove({});
-        this.next();
     }
 };
 
 // User must be logged in routes
-Router.onBeforeAction(onBeforeHooks.isLoggedIn, {
+FlowRouter.triggers.enter(triggers.isLoggedIn, {
     except: 'register verify.email login'.split(' ')
 });
 
 // Clear alerts when route changes
-Router.onBeforeAction(onBeforeHooks.clearAlerts);
+FlowRouter.triggers.exit(triggers.clearAlerts, {
+    only: 'login'.split(' ')
+});

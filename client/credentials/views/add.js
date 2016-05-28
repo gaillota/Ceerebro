@@ -20,7 +20,7 @@ AutoForm.addHooks('addCredentials', {
     },
     onSuccess: function() {
         throwAlert('Credentials successfully added', 'success');
-        Router.go('credentials');
+        FlowRouter.go('credentials');
     }
 });
 

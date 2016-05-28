@@ -1,7 +1,5 @@
-Router.route('/boot', function() {
-    this.response.end(Meteor.call('bootstrap'));
-}, {
-    where: 'server'
+Picker.route('/boot', function(params, req, res) {
+    res.end(Meteor.call('bootstrap'));
 });
 
 Meteor.methods({

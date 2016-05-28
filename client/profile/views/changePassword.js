@@ -9,6 +9,6 @@ AutoForm.addHooks('changePasswordForm', {
     },
     onSuccess: function() {
         throwAlert('Password changed !', 'success');
-        Router.go('index');
+        FlowRouter.go('index');
     }
 });
