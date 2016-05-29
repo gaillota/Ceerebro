@@ -3,7 +3,10 @@ RegistrationForm = new SimpleSchema({
         type: String,
         label: "Username",
         min: 3,
-        max: 20
+        max: 20,
+        autoform: {
+            autofocus: true
+        }
     },
     email: {
         type: String,

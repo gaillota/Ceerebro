@@ -1,6 +1,5 @@
 <template name="login">
     <h1>Welcome on Ceerebro</h1>
-    {{> alerts }}
     <div class="row">
         <div class="col-md-6">
             <h2>{{{fa 'sign-in'}}} Log in</h2>
@@ -8,25 +7,10 @@
             {{> quickForm schema="LoginForm" id="loginForm" buttonContent="Log in"}}
         </div>
         <div class="col-md-6">
-            <h2>{{{fa 'cloud-download'}}} Store your login credentials</h2>
+            <h2>{{{fa 'user-times'}}} Don't have an account ?</h2>
             <hr>
-            <p>Here you can safely store all of your credentials.</p>
-            <p>You can then access them from anywhere around the world.</p>
-            <p>Here is how it goes down :</p>
-            <ul>
-                <li>When you create an account, Ceerebro creates a <strong>keychain</strong> associated with your account.</li>
-                <li>This keychain contains 3 elements:
-                    <ul>
-                        <li>a <em>salt</em></li>
-                        <li>a <em>password validator</em></li>
-                        <li>a <em>master key</em></li>
-                    </ul>
-                </li>
-                <li>This <strong>master key</strong> is used to encrypt every credentials that you store on Ceerebro, using <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES-256</a> algorithm.</li>
-                <li>This <strong>master key</strong> is savely stored in Ceerebro using one half of a key generated from your password and your keychain salt. The other half is your password validator.</li>
-                <li>This way, only <strong>you</strong> can have access to your credentials, and <strong>no one else</strong> !</li>
-            </ul>
-            <a href="{{pathFor 'register'}}" class="btn btn-success">Create an account.</a>
+            <h2><small>You can create one right now, it's completely free !</small></h2>
+            <a href="{{pathFor 'register'}}" class="btn btn-success">Create an account</a>
         </div>
     </div>
 </template>
