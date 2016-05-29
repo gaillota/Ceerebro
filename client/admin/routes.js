@@ -1,6 +1,7 @@
 var adminRoutes = FlowRouter.group({
     prefix: '/admin',
-    name: 'adminGroup'
+    name: 'adminGroup',
+    triggersEnter: [FlowRouter.triggersFunctions.isAdmin]
 });
 
 adminRoutes.route('/', {
@@ -12,10 +13,14 @@ adminRoutes.route('/', {
 
 adminRoutes.route('/accounts', {
     name: 'admin.accounts',
-    subscriptions: function() {
-        this.register('adminAccounts', Meteor.subscribe('admin.accounts'));
-    },
     action: function() {
-        BlazeLayout.render('layout', { page: 'adminAccounts '});
+        BlazeLayout.render('layout', { page: 'adminAccounts' });
+    }
+});
+
+adminRoutes.route('/accounts/:userId/remove', {
+    name: 'admin.accounts.remove',
+    action: function() {
+        BlazeLayout.render('layout', { page: 'adminAccountsRemove' });
     }
 });

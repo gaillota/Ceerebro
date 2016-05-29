@@ -9,7 +9,7 @@
                 <th>Username</th>
                 <th>Email address</th>
                 <th>Created at</th>
-                <th>Status</th>
+                <th class="text-center">Status</th>
                 <th># cred.</th>
                 <th></th>
             </tr>
@@ -26,11 +26,23 @@
                             <span class="label label-{{type}}">{{{fa icon}}} {{text}}</span>
                         {{/with}}
                     </td>
-                    <td>0</td>
-                    <td>Actions</td>
+                    <td>{{credentialsCount}}</td>
+                    <td>
+                        <div class="pull-right">
+                            {{#if isDisabled}}
+                                <button type="button" class="btn btn-success btn-xs js-status-toggle">{{{fa 'check'}}}<span class="hidden-xs"> Enable</span></button>
+                            {{else}}
+                                <button type="button" class="btn btn-danger btn-xs js-status-toggle">{{{fa 'user-times'}}}<span class="hidden-xs"> Disable</span></button>
+                            {{/if}}
+                            <a href="{{pathFor 'admin.accounts.remove' userId=this._id}}" class="btn btn-danger btn-xs js-remove">{{{fa 'trash'}}}<span class="hidden-xs"> Remove</span></a>
+                        </div>
+                    </td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
     </div>
+    {{#if isEmpty users}}
+        <h4 class="text-center"><small>No users for now...</small></h4>
+    {{/if}}
 </template>

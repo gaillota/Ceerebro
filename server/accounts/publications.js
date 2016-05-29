@@ -1,4 +1,4 @@
-// Publish user's encryption keychain to client
+// Publish user's keychain to client
 Meteor.publish(null, function() {
     if (!this.userId) {
         return this.ready();

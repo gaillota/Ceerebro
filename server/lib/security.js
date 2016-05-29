@@ -13,7 +13,7 @@ checkUser = function() {
 checkAdmin = function() {
     checkUser();
 
-    if (!Roles.userIsInRole(Meteor.userId(), role)) {
+    if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
         throw new Meteor.Error(403, 'You must be admin to access this section.');
     }
 };

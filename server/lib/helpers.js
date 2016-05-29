@@ -9,7 +9,7 @@ hasRole = function(role, userId) {
     if (!role){
         return false;
     }
-    userId = userId || this.userId || Meteor.userId();
+    userId = userId || Meteor.userId();
 
     return Roles.userIsInRole(userId, role);
 };
@@ -21,6 +21,6 @@ hasRole = function(role, userId) {
  * @returns {*|Boolean}
  */
 isAdmin = function(userId) {
-    userId = userId || this.userId || Meteor.userId();
+    userId = userId || Meteor.userId();
     return hasRole(userId, 'admin');
 };
