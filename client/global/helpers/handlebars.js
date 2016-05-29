@@ -2,13 +2,13 @@ Template.registerHelper('fa', function(icon) {
     return '<i class="fa fa-' + icon + '"></i>';
 });
 
-Template.registerHelper('formatDate', function(date, defaultValue) {
+Template.registerHelper('formatDate', function(date) {
     if (!date) {
-        return defaultValue || 'undefined';
+        return 'undefined';
     }
 
     date = moment(date);
-    return date.isSame(new Date(), 'day') ? date.format('HH:mm') : date.isSame(new Date(), 'year') ? date.format('MMMM Do') : date.format('MMMM Do YYYY')
+    return date.isSame(new Date(), 'day') ? date.format('HH:mm') : date.isSame(new Date(), 'year') ? date.format('MMMM Do') : date.format('MMMM Do YYYY');
 });
 
 Template.registerHelper('formatDateRelative', function(date, defaultValue) {

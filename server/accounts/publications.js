@@ -8,6 +8,7 @@ Meteor.publish(null, function() {
         _id: this.userId
     }, {
         fields: {
+            createdAt: 1,
             keychain: 1
         }
     });
