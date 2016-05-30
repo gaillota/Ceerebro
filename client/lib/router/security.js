@@ -23,7 +23,7 @@ FlowRouter.triggersFunctions = {
 
 // User must be logged in routes
 FlowRouter.triggers.enter(FlowRouter.triggersFunctions.isLoggedIn, {
-    except: 'register verify.email login'.split(' ')
+    except: 'register verify.email login about'.split(' ')
 });
 
 //FlowRouter.triggers.enter(triggers.isAdmin, {
