@@ -46,3 +46,5 @@ kadira:blaze-layout
 arillo:flow-router-helpers
 meteorhacks:picker
 reywood:publish-composite
+mdg:geolocation
+dburles:google-maps

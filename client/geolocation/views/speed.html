@@ -1,0 +1,8 @@
+<template name="speed">
+    <h2 class="text-center">Speedometer</h2>
+    <hr>
+    {{#with toggleButton}}
+        <button class="btn {{class}} center-block js-toggle-measurements">{{text}}</button>
+    {{/with}}
+    <h1 class="text-center" style="margin-top: 30px;">{{speed}} km/h</h1>
+</template>
