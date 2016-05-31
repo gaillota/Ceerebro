@@ -1,20 +1,17 @@
 var lastLocation;
 var lastTime;
 var interval;
+var SPEED_MAX;
 
-Template.speed.onRendered(function() {
+Template.speedometer.onRendered(function() {
     var self = this;
 
     self.autorun(function() {
-        if (Session.get('enabled')) {
-            interval = setInterval(computeSpeed, 1000);
-        } else {
-            clearInterval(interval);
-        }
+        interval = Session.get('enabled') ? setInterval(computeSpeed, 1000) : clearInterval(interval);
     });
 });
 
-Template.speed.helpers({
+Template.speedometer.helpers({
     toggleButton: function() {
         return Session.get('enabled') ? {
             class: 'btn-danger',
@@ -26,10 +23,13 @@ Template.speed.helpers({
     },
     speed: function() {
         return Session.get('speed') || '0.00';
+    },
+    degree: function() {
+        return Session.get('degree') || -90;
     }
 });
 
-Template.speed.events({
+Template.speedometer.events({
     'click .js-toggle-measurements': function() {
         Session.set('enabled', !Session.get('enabled'));
     }
@@ -46,8 +46,9 @@ function computeSpeed() {
         return;
     }
 
-    var speed = SpeedService.computeSpeed(lastLocation, lastTime, currentLocation, currentTime);
+    var speed = GeolocationService.computeSpeed(lastLocation, lastTime, currentLocation, currentTime);
     Session.set('speed', speed);
+    Session.set('degree', GeolocationService.computeDegree(speed, SPEED_MAX));
 
     lastLocation = currentLocation;
     lastTime = currentTime;

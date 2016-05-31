@@ -1,7 +1,7 @@
 var geolocationGroup = FlowRouter.group({
     prefix: '/geolocation',
-    name: 'geolocationGroup',
-    triggersEnter: [FlowRouter.triggersFunctions.isAdmin]
+    name: 'geolocationGroup'
+    //triggersEnter: [FlowRouter.triggersFunctions.isAdmin]
 });
 
 geolocationGroup.route('/', {
@@ -11,10 +11,10 @@ geolocationGroup.route('/', {
     }
 });
 
-geolocationGroup.route('/speed', {
-    name: 'speed',
+geolocationGroup.route('/speedometer', {
+    name: 'speedometer',
     action: function() {
-        BlazeLayout.render('layout', { page: 'speed' });
+        BlazeLayout.render('layout', { page: 'speedometer' });
     }
 });
 

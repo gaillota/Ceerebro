@@ -20,7 +20,7 @@
                     {{#if currentUser}}
                         <li class="{{isActiveRoute regex='credentials'}}"><a href="{{pathFor 'credentials'}}">{{{fa 'key'}}} Credentials</a></li>
                         {{#if isInRole 'admin'}}
-                            <li class="{{isActiveRoute regex='geolocation'}}"><a href="{{pathFor 'geolocation'}}">{{{fa 'map'}}} Geolocation</a></li>
+                            <li class="{{isActiveRoute regex='geolocation'}}"><a href="{{pathFor 'geolocation'}}">{{{fa 'location-arrow'}}} Geolocation</a></li>
                             <li class="{{isActiveRoute regex='admin'}}"><a href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a></li>
                         {{/if}}
                     {{/if}}

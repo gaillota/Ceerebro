@@ -1,0 +1,42 @@
+#speedometer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 30px auto;
+    height: 150px;
+    width: 300px;
+    border-radius: 200px 200px 0 0;
+    background: #97bf0d;
+}
+
+#speedometer:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #97bf0d;
+    z-index: -1;
+}
+
+#needle {
+    position: relative;
+    width: 7px;
+    height: 98%;
+    border-radius: 100% 100% 2px 2px;
+    transform-origin: center bottom;
+    background: #d4d700;
+}
+
+#needle:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -1px;
+    left: -2px;
+    background: #1b9195;
+}
