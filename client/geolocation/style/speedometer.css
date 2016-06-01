@@ -6,6 +6,7 @@
     margin: 30px auto;
     height: 150px;
     width: 300px;
+    max-width: 100%;
     border-radius: 200px 200px 0 0;
     background: #97bf0d;
 }
