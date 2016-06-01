@@ -5,19 +5,21 @@ FlowRouter.triggersFunctions = {
         }
     },
     isAdmin: function(context, redirect) {
-        log('trigger to check if user is admin');
         if (!Meteor.userId()) {
             redirect('login');
         } else {
             if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
-                log('user aint no admin');
-                throwAlert("You must be admin to access this section !");
+                notify("You must be admin to access this section !");
                 redirect('index');
             }
         }
     },
     clearAlerts: function() {
-        Alerts.remove({});
+        Alerts.remove({
+            acrossRoute: {
+                $ne: true
+            }
+        });
     }
 };
 
@@ -26,11 +28,5 @@ FlowRouter.triggers.enter(FlowRouter.triggersFunctions.isLoggedIn, {
     except: 'register verify.email login about'.split(' ')
 });
 
-//FlowRouter.triggers.enter(triggers.isAdmin, {
-//    only: 'admin admin.accounts'.split(' ')
-//});
-
 // Clear alerts when route changes
-FlowRouter.triggers.enter(FlowRouter.triggersFunctions.clearAlerts, {
-    only: 'login register'.split(' ')
-});
+FlowRouter.triggers.exit(FlowRouter.triggersFunctions.clearAlerts);

@@ -1,19 +1,50 @@
-var lastLocation;
-var lastTime;
-var interval;
-var SPEED_MAX;
+var SPEED_MAX = 200;
 
-Template.speedometer.onRendered(function() {
-    var self = this;
+Template.speedometer.hooks({
+    created: function() {
+        this.enabled = new ReactiveVar();
+        this.lastLocation = new ReactiveVar(false);
+        this.lastTime = new ReactiveVar(false);
+        this.speed = new ReactiveVar(0.00);
+        this.degree = new ReactiveVar(-90);
+    },
+    rendered: function() {
+        var self = this;
 
-    self.autorun(function() {
-        interval = Session.get('enabled') ? setInterval(computeSpeed, 1000) : clearInterval(interval);
-    });
+        self.autorun(function() {
+            var geolocation = Geolocation.latLng();
+            var now = Date.now();
+
+            if (!self.enabled.get()) {
+                return;
+            }
+
+            // Set last record if there's no
+            if (!self.lastLocation.get() || !self.lastTime.get()) {
+                self.lastLocation.set(geolocation);
+                self.lastTime.set(now);
+
+                return;
+            }
+
+            // Limit to one computation every second top
+            if (now - self.lastTime.get() < 1000) {
+                return;
+            }
+
+            var speed = GeolocationService.computeSpeed(self.lastLocation.get(), self.lastTime.get(), geolocation, now);
+            self.speed.set(speed);
+            self.degree.set(GeolocationService.computeDegree(speed, SPEED_MAX));
+
+            self.lastLocation.set(geolocation);
+            self.lastTime.set(now);
+        });
+    }
 });
 
 Template.speedometer.helpers({
     toggleButton: function() {
-        return Session.get('enabled') ? {
+        return Template.instance().enabled.get() ? {
             class: 'btn-danger',
             text: 'Stop'
         } : {
@@ -22,34 +53,15 @@ Template.speedometer.helpers({
         }
     },
     speed: function() {
-        return Session.get('speed') || '0.00';
+        return Template.instance().speed.get() || 0.00;
     },
     degree: function() {
-        return Session.get('degree') || -90;
+        return Template.instance().degree.get() || -90;
     }
 });
 
 Template.speedometer.events({
-    'click .js-toggle-measurements': function() {
-        Session.set('enabled', !Session.get('enabled'));
+    'click .js-toggle-measurements': function(event, template) {
+        template.enabled.set(!template.enabled.get());
     }
 });
-
-function computeSpeed() {
-    var currentLocation = Geolocation.latLng();
-    var currentTime = Date.now();
-
-    if (!lastLocation || !lastTime) {
-        lastLocation = currentLocation;
-        lastTime = currentTime;
-
-        return;
-    }
-
-    var speed = GeolocationService.computeSpeed(lastLocation, lastTime, currentLocation, currentTime);
-    Session.set('speed', speed);
-    Session.set('degree', GeolocationService.computeDegree(speed, SPEED_MAX));
-
-    lastLocation = currentLocation;
-    lastTime = currentTime;
-}

@@ -28,7 +28,7 @@ AutoForm.addHooks('addCredentials', {
         });
     },
     onSuccess: function() {
-        throwAlert('Credentials successfully added', 'success');
+        notify('Credentials successfully added', 'success', true);
         FlowRouter.go('credentials');
     }
 });

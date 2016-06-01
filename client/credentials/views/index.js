@@ -26,7 +26,7 @@ Template.credentials.events({
         if (confirm('Are you sure ?')) {
             Meteor.call('removeCredentials', this._id, function(error) {
                 if (error) {
-                    throwAlert(error.reason);
+                    notify(error.toString());
                 }
             });
         }

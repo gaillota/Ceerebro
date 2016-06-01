@@ -6,8 +6,7 @@ AutoForm.addHooks(null, {
             return;
         }
 
-        log(error);
-        throwAlert(error.toString());
+        notify(error.toString());
     }
 });
 

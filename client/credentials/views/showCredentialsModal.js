@@ -2,7 +2,7 @@ Template.showCredentialsModal.helpers({
     credentials: function() {
         var credentials = Credentials.findOne(Template.currentData());
         if (!credentials) {
-            throwAlert('Credentials not found');
+            notify('Credentials not found');
             Modal.hide(this.template.view);
         }
 

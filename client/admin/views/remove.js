@@ -10,7 +10,7 @@ AutoForm.addHooks('accountsRemoveForm', {
         });
     },
     onSuccess: function() {
-        throwAlert('User successfully removed !', 'success');
+        notify('User successfully removed !', 'success', true);
         FlowRouter.go('admin.accounts');
     }
 });

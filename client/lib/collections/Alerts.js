@@ -1,3 +1,4 @@
+// Local collection used for better UX
 Alerts = new Mongo.Collection(null);
 
 AlertSchema = new SimpleSchema({
@@ -15,6 +16,14 @@ AlertSchema = new SimpleSchema({
         autoValue: function() {
             if (this.isInsert && !this.isSet) {
                 return "An error occured";
+            }
+        }
+    },
+    acrossRoute: {
+        type: Boolean,
+        autoValue: function() {
+            if (this.isInsert && !this.isSet) {
+                return false;
             }
         }
     },

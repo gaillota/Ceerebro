@@ -27,7 +27,7 @@ credentialsRoutes.route('/edit/:credentialsId', {
     },
     triggersEnter: function(context, redirect) {
         if (!Session.get('masterKey')) {
-            throwAlert('You must set your master key to be able to edit any credentials !');
+            notify('You must set your master key to be able to edit any credentials !');
             redirect('credentials');
         }
     },

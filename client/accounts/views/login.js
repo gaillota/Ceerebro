@@ -8,6 +8,9 @@ AutoForm.addHooks('loginForm', {
         });
     },
     onSuccess: function() {
+        if (Meteor.user()) {
+            notify('Welcome back ' + Meteor.user().username + ' ! :)', 'success', true);
+        }
         FlowRouter.go('index');
     }
 });
