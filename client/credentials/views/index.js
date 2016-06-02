@@ -1,6 +1,13 @@
 Template.credentials.helpers({
+    countCredentials: function() {
+        return Credentials.find({
+            owner: Meteor.userId()
+        }).count();
+    },
     credentials: function() {
-        return Credentials.find({}, {
+        return Credentials.find({
+            owner: Meteor.userId()
+        }, {
             sort: {
                 domain: 1
             }
