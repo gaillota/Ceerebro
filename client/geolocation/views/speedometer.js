@@ -33,8 +33,9 @@ Template.speedometer.hooks({
             }
 
             var speed = GeolocationService.computeSpeed(self.lastLocation.get(), self.lastTime.get(), geolocation, now);
+            var degree = max(GeolocationService.computeDegree(speed, SPEED_MAX), SPEED_MAX);
             self.speed.set(speed);
-            self.degree.set(GeolocationService.computeDegree(speed, SPEED_MAX));
+            self.degree.set(degree);
 
             self.lastLocation.set(geolocation);
             self.lastTime.set(now);
