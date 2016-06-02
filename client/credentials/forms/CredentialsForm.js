@@ -3,6 +3,7 @@ CredentialsForm = new SimpleSchema({
         type: String,
         label: 'Domain',
         autoform: {
+            type: 'url',
             autofocus: true,
             autocomplete: false
         }
@@ -11,6 +12,7 @@ CredentialsForm = new SimpleSchema({
         type: String,
         label: 'Identifier',
         autoform: {
+            type: 'email',
             autocomplete: false
         }
     },
