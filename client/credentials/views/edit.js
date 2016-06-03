@@ -43,7 +43,7 @@ AutoForm.addHooks('editCredentials', {
         });
     },
     onSuccess: function() {
-        notify('Credentials edited', 'success', true);
+        toastr.success('Credentials edited');
         FlowRouter.go('credentials');
     }
 });

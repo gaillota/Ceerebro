@@ -4,7 +4,7 @@ Template.navbar.events({
 
         Meteor.logout(function(error) {
             if (error) {
-                notify(error.toString());
+                toastr.error(error.toString());
             } else {
                 removeMasterKey();
                 FlowRouter.go('index');

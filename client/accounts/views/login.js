@@ -9,7 +9,7 @@ AutoForm.addHooks('loginForm', {
     },
     onSuccess: function() {
         if (Meteor.user()) {
-            notify('Welcome back ' + Meteor.user().username + ' ! :)', 'success', true);
+            toastr.success("Welcome back " + Meteor.user().username + " ! :)");
         }
         FlowRouter.go('index');
     }

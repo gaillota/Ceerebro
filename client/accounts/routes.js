@@ -10,9 +10,9 @@ FlowRouter.route('/verify-email/:token', {
     action: function(params) {
         Accounts.verifyEmail(params.token, function(error) {
             if (error) {
-                notify(error.toString(), 'danger', true);
+                toastr.error(error.toString());
             } else {
-                notify('Your account is now activated. Thanks !', 'success', true);
+                toastr.success('Your account is now activated. Thanks !');
             }
             FlowRouter.go('index');
         });

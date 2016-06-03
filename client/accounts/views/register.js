@@ -9,6 +9,6 @@ AutoForm.addHooks('registrationForm', {
         });
     },
     onSuccess: function() {
-        notify('Registration successful ! Check your e-mails', 'success');
+        toastr.success('Registration successful ! Check your e-mails');
     }
 });

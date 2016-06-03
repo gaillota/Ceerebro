@@ -8,7 +8,7 @@ AutoForm.addHooks('changePasswordForm', {
         });
     },
     onSuccess: function() {
-        notify('Password changed !', 'success', true);
+        toastr.success('Password changed !', 'success', true);
         FlowRouter.go('index');
     }
 });

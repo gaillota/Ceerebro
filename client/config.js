@@ -6,7 +6,7 @@ AutoForm.addHooks(null, {
             return;
         }
 
-        notify(error.toString());
+        toastr.error(error.toString());
     }
 });
 
@@ -14,3 +14,21 @@ AutoForm.addHooks(null, {
 NProgress.configure({
     showSpinner: false
 });
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "1000",
+    "hideDuration": "1000",
+    "timeOut": "3500",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+};
