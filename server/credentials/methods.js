@@ -43,5 +43,21 @@ Meteor.methods({
         }
 
         Credentials.remove(credentialsId);
+    },
+    createFake: function(number) {
+        checkAdmin();
+        number = number || 30;
+        check(number, Number);
+
+        _.each(_.range(number), function() {
+            var credentials = {
+                domain: 'google.com',
+                identifier: 'admin',
+                password: 'admin',
+                iv: 'bjdzbqkjdvzkqjmdbzq'
+            };
+
+            Meteor.call('insertCredentials', credentials);
+        });
     }
 });
