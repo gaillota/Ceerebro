@@ -1,9 +1,7 @@
-Meteor.publish('credentials', function(limit) {
+Meteor.publish('credentials', function() {
     if (!this.userId) {
         return this.ready();
     }
-    limit = limit || 20;
-    check(limit, Number);
 
     Counts.publish(this, 'totalCredentials', Credentials.find({ owner: this.userId }));
 
@@ -12,8 +10,7 @@ Meteor.publish('credentials', function(limit) {
     }, {
         sort: {
             createdAt: -1
-        },
-        limit: limit
+        }
     });
 });
 

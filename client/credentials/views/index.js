@@ -3,22 +3,7 @@ var credentialsIncrement = 10;
 
 Template.credentials.hooks({
     created: function() {
-        var self = this;
-
-        self.limit = new ReactiveVar(credentialsIncrement);
-        self.autorun(function() {
-            Meteor.subscribe('credentials', self.limit.get());
-        });
-    },
-    rendered: function() {
-        var self = this;
-
-        $(window).scroll(function() {
-            // Fetch more credentials when scroll enters the last 100 px
-            if ($(window).scrollTop() + $(window).height() > $(document).height() - scrollTriggerHeight) {
-                increaseCredentials(self);
-            }
-        });
+        Meteor.subscribe('credentials');
     }
 });
 
@@ -37,9 +22,6 @@ Template.credentials.helpers({
     },
     editButtonState: function() {
         return Session.get('masterKey') ? '' : 'disabled';
-    },
-    hasMoreCredentials: function() {
-        return Credentials.find({ owner: Meteor.userId() }).count() < Counts.get('totalCredentials');
     }
 });
 
@@ -62,16 +44,5 @@ Template.credentials.events({
                 }
             });
         }
-    },
-    'click .js-more': function(event, template) {
-        event.preventDefault();
-
-        increaseCredentials(template);
     }
 });
-
-function increaseCredentials(template) {
-    if (template.limit.get() < Counts.get('totalCredentials')) {
-        template.limit.set(template.limit.get() + credentialsIncrement);
-    }
-}
