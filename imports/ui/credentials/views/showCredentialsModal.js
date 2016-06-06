@@ -1,3 +1,12 @@
+import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { toastr } from 'meteor/chrismbeckett:toastr';
+import { EncryptionService } from '../../global/services/EncryptionService.js';
+
+import './showCredentialsModal.html';
+import { Credentials } from '';
+
 Template.showCredentialsModal.helpers({
     credentials: function() {
         var credentials = Credentials.findOne(Template.currentData());

@@ -5,9 +5,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { toastr } from 'meteor/chrismbeckett:toastr';
 
-import { Credentials } from '';
-
 import './index.html';
+import { Credentials } from '';
 
 var scrollTriggerHeight = 100;
 var credentialsIncrement = 10;

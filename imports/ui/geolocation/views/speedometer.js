@@ -1,3 +1,8 @@
+import { Template } from 'meteor/templating';
+import { GeolocationService } from '../services/GeolocationService.js';
+
+import './speedometer.html';
+
 var SPEED_MAX = 200;
 
 Template.speedometer.hooks({
