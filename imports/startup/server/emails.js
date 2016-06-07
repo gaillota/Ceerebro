@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+
 Accounts.urls.verifyEmail = function(token) {
     return Meteor.absoluteUrl('verify-email/' + token);
 };

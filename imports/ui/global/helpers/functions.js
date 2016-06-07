@@ -1,5 +1,5 @@
 import { Session } from 'meteor/session';
 
-removeMasterKey = function() {
+export const removeMasterKey = () => {
     Session.set('masterKey', undefined);
 };

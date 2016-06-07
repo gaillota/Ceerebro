@@ -1,3 +1,10 @@
+import { Accounts } from 'meteor/accounts-base';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import './changePassword.html';
+
 AutoForm.addHooks('changePasswordForm', {
     onSubmit: function(doc) {
         this.event.preventDefault();

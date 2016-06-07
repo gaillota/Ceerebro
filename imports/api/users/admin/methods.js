@@ -1,3 +1,8 @@
+import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
+import { check } from 'meteor/check';
+import { checkAdmin } from '';
+
 Meteor.methods({
     changeUserStatus: function(userId) {
         checkAdmin();

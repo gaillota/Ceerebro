@@ -1,3 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+import { Picker } from 'meteor/meteorhacks:picker';
+
 Picker.route('/boot', function(params, req, res) {
     res.end(Meteor.call('bootstrap'));
 });

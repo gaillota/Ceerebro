@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 // Publish user's keychain to client
 Meteor.publish(null, function() {
     if (!this.userId) {

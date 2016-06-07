@@ -1,3 +1,13 @@
+import { Meteor } from 'meteor/meteor';
+import { AutoForm } from 'meteor/aldeed:autoform';
+import { Session } from 'meteor/session';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { CryptoJS } from 'meteor/jparker:crypto-aes';
+
+import './masterPasswordModal.html';
+
+import { EncryptionService } from '../../services/EncryptionService.js';
+
 AutoForm.addHooks('masterPasswordForm', {
     onSubmit: function(doc) {
         this.event.preventDefault();
@@ -7,7 +17,7 @@ AutoForm.addHooks('masterPasswordForm', {
         var pvaek = EncryptionService.splitKeyInHalf(pbk);
 
         if (keychain.passwordValidator !== pvaek.passwordValidator) {
-            this.done(new Error('Wrong password !'));
+            this.done(new Meteor.Error('Wrong password !'));
             return;
         }
 

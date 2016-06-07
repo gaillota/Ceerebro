@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
+
 /**
  * Check if user has specified role
  *
@@ -5,7 +8,7 @@
  * @param userId
  * @returns {*|Boolean}
  */
-hasRole = function(role, userId) {
+export const hasRole = function(role, userId) {
     if (!role){
         return false;
     }
@@ -20,7 +23,7 @@ hasRole = function(role, userId) {
  * @param userId
  * @returns {*|Boolean}
  */
-isAdmin = function(userId) {
+export const isAdmin = function(userId) {
     userId = userId || Meteor.userId();
     return hasRole(userId, 'admin');
 };

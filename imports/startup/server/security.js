@@ -1,7 +1,7 @@
 /**
  * Check if user is logged in
  */
-checkUser = function() {
+export const checkUser = function() {
     if (!Meteor.userId()) {
         throw new Meteor.Error(403, 'You must be logged in to access this section.');
     }
@@ -10,7 +10,7 @@ checkUser = function() {
 /**
  * Check if user is logged in and is admin
  */
-checkAdmin = function() {
+export const checkAdmin = function() {
     checkUser();
 
     if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {

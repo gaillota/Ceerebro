@@ -1,4 +1,4 @@
-EncryptionService = {
+export const EncryptionService = {
     /**
      * Setup the user keychain needed to encrypt data smoothly
      *
