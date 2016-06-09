@@ -1,3 +1,7 @@
+import { Meteor } from 'meteor/meteor';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Credentials } from '../credentials/credentials.js';
+
 UserKeychainSchema = new SimpleSchema({
     masterKey: {
         type: String,
@@ -70,19 +74,13 @@ Meteor.users.attachSchema(UserSchema);
 
 // Prevent client from modifying user collection
 Meteor.users.deny({
-    'insert': function() {
-        return true;
-    },
-    'update': function() {
-        return true;
-    },
-    'remove': function() {
-        return true;
-    }
+    insert() { return true; },
+    update() { return true; },
+    remove() { return true; }
 });
 
 Meteor.users.helpers({
-    credentials: function() {
+    credentials() {
         return Credentials.find({
             owner: this._id
         });

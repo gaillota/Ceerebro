@@ -1,4 +1,14 @@
-Credentials = new Mongo.Collection("credentials");
+import { Mongo } from 'meteor/mongo';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+export const Credentials = new Mongo.Collection("credentials");
+
+// Deny all client-side access (management through methods)
+Credentials.deny({
+    insert() { return true; },
+    update() { return true; },
+    remove() { return true; }
+});
 
 Credentials.schema = new SimpleSchema({
     domain: {
@@ -29,21 +39,8 @@ Credentials.schema = new SimpleSchema({
 
 Credentials.attachSchema(Credentials.schema);
 
-// Deny all client-side access (management through methods)
-Credentials.deny({
-    'insert': function() {
-        return true;
-    },
-    'update': function() {
-        return true;
-    },
-    'remove': function() {
-        return true;
-    }
-});
-
 Credentials.helpers({
-    isOwner: function(userId) {
+    isOwner(userId) {
         return this.owner = userId;
     }
 });
