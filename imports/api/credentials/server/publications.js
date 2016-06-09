@@ -1,3 +1,9 @@
+import { Meteor } from 'meteor/meteor';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+import { check } from 'meteor/check';
+
+import { Credentials } from '../credentials.js';
+
 Meteor.publish('credentials', function() {
     if (!this.userId) {
         return this.ready();
