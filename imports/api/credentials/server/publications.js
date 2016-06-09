@@ -4,7 +4,7 @@ import { check } from 'meteor/check';
 
 import { Credentials } from '../credentials.js';
 
-Meteor.publish('credentials', function() {
+Meteor.publish('credentials', function credentials() {
     if (!this.userId) {
         return this.ready();
     }
@@ -20,7 +20,7 @@ Meteor.publish('credentials', function() {
     });
 });
 
-Meteor.publish('credentials.edit', function(credentialsId) {
+Meteor.publish('credentials.edit', function credentialsEdit(credentialsId) {
     check(credentialsId, String);
     if (!this.userId) {
         return this.ready();
