@@ -7,7 +7,7 @@ import '../../../../ui/profile/views/index.js';
 
 FlowRouter.route('/profile', {
     name: 'profile',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'profile' });
     }
 });

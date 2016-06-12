@@ -8,14 +8,14 @@ import '../../../../ui/public/views/about.js';
 
 FlowRouter.route('/', {
     name: 'index',
-    action: function() {
+    action() {
         FlowRouter.go('credentials');
     }
 });
 
 FlowRouter.route('/about', {
     name: 'about',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'about' });
     }
 });

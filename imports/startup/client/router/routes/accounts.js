@@ -12,14 +12,14 @@ import '../../../../ui/public/views/index.js';
 
 FlowRouter.route('/register', {
     name: 'register',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'register' });
     }
 });
 
 FlowRouter.route('/verify-email/:token', {
     name: 'verify.email',
-    action: function(params) {
+    action(params) {
         Accounts.verifyEmail(params.token, function(error) {
             if (error) {
                 toastr.error(error.toString());
@@ -33,7 +33,7 @@ FlowRouter.route('/verify-email/:token', {
 
 FlowRouter.route('/login', {
     name: 'login',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'login' });
     }
 });

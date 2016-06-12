@@ -1,18 +1,20 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
-Accounts.urls.verifyEmail = function(token) {
+/**
+ * Accounts urls
+ */
+Accounts.urls.verifyEmail = function (token) {
     return Meteor.absoluteUrl('verify-email/' + token);
 };
 
 /**
- * Emails settings
+ * Accounts emails settings
  */
 Accounts.emailTemplates.from = "Ceerebro <no-reply@ceerebro.com>";
 
 Accounts.emailTemplates.siteName = "Ceerebro";
 
-// Email verifying email
 Accounts.emailTemplates.verifyEmail = {
     subject: function() {
         return "Activate your Ceerebro account.";
@@ -28,3 +30,29 @@ Accounts.emailTemplates.verifyEmail = {
             + "The Ceerebro Team.";
     }
 };
+
+/**
+ * Accounts login hook
+ */
+Accounts.validateLoginAttempt(function(obj) {
+    if (!obj.user)
+        return false;
+
+    if (obj.user.emails && !obj.user.emails[0].verified) {
+        throw new Meteor.Error(403, 'Your must activate your account before you can login. Please follow the instructions sent by e-mail');
+    }
+
+    if (obj.user.disabled) {
+        throw new Meteor.Error(403, 'Your account has been disabled.');
+    }
+
+    Meteor.users.update({
+        _id: obj.user._id
+    }, {
+        $set: {
+            lastConnectionAt: new Date()
+        }
+    });
+
+    return true;
+});

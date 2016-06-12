@@ -1,3 +1,4 @@
-import './bootstrap';
-import './emails.js';
-import './hooks.js';
+import './accounts-emails';
+import '../common/validated-method-mixins';
+import './routes';
+import './register-api';

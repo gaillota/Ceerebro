@@ -14,14 +14,14 @@ var geolocationGroup = FlowRouter.group({
 
 geolocationGroup.route('/', {
     name: 'geolocation',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'geolocation' });
     }
 });
 
 geolocationGroup.route('/speedometer', {
     name: 'speedometer',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'speedometer' });
     }
 });

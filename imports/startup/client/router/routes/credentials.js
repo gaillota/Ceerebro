@@ -17,30 +17,30 @@ var credentialsRoutes = FlowRouter.group({
 
 credentialsRoutes.route('/', {
     name: 'credentials',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'credentials' });
     }
 });
 
 credentialsRoutes.route('/add', {
     name: 'credentials.add',
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'credentialsAdd' });
     }
 });
 
 credentialsRoutes.route('/edit/:credentialsId', {
     name: 'credentials.edit',
-    subscriptions: function(params) {
+    subscriptions(params) {
         this.register('credentialsEdit', Meteor.subscribe('credentials.edit', params.credentialsId));
     },
-    triggersEnter: function(context, redirect) {
+    triggersEnter(context, redirect) {
         if (!Session.get('masterKey')) {
             toastr.error('You must set your master key to be able to edit any credentials !');
             redirect('credentials');
         }
     },
-    action: function() {
+    action() {
         BlazeLayout.render('layout', { page: 'credentialsEdit' });
     }
 });

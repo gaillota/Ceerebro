@@ -4,49 +4,71 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
+# Core packages
 meteor-base             # Packages every Meteor app needs to have
-mobile-experience       # Packages for a great mobile UX
-mongo                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 session                 # Client-side reactive dictionary for your app
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
-
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
+check
+email
+http
+reactive-var
 
-stevezhu:lodash
-momentjs:moment
-digilord:faker
-twbs:bootstrap
+# Collections
+mongo                   # The database Meteor supports right now
 aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
 matb33:collection-hooks
-email
-aldeed:autoform
-settinghead:auto-nprogress
-zimme:active-route
+tmeasday:publish-counts
+reywood:publish-composite
+
+# Templating
 raix:handlebar-helpers
 aldeed:template-extension
+
+# UI
+twbs:bootstrap
+fortawesome:fontawesome
+settinghead:auto-nprogress
+peppelg:bootstrap-3-modal
+chrismbeckett:toastr
+
+# Router
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+zimme:active-route
+tomwasd:flow-router-seo
+meteorhacks:picker
+
+# Forms
+aldeed:autoform
+
+# Accounts
 accounts-base
 accounts-password
 alanning:roles
 mizzao:user-status
-check
-http
-reactive-var
-tmeasday:publish-counts
-fortawesome:fontawesome
-jparker:crypto-aes
-peppelg:bootstrap-3-modal
-kadira:flow-router
-kadira:blaze-layout
-arillo:flow-router-helpers
-meteorhacks:picker
-reywood:publish-composite
+
+# Methods
+mdg:validated-method
+tunifight:loggedin-mixin
+rlivingston:simple-schema-mixin
+
+# Geolocation
 mdg:geolocation
 dburles:google-maps
-chrismbeckett:toastr
+
+# Utils
+stevezhu:lodash
+momentjs:moment
+digilord:faker
+jparker:crypto-aes
+
+# Production
 standard-minifier-css
 standard-minifier-js
