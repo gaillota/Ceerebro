@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { check } from 'meteor/check';
 
-import { Credentials } from '../credentials.js';
+import { Credentials } from '../credentials';
 
 Meteor.publish('credentials', function credentials() {
     if (!this.userId) {

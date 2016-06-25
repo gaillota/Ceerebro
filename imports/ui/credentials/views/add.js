@@ -3,21 +3,23 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { toastr } from 'meteor/chrismbeckett:toastr';
-import { EncryptionService } from '../../global/services/EncryptionService.js';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
+
 
 import './add.html';
 
-import { CredentialsForm } from '../forms/CredentialsForm.js';
+import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
+import { EncryptionService } from '../../../startup/services/encryption.service';
 
 Template.credentialsAdd.helpers({
-    credentialsForm: function() {
+    credentialsForm() {
         return CredentialsForm;
     }
 });
 
 Template.credentialsAdd.events({
-    'click .js-set-key': function(event) {
+    'click .js-set-key'(event) {
         if (!Session.get('masterKey')) {
             event.preventDefault();
             Modal.show('masterPasswordModal');
@@ -26,7 +28,7 @@ Template.credentialsAdd.events({
 });
 
 AutoForm.addHooks('addCredentials', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
@@ -45,8 +47,8 @@ AutoForm.addHooks('addCredentials', {
             self.done(error);
         });
     },
-    onSuccess: function() {
-        toastr.success('Credentials successfully added', 'success', true);
+    onSuccess() {
+        NotificationService.success('Credentials successfully added');
         FlowRouter.go('credentials');
     }
 });

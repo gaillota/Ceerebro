@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import { moment } from 'meteor/momentjs:moment';
-import { _ } from 'meteor/stevezhu:lodash';
+import { _ } from 'lodash';
 
 Template.registerHelper('fa', function(icon) {
     return '<i class="fa fa-' + icon + '"></i>';

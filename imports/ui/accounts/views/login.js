@@ -2,14 +2,15 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
 
 import './login.html';
 
-import { LoginForm } from '../forms/LoginForm.js';
+import { schema as LoginForm } from '../../../startup/forms/accounts/LoginForm';
 
 AutoForm.addHooks('loginForm', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
@@ -17,16 +18,16 @@ AutoForm.addHooks('loginForm', {
             self.done(error);
         });
     },
-    onSuccess: function() {
+    onSuccess() {
         if (Meteor.user()) {
-            toastr.success("Welcome back " + Meteor.user().username + " ! :)");
+            NotificationService.success("Welcome back " + Meteor.user().username + " ! :)");
         }
         FlowRouter.go('index');
     }
 });
 
 Template.login.helpers({
-    loginForm: function() {
+    loginForm() {
         return LoginForm;
     }
 });

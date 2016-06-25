@@ -4,21 +4,22 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-# Core packages
-meteor-base             # Packages every Meteor app needs to have
-blaze-html-templates    # Compile .html files into Meteor Blaze views
-session                 # Client-side reactive dictionary for your app
-jquery                  # Helpful client-side library
-tracker                 # Meteor's client-side reactive programming library
-es5-shim                # ECMAScript 5 compatibility for older browsers.
-ecmascript              # Enable ECMAScript2015+ syntax in app code
+# meteor librairies
+meteor-base
+ecmascript
+es5-shim
 check
+tracker
+
+# standards librairies
+session
+jquery
 email
 http
 reactive-var
 
-# Collections
-mongo                   # The database Meteor supports right now
+# data
+mongo
 aldeed:simple-schema
 aldeed:collection2
 dburles:collection-helpers
@@ -26,18 +27,17 @@ matb33:collection-hooks
 tmeasday:publish-counts
 reywood:publish-composite
 
-# Templating
-raix:handlebar-helpers
+# ui
+blaze-html-templates
 aldeed:template-extension
-
-# UI
+raix:handlebar-helpers
 twbs:bootstrap
 fortawesome:fontawesome
-settinghead:auto-nprogress
+mrt:nprogress
 peppelg:bootstrap-3-modal
-chrismbeckett:toastr
+gfk:notifications
 
-# Router
+# router
 kadira:flow-router
 kadira:blaze-layout
 arillo:flow-router-helpers
@@ -45,30 +45,29 @@ zimme:active-route
 tomwasd:flow-router-seo
 meteorhacks:picker
 
-# Forms
+# forms
 aldeed:autoform
 
-# Accounts
+# accounts
 accounts-base
 accounts-password
 alanning:roles
 mizzao:user-status
 
-# Methods
+# methods and mixins
 mdg:validated-method
 tunifight:loggedin-mixin
 rlivingston:simple-schema-mixin
 
-# Geolocation
+# geolocation
 mdg:geolocation
 dburles:google-maps
 
-# Utils
-stevezhu:lodash
+# utilities
 momentjs:moment
 digilord:faker
 jparker:crypto-aes
 
-# Production
+# production
 standard-minifier-css
 standard-minifier-js

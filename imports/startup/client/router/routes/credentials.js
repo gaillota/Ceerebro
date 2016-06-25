@@ -2,13 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Session } from 'meteor/session';
-import { toastr } from 'meteor/chrismbeckett:toastr';
 
-import '../../../../ui/global/views/layout.js';
+import { NotificationService } from '../../../services/notification.service.js';
 
-import '../../../../ui/credentials/views/index.js';
-import '../../../../ui/credentials/views/add.js';
-import '../../../../ui/credentials/views/edit.js';
+import '../../../../ui/global/views/layout';
+
+import '../../../../ui/credentials/views/index';
+import '../../../../ui/credentials/views/add';
+import '../../../../ui/credentials/views/edit';
 
 var credentialsRoutes = FlowRouter.group({
     prefix: '/credentials',
@@ -36,7 +37,7 @@ credentialsRoutes.route('/edit/:credentialsId', {
     },
     triggersEnter(context, redirect) {
         if (!Session.get('masterKey')) {
-            toastr.error('You must set your master key to be able to edit any credentials !');
+            NotificationService.error('You must set your master key to be able to edit any credentials !', 'Missing master key');
             redirect('credentials');
         }
     },

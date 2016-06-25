@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Credentials } from '../credentials/credentials.js';
+
+import { Credentials } from '../credentials/credentials';
 
 UserKeychainSchema = new SimpleSchema({
     masterKey: {

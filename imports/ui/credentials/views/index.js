@@ -3,25 +3,21 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
 
 import './index.html';
-import { Credentials } from '';
+import { Credentials } from '../../../api/credentials/credentials';
 
-var scrollTriggerHeight = 100;
-var credentialsIncrement = 10;
-
-Template.credentials.hooks({
-    created: function() {
-        Meteor.subscribe('credentials');
-    }
+Template.credentials.onCreated(function credentialsCreated() {
+    this.subscribe('credentials');
 });
 
 Template.credentials.helpers({
-    countCredentials: function() {
+    countCredentials() {
         return Counts.get('totalCredentials');
     },
-    credentials: function() {
+    credentials() {
         return Credentials.find({
             owner: Meteor.userId()
         }, {
@@ -30,13 +26,13 @@ Template.credentials.helpers({
             }
         });
     },
-    editButtonState: function() {
+    editButtonState() {
         return Session.get('masterKey') ? '' : 'disabled';
     }
 });
 
 Template.credentials.events({
-    'click .js-credentials-see': function() {
+    'click .js-credentials-see'() {
         var masterKey = Session.get('masterKey');
         if (!masterKey) {
             Session.set('passwordOnHold', this._id);
@@ -46,11 +42,11 @@ Template.credentials.events({
 
         Modal.show('showCredentialsModal', this._id);
     },
-    'click .js-credentials-remove': function() {
+    'click .js-credentials-remove'() {
         if (confirm('Are you sure ?')) {
             Meteor.call('removeCredentials', this._id, function(error) {
                 if (error) {
-                    toastr.error(error.toString());
+                    NotificationService.error(error.toString());
                 }
             });
         }

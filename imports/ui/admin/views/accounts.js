@@ -4,16 +4,16 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
-Template.adminAccounts.onCreated(function() {
+Template.adminAccounts.onCreated(function adminAccountsCreated() {
     this.subscribe('admin.accounts');
 });
 
 Template.adminAccounts.helpers({
-    usersCount: function() {
+    usersCount() {
         // Subtract current user from users count
         return Counts.get('totalAccounts');
     },
-    users: function() {
+    users() {
         return Meteor.users.find({
             _id: {
                 $ne: Meteor.userId()
@@ -24,7 +24,7 @@ Template.adminAccounts.helpers({
             }
         });
     },
-    userConnectionStatus: function() {
+    userConnectionStatus() {
         if (!this.status) {
             return 'gray';
         } else {
@@ -37,10 +37,10 @@ Template.adminAccounts.helpers({
             }
         }
     },
-    credentialsCount: function() {
+    credentialsCount() {
         return this.credentials().count();
     },
-    isDisabled: function() {
+    isDisabled() {
         return !!this.disabled;
     }
     //userStatusAction: function() {
@@ -57,7 +57,7 @@ Template.adminAccounts.helpers({
 });
 
 Template.adminAccounts.events({
-    'click .js-status-toggle': function() {
+    'click .js-status-toggle'() {
         Meteor.call('changeUserStatus', this._id);
     }
 });

@@ -1,12 +1,20 @@
 import { Accounts } from 'meteor/accounts-base';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import { schema as changePasswordForm } from '../../../startup/forms/profile/ChangePasswordForm';
+import { NotificationService } from '../../../startup/services/notification.service.js';
 
 import './changePassword.html';
 
+Template.changePassword.helpers({
+    changePasswordForm() {
+        return changePasswordForm;
+    }
+});
+
 AutoForm.addHooks('changePasswordForm', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
@@ -14,8 +22,8 @@ AutoForm.addHooks('changePasswordForm', {
             self.done(error);
         });
     },
-    onSuccess: function() {
-        toastr.success('Password changed !', 'success', true);
+    onSuccess() {
+        NotificationService.success('Password changed !', 'success', true);
         FlowRouter.go('index');
     }
 });

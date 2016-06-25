@@ -1,14 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
 
 import './remove.html';
 
-import { AccountsRemoveForm } from '../forms/AccountsRemoveForm.js';
+import { schema as AccountsRemoveForm } from '../../../startup/forms/admin/AccountsRemoveForm';
 
 AutoForm.addHooks('accountsRemoveForm', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
         var userId = FlowRouter.getParam('userId');
@@ -18,14 +19,14 @@ AutoForm.addHooks('accountsRemoveForm', {
             self.done(error);
         });
     },
-    onSuccess: function() {
-        toastr.success('User successfully removed !');
+    onSuccess() {
+        NotificationService.success('User successfully removed !');
         FlowRouter.go('admin.accounts');
     }
 });
 
 Template.adminAccountsRemove.helpers({
-    accountsRemoveForm: function() {
+    accountsRemoveForm() {
         return AccountsRemoveForm;
     }
 });

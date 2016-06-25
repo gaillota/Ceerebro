@@ -2,10 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
-import { Credentials } from '../../credentials/credentials.js';
+import { Credentials } from '../../credentials/credentials';
 
 // Publish user's keychain to client
-Meteor.publish(null, function() {
+Meteor.publish(null, function userKeychain() {
     if (!this.userId) {
         return this.ready();
     }
@@ -21,7 +21,7 @@ Meteor.publish(null, function() {
 });
 
 Meteor.publishComposite('admin.accounts', {
-    find: function() {
+    find() {
         if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
             return this.ready();
         }
@@ -33,7 +33,7 @@ Meteor.publishComposite('admin.accounts', {
     },
     children: [
         {
-            find: function(user) {
+            find(user) {
                 return Credentials.find({
                     owner: user._id
                 }, {

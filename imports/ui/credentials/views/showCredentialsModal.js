@@ -1,23 +1,26 @@
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { toastr } from 'meteor/chrismbeckett:toastr';
-import { EncryptionService } from '../../global/services/EncryptionService.js';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
+
+import { Credentials } from '../../../api/credentials/credentials';
 
 import './showCredentialsModal.html';
-import { Credentials } from '';
+
+import { EncryptionService } from '../../../startup/services/encryption.service';
 
 Template.showCredentialsModal.helpers({
-    credentials: function() {
+    credentials() {
         var credentials = Credentials.findOne(Template.currentData());
         if (!credentials) {
-            toastr.error('Credentials not found');
+            NotificationService.error('Credentials not found');
             Modal.hide(this.template.view);
         }
 
         return credentials;
     },
-    plainPassword: function() {
+    plainPassword() {
         var masterKey = Session.get('masterKey');
         if (!masterKey) {
             alert('Cannot decrypt password. Master key missing.');

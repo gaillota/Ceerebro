@@ -6,10 +6,17 @@ import { CryptoJS } from 'meteor/jparker:crypto-aes';
 
 import './masterPasswordModal.html';
 
-import { EncryptionService } from '../../services/EncryptionService.js';
+import { schema as masterPasswordForm } from '../../../../startup/forms/global/MasterPasswordForm';
+import { EncryptionService } from '../../../../startup/services/encryption.service';
+
+Template.masterPasswordModal.helpers({
+    masterPasswordForm() {
+        return masterPasswordForm;
+    }
+});
 
 AutoForm.addHooks('masterPasswordForm', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
 
         var keychain = Meteor.user().keychain;
@@ -32,9 +39,3 @@ AutoForm.addHooks('masterPasswordForm', {
         }
     }
 });
-
-//Template.showCredentialsModal.hooks({
-//    rendered: function() {
-//
-//    }
-//});

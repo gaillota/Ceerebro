@@ -1,19 +1,21 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { toastr } from 'meteor/chrismbeckett:toastr';
+
+import { NotificationService } from '../../../../startup/services/notification.service.js';
+import { removeMasterKey } from '../../../../startup/utilities/functions';
+
+import './logo';
 
 import './navbar.html';
 
-import { removeMasterKey } from '../../helpers/functions.js';
-
 Template.navbar.events({
-    'click .js-logout': function(event) {
+    'click .js-logout'(event) {
         event.preventDefault();
 
         Meteor.logout(function(error) {
             if (error) {
-                toastr.error(error.toString());
+                NotificationService.error(error.toString());
             } else {
                 removeMasterKey();
                 FlowRouter.go('index');

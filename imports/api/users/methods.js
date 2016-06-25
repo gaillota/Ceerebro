@@ -1,22 +1,56 @@
 import { Meteor } from 'meteor/meteor';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Accounts } from 'meteor/accounts-base';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { check } from 'meteor/check';
-import { _ } from 'meteor/stevezhu:lodash';
+import { _ } from 'lodash';
+
+import { schema as RegistrationForm } from '../../startup/forms/accounts/RegistrationForm';
+
+export const bootstrap = new ValidatedMethod({
+    name: 'bootstrap',
+    validate: new SimpleSchema({}).validator(),
+    run() {
+        if (!Meteor.users.find().count()) {
+            return 'No user registered';
+        }
+
+        if (Roles.getUsersInRole('admin').count()) {
+            return 'An admin user already exists';
+        }
+
+        const firstUser = Meteor.users.findOne({}, {
+            sort: {
+                createdAt: 1
+            }
+        });
+
+        Roles.addUsersToRoles(firstUser._id, 'admin');
+
+        return "First user set as admin !";
+    }
+});
 
 export const register = new ValidatedMethod({
     name: 'users.register',
-    validate: new SimpleSchema({}).validator(),
+    mixins: [ValidatedMethod.mixins.schema],
+    schema: [RegistrationForm, {
+        keychain: {
+            type: Object
+        },
+        "keychain.masterKey": {
+            type: String
+        },
+        "keychain.salt" : {
+            type: String
+        },
+        "keychain.passwordValidator": {
+            type: String
+        }
+    }],
     run({ username, email, password, keychain }) {
-        // Check integrity of keychain
-        check(keychain, {
-            masterKey: String,
-            salt: String,
-            passwordValidator: String
-        });
-
         // Create new user
-        var newUserId = Accounts.createUser({ username, email, password });
+        const newUserId = Accounts.createUser({ username, email, password });
 
         Meteor.users.update({
             _id: newUserId
@@ -43,7 +77,7 @@ export const toggleStatus = new ValidatedMethod({
             type: SimpleSchema.RegEx.Id
         }
     },
-    run(userId) {
+    run({ userId }) {
         const user = Meteor.users.findOne({
             _id: userId
         });
@@ -70,10 +104,11 @@ export const remove = new ValidatedMethod({
             type: String
         },
         userId: {
-            type: SimpleSchema.RegEx.Id
+            type: String,
+            regEx: SimpleSchema.RegEx.Id
         }
     },
-    run(digest, userId) {
+    run({ digest, userId }) {
         const result = Accounts._checkPassword(Meteor.user(), { digest: digest, algorithm: 'sha-256' });
         if (result.error) {
             throw new Meteor.Error(403, 'Wrong password');

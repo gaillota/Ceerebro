@@ -1,13 +1,13 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-import '../../../../ui/global/views/layout.js';
+import '../../../../ui/global/views/layout';
 
-import '../../../../ui/admin/views/index.js';
-import '../../../../ui/admin/views/accounts.js';
-import '../../../../ui/admin/views/remove.js';
+import '../../../../ui/admin/views/index';
+import '../../../../ui/admin/views/accounts';
+import '../../../../ui/admin/views/remove';
 
-var adminRoutes = FlowRouter.group({
+const adminRoutes = FlowRouter.group({
     prefix: '/admin',
     name: 'adminGroup',
     triggersEnter: [FlowRouter.triggersFunctions.isAdmin]

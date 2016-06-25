@@ -1,21 +1,22 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Geolocation } from 'meteor/mdg:geolocation';
-import { GeolocationService } from '../services/GeolocationService.js';
 
 import './speedometer.html';
+
+import { GeolocationService } from '../../../startup/services/geolocation.service';
 
 var SPEED_MAX = 200;
 
 Template.speedometer.hooks({
-    created: function() {
+    created() {
         this.enabled = new ReactiveVar();
         this.lastLocation = new ReactiveVar(false);
         this.lastTime = new ReactiveVar(false);
         this.speed = new ReactiveVar(0.00);
         this.degree = new ReactiveVar(-90);
     },
-    rendered: function() {
+    rendered() {
         var self = this;
 
         self.autorun(function() {
@@ -51,7 +52,7 @@ Template.speedometer.hooks({
 });
 
 Template.speedometer.helpers({
-    toggleButton: function() {
+    toggleButton() {
         return Template.instance().enabled.get() ? {
             class: 'btn-danger',
             text: 'Stop'
@@ -60,16 +61,16 @@ Template.speedometer.helpers({
             text: 'Start'
         }
     },
-    speed: function() {
+    speed() {
         return Template.instance().speed.get() || 0.00;
     },
-    degree: function() {
+    degree() {
         return Template.instance().degree.get() || -90;
     }
 });
 
 Template.speedometer.events({
-    'click .js-toggle-measurements': function(event, template) {
+    'click .js-toggle-measurements'(event, template) {
         template.enabled.set(!template.enabled.get());
     }
 });

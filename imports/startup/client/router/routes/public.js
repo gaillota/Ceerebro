@@ -1,10 +1,10 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-import '../../../../ui/global/views/layout.js';
+import '../../../../ui/global/views/layout';
 
-import '../../../../ui/public/views/index.js';
-import '../../../../ui/public/views/about.js';
+import '../../../../ui/public/views/index';
+import '../../../../ui/public/views/about';
 
 FlowRouter.route('/', {
     name: 'index',

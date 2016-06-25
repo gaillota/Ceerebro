@@ -1,15 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { toastr } from 'meteor/chrismbeckett:toastr';
-import { EncryptionService } from '../../global/services/EncryptionService.js';
+
+import { NotificationService } from '../../../startup/services/notification.service.js';
 
 import './register.html';
 
-import { RegistrationForm } from '../forms/RegistrationForm.js';
+import { schema as RegistrationForm } from '../../../startup/forms/accounts/RegistrationForm';
+import { EncryptionService } from '../../../startup/services/encryption.service';
 
 AutoForm.addHooks('registrationForm', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
@@ -18,13 +19,13 @@ AutoForm.addHooks('registrationForm', {
             self.done(error);
         });
     },
-    onSuccess: function() {
-        toastr.success('Registration successful ! Check your e-mails');
+    onSuccess() {
+        NotificationService.success('Registration successful ! Check your e-mails');
     }
 });
 
 Template.register.helpers({
-    registrationForm: function() {
+    registrationForm() {
         return RegistrationForm;
     }
 });

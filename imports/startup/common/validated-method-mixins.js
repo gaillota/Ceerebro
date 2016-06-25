@@ -1,6 +1,6 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { LoggedInMixin } from "meteor/tunifight:loggedin-mixin";
-import { SimpleSchemaMixin } from "meteor/rlivingston:simple-schema-mixin";
+import { LoggedInMixin } from 'meteor/tunifight:loggedin-mixin';
+import { simpleSchemaMixin } from 'meteor/rlivingston:simple-schema-mixin';
 
 ValidatedMethod.mixins = {};
 
@@ -11,7 +11,7 @@ ValidatedMethod.mixins.isLoggedIn = function (methodOptions) {
         reason: 'You need to login' //Optional
     };
 
-    return methodOptions;
+    return LoggedInMixin(methodOptions);
 };
 
 ValidatedMethod.mixins.isAdmin = function (methodOptions) {
@@ -28,5 +28,5 @@ ValidatedMethod.mixins.isAdmin = function (methodOptions) {
 };
 
 ValidatedMethod.mixins.schema = function (methodOptions) {
-    return SimpleSchemaMixin(methodOptions);
+    return simpleSchemaMixin(methodOptions);
 };

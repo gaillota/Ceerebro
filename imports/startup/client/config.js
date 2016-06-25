@@ -1,7 +1,10 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { toastr } from 'meteor/chrismbeckett:toastr';
-import { NProgress } from 'meteor/settinghead:auto-nprogress';
+import { NProgress } from 'meteor/mrt:nprogress';
+import { _ } from 'lodash';
+import { Notifications } from 'meteor/gfk:notifications';
+
+import { NotificationService } from '../services/notification.service.js';
 
 // SimpleSchema errors overridden
 SimpleSchema.messages({
@@ -19,7 +22,7 @@ SimpleSchema.messages({
     notValid: "[label] is not valid",
     passwordMismatch: "The two passwords don't match",
     regEx: [
-        { exp: SimpleSchema.RegEx.Url, msg: "[value] is not a valid URL"},
+        { exp: SimpleSchema.RegEx.Url, msg: "[value] is not a valid URL" },
         { exp: SimpleSchema.RegEx.Email, msg: "[label] must be a valid e-mail address" }
     ],
     keyNotInSchema: "[key] is not allowed by the schema"
@@ -33,7 +36,7 @@ AutoForm.addHooks(null, {
             return;
         }
 
-        toastr.error(error.toString());
+        NotificationService.error(error.toString());
     }
 });
 
@@ -42,20 +45,9 @@ NProgress.configure({
     showSpinner: false
 });
 
-toastr.options = {
-    "closeButton": true,
-    "debug": false,
-    "newestOnTop": true,
-    "progressBar": false,
-    "positionClass": "toast-top-right",
-    "preventDuplicates": false,
-    "onclick": null,
-    "showDuration": "1000",
-    "hideDuration": "1000",
-    "timeOut": "3500",
-    "extendedTimeOut": "1000",
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
-};
+_.extend(Notifications.defaultOptions, {
+    type: 'success',
+    userCloseable: true,
+    clickBodyToClose: true,
+    timeout: 3500
+});

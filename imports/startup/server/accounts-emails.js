@@ -16,10 +16,10 @@ Accounts.emailTemplates.from = "Ceerebro <no-reply@ceerebro.com>";
 Accounts.emailTemplates.siteName = "Ceerebro";
 
 Accounts.emailTemplates.verifyEmail = {
-    subject: function() {
+    subject() {
         return "Activate your Ceerebro account.";
     },
-    text: function(user, url) {
+    text(user, url) {
         return "Hi " + user.username + ",\n\n"
             + "Welcome on Ceerebro ! :)\n\n"
             + "Before you can begin, we just need you to do one last thing...\n"

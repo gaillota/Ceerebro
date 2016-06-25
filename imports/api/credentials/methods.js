@@ -1,13 +1,23 @@
-Meteor.methods({
-    insertCredentials: function (credentials) {
-        checkUser();
+import { Meteor } from 'meteor/meteor';
+import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-        credentials.owner = Meteor.userId();
+import { Credentials } from '../credentials/credentials';
+import { schema as CredentialsForm } from '../../startup/forms/credentials/CredentialsForm';
+
+export const insert = new ValidatedMethod({
+    name: 'credentials.insert',
+    mixins: [ValidatedMethod.mixins.schema],
+    schema: CredentialsForm,
+    run({ credentials }) {
         Credentials.insert(credentials);
-    },
-    editCredentials: function(credentialsId, doc) {
-        checkUser();
+    }
+});
 
+export const update = new ValidatedMethod({
+    name: 'credentials.update',
+    mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
+    schema: CredentialsForm,
+    run({ credentialsId, doc }) {
         const credentials = Credentials.findOne(credentialsId);
 
         if (!credentials) {
@@ -27,11 +37,18 @@ Meteor.methods({
                 password: doc.password
             }
         });
-    },
-    removeCredentials: function (credentialsId) {
-        checkUser();
-        check(credentialsId, String);
+    }
+});
 
+export const remove = new ValidatedMethod({
+    name: 'credentials.remove',
+    mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
+    schema: {
+        credentialsId: {
+            type: String
+        }
+    },
+    run({ credentialsId }) {
         const credentials = Credentials.findOne(credentialsId);
 
         if (!credentials) {

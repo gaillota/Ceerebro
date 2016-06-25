@@ -3,20 +3,20 @@ import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { toastr } from 'meteor/chrismbeckett:toastr';
 
-import { Credentials } from '';
-import { EncryptionService } from '../../global/services/EncryptionService.js';
+import { NotificationService } from '../../../startup/services/notification.service.js';
+import { Credentials } from '../../../api/credentials/credentials';
 
 import './edit.html';
 
-import { CredentialsForm } from '../forms/CredentialsForm.js';
+import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
+import { EncryptionService } from '../../../startup/services/encryption.service';
 
 Template.credentialsEdit.helpers({
-    credentialsForm: function() {
+    credentialsForm() {
         return CredentialsForm;
     },
-    credentials: function() {
+    credentials() {
         var credentialsId = FlowRouter.getParam('credentialsId');
         var credentials = Credentials.findOne(credentialsId);
         if (!credentials) {
@@ -34,7 +34,7 @@ Template.credentialsEdit.helpers({
 });
 
 AutoForm.addHooks('editCredentials', {
-    onSubmit: function(doc) {
+    onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
@@ -59,8 +59,8 @@ AutoForm.addHooks('editCredentials', {
             self.done(error);
         });
     },
-    onSuccess: function() {
-        toastr.success('Credentials edited');
+    onSuccess() {
+        NotificationService.success('Credentials edited');
         FlowRouter.go('credentials');
     }
 });
