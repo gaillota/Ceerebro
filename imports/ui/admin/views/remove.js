@@ -2,11 +2,12 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
-
 import './remove.html';
 
+import { NotificationService } from '../../../startup/services/notification.service.js';
 import { schema as AccountsRemoveForm } from '../../../startup/forms/admin/AccountsRemoveForm';
+
+import { remove } from '../../../api/users/methods';
 
 AutoForm.addHooks('accountsRemoveForm', {
     onSubmit(doc) {
@@ -15,7 +16,7 @@ AutoForm.addHooks('accountsRemoveForm', {
         var userId = FlowRouter.getParam('userId');
         var digest = Package.sha.SHA256(doc.password);
 
-        Meteor.call('removeUser', digest, userId, function(error) {
+        remove.call({ digest: digest, userId: userId }, (error) => {
             self.done(error);
         });
     },

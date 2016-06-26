@@ -4,6 +4,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
+import { toggleStatus } from '../../../api/users/methods';
+
 Template.adminAccounts.onCreated(function adminAccountsCreated() {
     this.subscribe('admin.accounts');
 });
@@ -58,6 +60,8 @@ Template.adminAccounts.helpers({
 
 Template.adminAccounts.events({
     'click .js-status-toggle'() {
-        Meteor.call('changeUserStatus', this._id);
+        toggleStatus.call({ userId: this._id }, (error) => {
+            // Display error
+        });
     }
 });

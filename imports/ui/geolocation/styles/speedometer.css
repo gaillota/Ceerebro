@@ -1,0 +1,50 @@
+#speedometer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 30px auto;
+    height: 150px;
+    max-height: 100vw;
+    width: 300px;
+    max-width: 100%;
+    border-radius: 200px 200px 0 0;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#9dd53a+0,a1d54f+50,7cbc0a+100 */
+    background: #9dd53a; /* Old browsers */
+    background: -moz-linear-gradient(top, #9dd53a 0%, #a1d54f 50%, #7cbc0a 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#7cbc0a 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #9dd53a 0%,#a1d54f 50%,#7cbc0a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
+}
+
+#speedometer:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #97bf0d;
+    z-index: -1;
+}
+
+#needle {
+    position: relative;
+    width: 6px;
+    height: 98%;
+    border-radius: 100% 100% 2px 2px;
+    transform-origin: center bottom;
+    background: #dc200e;
+}
+
+#needle:after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -1px;
+    left: -2px;
+    background: #171cc5;
+}

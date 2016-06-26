@@ -5,7 +5,7 @@ import { Session } from 'meteor/session';
 
 import { NotificationService } from '../../../services/notification.service.js';
 
-import '../../../../ui/global/views/layout';
+import '../../../../ui/layout';
 
 import '../../../../ui/credentials/views/index';
 import '../../../../ui/credentials/views/add';

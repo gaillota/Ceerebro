@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 import { NotificationService } from '../../../services/notification.service.js';
 
-import '../../../../ui/global/views/layout';
+import '../../../../ui/layout';
 
 import '../../../../ui/accounts/views/register';
 import '../../../../ui/accounts/views/login';

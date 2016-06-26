@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { NotificationService } from '../../../../startup/services/notification.service.js';
-import { removeMasterKey } from '../../../../startup/utilities/functions';
+import { NotificationService } from '../../startup/services/notification.service.js';
+import { removeMasterKey } from '../../startup/utilities/functions';
 
 import './logo';
 

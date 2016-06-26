@@ -9,13 +9,15 @@ import './register.html';
 import { schema as RegistrationForm } from '../../../startup/forms/accounts/RegistrationForm';
 import { EncryptionService } from '../../../startup/services/encryption.service';
 
+import { register } from '../../../api/users/methods';
+
 AutoForm.addHooks('registrationForm', {
     onSubmit(doc) {
         this.event.preventDefault();
         var self = this;
 
         doc.keychain = EncryptionService.setupUserKeychain(doc.password);
-        Meteor.call('registerUser', doc, function(error) {
+        register.call({ doc }, (error) => {
             self.done(error);
         });
     },

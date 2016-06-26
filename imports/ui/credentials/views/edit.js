@@ -11,6 +11,7 @@ import './edit.html';
 
 import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
 import { EncryptionService } from '../../../startup/services/encryption.service';
+import { update } from '../../../api/credentials/methods';
 
 Template.credentialsEdit.helpers({
     credentialsForm() {
@@ -55,7 +56,7 @@ AutoForm.addHooks('editCredentials', {
 
         doc.password = EncryptionService.encrypt(doc.password, masterKey, credential.iv);
 
-        Meteor.call("editCredentials", credentialsId, doc, function(error) {
+        update.call({ credentialsId: credentialsId, doc: credential }, (error) => {
             self.done(error);
         });
     },

@@ -6,11 +6,12 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 import { NotificationService } from '../../../startup/services/notification.service.js';
 
-
 import './add.html';
 
 import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
 import { EncryptionService } from '../../../startup/services/encryption.service';
+
+import { insert } from '../../../api/credentials/methods';
 
 Template.credentialsAdd.helpers({
     credentialsForm() {
@@ -43,7 +44,7 @@ AutoForm.addHooks('addCredentials', {
         doc.iv = EncryptionService.generateKey(128);
         doc.password = EncryptionService.encrypt(password, masterKey, doc.iv);
 
-        Meteor.call("insertCredentials", doc, function(error) {
+        insert.call({ credentials: doc }, (error) => {
             self.done(error);
         });
     },

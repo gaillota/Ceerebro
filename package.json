@@ -1,0 +1,20 @@
+{
+  "name": "ceerebro",
+  "version": "1.0.0",
+  "description": "A secure credentials storage platform",
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "meteor-node-stubs": "^0.2.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaillota/Ceerebro.git"
+  },
+  "author": "Antoine Gaillot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaillota/Ceerebro/issues"
+  },
+  "homepage": "https://github.com/gaillota/Ceerebro#readme"
+}

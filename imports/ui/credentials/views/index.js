@@ -9,6 +9,8 @@ import { NotificationService } from '../../../startup/services/notification.serv
 import './index.html';
 import { Credentials } from '../../../api/credentials/credentials';
 
+import { remove } from '../../../api/credentials/methods';
+
 Template.credentials.onCreated(function credentialsCreated() {
     this.subscribe('credentials');
 });
@@ -44,9 +46,11 @@ Template.credentials.events({
     },
     'click .js-credentials-remove'() {
         if (confirm('Are you sure ?')) {
-            Meteor.call('removeCredentials', this._id, function(error) {
+            remove.call({ credentialsId: this._id }, (error) => {
                 if (error) {
                     NotificationService.error(error.toString());
+                } else {
+                    NotificationService.success('Credentials successfully removed !');
                 }
             });
         }

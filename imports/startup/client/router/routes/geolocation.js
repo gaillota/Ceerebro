@@ -1,7 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
-import '../../../../ui/global/views/layout';
+import '../../../../ui/layout';
 
 import '../../../../ui/geolocation/views/index';
 import '../../../../ui/geolocation/views/speedometer';
