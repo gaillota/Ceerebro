@@ -1,5 +1,5 @@
 import { check } from 'meteor/check';
-import { CryptoJS } from 'meteor/jparker:crypto-aes';
+import { CryptoJS } from 'meteor/jparker:crypto-core';
 
 export const EncryptionService = (function () {
     return {

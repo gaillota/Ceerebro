@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { CryptoJS } from 'meteor/jparker:crypto-aes';
+import { CryptoJS } from 'meteor/jparker:crypto-core';
 
 import './masterPasswordModal.html';
 

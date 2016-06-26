@@ -6,9 +6,13 @@ import { schema as CredentialsForm } from '../../startup/forms/credentials/Crede
 
 export const insert = new ValidatedMethod({
     name: 'credentials.insert',
-    mixins: [ValidatedMethod.mixins.schema],
-    schema: CredentialsForm,
-    run({ credentials }) {
+    mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
+    schema: [CredentialsForm, {
+        iv: {
+            type: String
+        }
+    }],
+    run(credentials) {
         Credentials.insert(credentials);
     }
 });
@@ -16,8 +20,13 @@ export const insert = new ValidatedMethod({
 export const update = new ValidatedMethod({
     name: 'credentials.update',
     mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
-    schema: CredentialsForm,
-    run({ credentialsId, doc }) {
+    schema: [CredentialsForm, {
+        credentialsId: {
+            type: String,
+            regEx: SimpleSchema.RegEx.Id
+        }
+    }],
+    run({ credentialsId, domain, identifier, password }) {
         const credentials = Credentials.findOne(credentialsId);
 
         if (!credentials) {
@@ -32,9 +41,9 @@ export const update = new ValidatedMethod({
             _id: credentialsId
         }, {
             $set: {
-                domain: doc.domain,
-                identifier: doc.identifier,
-                password: doc.password
+                domain: domain,
+                identifier: identifier,
+                password: password
             }
         });
     }

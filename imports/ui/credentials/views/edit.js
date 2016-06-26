@@ -55,8 +55,9 @@ AutoForm.addHooks('editCredentials', {
         }
 
         doc.password = EncryptionService.encrypt(doc.password, masterKey, credential.iv);
+        doc.credentialsId = credentialsId;
 
-        update.call({ credentialsId: credentialsId, doc: credential }, (error) => {
+        update.call(doc, (error) => {
             self.done(error);
         });
     },

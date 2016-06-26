@@ -4,9 +4,12 @@ import { Session } from 'meteor/session';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
+import { NotificationService } from '../../../startup/services/notification.service';
 
 import './index.html';
+import '../../components/masterPasswordModal';
+import '../../credentials/views/showCredentialsModal';
+
 import { Credentials } from '../../../api/credentials/credentials';
 
 import { remove } from '../../../api/credentials/methods';
@@ -50,7 +53,7 @@ Template.credentials.events({
                 if (error) {
                     NotificationService.error(error.toString());
                 } else {
-                    NotificationService.success('Credentials successfully removed !');
+                    NotificationService.success('Credentials successfully removed !')
                 }
             });
         }

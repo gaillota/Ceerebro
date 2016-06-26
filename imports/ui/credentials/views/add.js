@@ -13,6 +13,8 @@ import { EncryptionService } from '../../../startup/services/encryption.service'
 
 import { insert } from '../../../api/credentials/methods';
 
+import '../../components/masterPasswordModal';
+
 Template.credentialsAdd.helpers({
     credentialsForm() {
         return CredentialsForm;
@@ -44,7 +46,7 @@ AutoForm.addHooks('addCredentials', {
         doc.iv = EncryptionService.generateKey(128);
         doc.password = EncryptionService.encrypt(password, masterKey, doc.iv);
 
-        insert.call({ credentials: doc }, (error) => {
+        insert.call(doc, (error) => {
             self.done(error);
         });
     },

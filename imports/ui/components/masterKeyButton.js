@@ -6,7 +6,6 @@ import './masterPasswordModal';
 
 import './masterKeyButton.html';
 
-
 Template.masterKeyButton.events({
     'click .js-set-key'(event) {
         event.preventDefault();
