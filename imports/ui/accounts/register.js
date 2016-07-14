@@ -14,7 +14,7 @@ import { register } from '../../api/users/methods';
 AutoForm.addHooks('registrationForm', {
     before: {
         method() {
-            Notification.warn('Generating your secure keychain...');
+            Notification.warning('Generating your secure keychain...');
         }
     },
     onSuccess() {
