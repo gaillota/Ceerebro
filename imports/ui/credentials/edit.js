@@ -4,14 +4,14 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
-import { Credentials } from '../../../api/credentials/credentials';
+import { Notification } from '../../startup/services/notification.service.js';
+import { Credentials } from '../../api/credentials/credentials';
 
 import './edit.html';
 
-import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
-import { EncryptionService } from '../../../startup/services/encryption.service';
-import { update } from '../../../api/credentials/methods';
+import { schema as CredentialsForm } from '../../startup/forms/credentials/CredentialsForm';
+import { EncryptionService } from '../../startup/services/encryption.service.js';
+import { update } from '../../api/credentials/methods';
 
 Template.credentialsEdit.helpers({
     credentialsForm() {
@@ -62,7 +62,7 @@ AutoForm.addHooks('editCredentials', {
         });
     },
     onSuccess() {
-        NotificationService.success('Credentials edited');
+        Notification.success('Credentials edited');
         FlowRouter.go('credentials');
     }
 });

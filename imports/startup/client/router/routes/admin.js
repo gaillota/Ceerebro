@@ -3,8 +3,8 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../../../../ui/layout';
 
-import '../../../../ui/admin/views/index';
-import '../../../../ui/admin/views/accounts';
+import '../../../../ui/admin/index';
+import '../../../../ui/admin/accounts';
 
 const adminRoutes = FlowRouter.group({
     prefix: '/admin',

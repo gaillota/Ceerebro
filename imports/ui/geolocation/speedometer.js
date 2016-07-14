@@ -4,7 +4,7 @@ import { Geolocation } from 'meteor/mdg:geolocation';
 
 import './speedometer.html';
 
-import { GeolocationService } from '../../../startup/services/geolocation.service';
+import { GeolocationService } from '../../startup/services/geolocation.service.js';
 
 var SPEED_MAX = 200;
 

@@ -4,8 +4,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
-import { activate } from '../../../api/users/methods';
-import { toggleStatus } from '../../../api/users/methods';
+import { activate } from '../../api/users/methods';
+import { toggleStatus } from '../../api/users/methods';
 
 Template.adminAccounts.onCreated(function adminAccountsCreated() {
     this.subscribe('admin.accounts');

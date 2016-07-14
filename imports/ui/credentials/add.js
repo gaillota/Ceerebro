@@ -4,16 +4,16 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
+import { Notification } from '../../startup/services/notification.service.js';
 
 import './add.html';
 
-import { schema as CredentialsForm } from '../../../startup/forms/credentials/CredentialsForm';
-import { EncryptionService } from '../../../startup/services/encryption.service';
+import { schema as CredentialsForm } from '../../startup/forms/credentials/CredentialsForm';
+import { EncryptionService } from '../../startup/services/encryption.service.js';
 
-import { insert } from '../../../api/credentials/methods';
+import { insert } from '../../api/credentials/methods';
 
-import '../../components/masterPasswordModal';
+import '../components/masterPasswordModal';
 
 Template.credentialsAdd.helpers({
     credentialsForm() {
@@ -51,7 +51,7 @@ AutoForm.addHooks('addCredentials', {
         });
     },
     onSuccess() {
-        NotificationService.success('Credentials successfully added');
+        Notification.success('Credentials successfully added');
         FlowRouter.go('credentials');
     }
 });

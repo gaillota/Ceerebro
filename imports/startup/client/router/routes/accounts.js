@@ -2,12 +2,12 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import { Accounts } from 'meteor/accounts-base';
 
-import { NotificationService } from '../../../services/notification.service.js';
+import { Notification } from '../../../services/notification.service.js';
 
 import '../../../../ui/layout';
 
-import '../../../../ui/accounts/views/register';
-import '../../../../ui/accounts/views/login';
+import '../../../../ui/accounts/register';
+import '../../../../ui/accounts/login';
 
 
 FlowRouter.route('/register', {
@@ -22,9 +22,9 @@ FlowRouter.route('/verify-email/:token', {
     action(params) {
         Accounts.verifyEmail(params.token, function(error) {
             if (error) {
-                NotificationService.error(error.toString());
+                Notification.error(error.toString());
             } else {
-                NotificationService.success('Your account is now activated. Thanks !');
+                Notification.success('Your account is now activated. Thanks !');
             }
             FlowRouter.go('index');
         });

@@ -2,8 +2,8 @@ import { Accounts } from 'meteor/accounts-base';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { AutoForm } from 'meteor/aldeed:autoform';
 
-import { schema as changePasswordForm } from '../../../startup/forms/profile/ChangePasswordForm';
-import { NotificationService } from '../../../startup/services/notification.service.js';
+import { schema as changePasswordForm } from '../../startup/forms/profile/ChangePasswordForm';
+import { Notification } from '../../startup/services/notification.service.js';
 
 import './changePassword.html';
 
@@ -23,7 +23,7 @@ AutoForm.addHooks('changePasswordForm', {
         });
     },
     onSuccess() {
-        NotificationService.success('Password changed !', 'success', true);
+        Notification.success('Password changed !');
         FlowRouter.go('index');
     }
 });

@@ -5,8 +5,6 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { check } from 'meteor/check';
 import { _ } from 'lodash';
 
-import './users';
-
 import { schema as RegistrationForm } from '../../startup/forms/accounts/RegistrationForm';
 import { EncryptionService } from '../../startup/services/encryption.service';
 

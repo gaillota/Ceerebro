@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 
-import { Credentials } from '../credentials/credentials';
+import { Credentials } from './credentials';
 import { schema as CredentialsForm } from '../../startup/forms/credentials/CredentialsForm';
 
 export const insert = new ValidatedMethod({

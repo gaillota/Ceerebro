@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { NotificationService } from '../../startup/services/notification.service.js';
+import { Notification } from '../../startup/services/notification.service.js';
 import { removeMasterKey } from '../../startup/utilities/functions';
 
 import './logo';
@@ -15,7 +15,7 @@ Template.navbar.events({
 
         Meteor.logout(function(error) {
             if (error) {
-                NotificationService.error(error.toString());
+                Notification.error(error.toString());
             } else {
                 removeMasterKey();
                 FlowRouter.go('index');

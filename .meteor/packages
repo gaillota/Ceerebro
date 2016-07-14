@@ -14,6 +14,7 @@ tracker
 # standards librairies
 session
 jquery
+less
 email
 http
 reactive-var
@@ -35,7 +36,8 @@ twbs:bootstrap
 fortawesome:fontawesome
 mrt:nprogress
 peppelg:bootstrap-3-modal
-gfk:notifications
+juliancwirko:s-alert
+juliancwirko:s-alert-scale
 
 # router
 kadira:flow-router

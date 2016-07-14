@@ -1,12 +1,11 @@
-import { Notifications } from 'meteor/gfk:notifications';
+import { sAlert } from "meteor/juliancwirko:s-alert";
 
-export const NotificationService = (function() {
+export const Notification = (function() {
     let functions = {};
 
-    _.each('error warn info success'.split(' '), (type) => {
-        functions[type] = (message, title = '', options = {}) => {
-            options.type = type;
-            Notifications[type](title, message, options);
+    _.each('success info warning error'.split(' '), (type) => {
+        functions[type] = (message, options = {}) => {
+            sAlert[type](message, options);
         }
     });
 

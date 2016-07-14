@@ -3,11 +3,11 @@ import { Template } from 'meteor/templating';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
+import { Notification } from '../../startup/services/notification.service.js';
 
 import './login.html';
 
-import { schema as LoginForm } from '../../../startup/forms/accounts/LoginForm';
+import { schema as LoginForm } from '../../startup/forms/accounts/LoginForm';
 
 AutoForm.addHooks('loginForm', {
     onSubmit(doc) {
@@ -20,7 +20,7 @@ AutoForm.addHooks('loginForm', {
     },
     onSuccess() {
         if (Meteor.user()) {
-            NotificationService.success("Welcome back " + Meteor.user().username + " ! :)");
+            Notification.success("Welcome back " + Meteor.user().username + " ! :)");
         }
         FlowRouter.go('index');
     }

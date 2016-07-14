@@ -1,10 +1,10 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { AutoForm } from 'meteor/aldeed:autoform';
+import { sAlert } from "meteor/juliancwirko:s-alert";
 import { NProgress } from 'meteor/mrt:nprogress';
 import { _ } from 'lodash';
-import { Notifications } from 'meteor/gfk:notifications';
 
-import { NotificationService } from '../services/notification.service.js';
+import { Notification } from '../services/notification.service.js';
 
 // SimpleSchema errors overridden
 SimpleSchema.messages({
@@ -20,7 +20,7 @@ SimpleSchema.messages({
     notAllowed: "[value] is not allowed",
     notUnique: "[value] is already taken",
     notValid: "[label] is not valid",
-    passwordMismatch: "The two passwords don't match",
+    passwordMismatch: "The passwords don't match",
     regEx: [
         { exp: SimpleSchema.RegEx.Url, msg: "[value] is not a valid URL" },
         { exp: SimpleSchema.RegEx.Email, msg: "[label] must be a valid e-mail address" }
@@ -36,18 +36,18 @@ AutoForm.addHooks(null, {
             return;
         }
 
-        NotificationService.error(error.toString());
+        Notification.error(error.toString());
     }
+});
+
+// Alerts configuration
+sAlert.config({
+    effect: 'scale',
+    position: 'bottom-right',
+    onRouteClose: false
 });
 
 // Hide spinner for NProgress bar
 NProgress.configure({
     showSpinner: false
-});
-
-_.extend(Notifications.defaultOptions, {
-    type: 'success',
-    userCloseable: true,
-    clickBodyToClose: true,
-    timeout: 3500
 });

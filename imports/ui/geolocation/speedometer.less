@@ -16,17 +16,17 @@
     background: -webkit-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#7cbc0a 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #9dd53a 0%,#a1d54f 50%,#7cbc0a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
-}
 
-#speedometer:after {
-    content: "";
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #97bf0d;
-    z-index: -1;
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #97bf0d;
+        z-index: -1;
+    }
 }
 
 #needle {
@@ -36,15 +36,15 @@
     border-radius: 100% 100% 2px 2px;
     transform-origin: center bottom;
     background: #dc200e;
-}
 
-#needle:after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -1px;
-    left: -2px;
-    background: #171cc5;
+    &:after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        bottom: -1px;
+        left: -2px;
+        background: #171cc5;
+    }
 }

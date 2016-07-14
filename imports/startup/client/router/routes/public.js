@@ -3,8 +3,8 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../../../../ui/layout';
 
-import '../../../../ui/public/views/index';
-import '../../../../ui/public/views/about';
+import '../../../../ui/public/index';
+import '../../../../ui/public/about';
 
 FlowRouter.route('/', {
     name: 'index',

@@ -3,8 +3,8 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../../../../ui/layout';
 
-import '../../../../ui/geolocation/views/index';
-import '../../../../ui/geolocation/views/speedometer';
+import '../../../../ui/geolocation/index';
+import '../../../../ui/geolocation/speedometer';
 
 var geolocationGroup = FlowRouter.group({
     prefix: '/geolocation',

@@ -4,15 +4,14 @@ import { Session } from 'meteor/session';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { NotificationService } from '../../../startup/services/notification.service';
+import { Notification } from '../../startup/services/notification.service.js';
 
 import './index.html';
-import '../../components/masterPasswordModal';
-import '../../credentials/views/showCredentialsModal';
+import '../components/masterPasswordModal';
+import './showCredentialsModal';
 
-import { Credentials } from '../../../api/credentials/credentials';
-
-import { remove } from '../../../api/credentials/methods';
+import { Credentials } from '../../api/credentials/credentials';
+import { remove } from '../../api/credentials/methods';
 
 Template.credentials.onCreated(function credentialsCreated() {
     this.subscribe('credentials');
@@ -51,9 +50,9 @@ Template.credentials.events({
         if (confirm('Are you sure ?')) {
             remove.call({ credentialsId: this._id }, (error) => {
                 if (error) {
-                    NotificationService.error(error.toString());
+                    Notification.error(error.toString());
                 } else {
-                    NotificationService.success('Credentials successfully removed !')
+                    Notification.success('Credentials successfully removed !')
                 }
             });
         }

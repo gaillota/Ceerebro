@@ -2,19 +2,19 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
-import { NotificationService } from '../../../startup/services/notification.service.js';
+import { Notification } from '../../startup/services/notification.service.js';
 
-import { Credentials } from '../../../api/credentials/credentials';
+import { Credentials } from '../../api/credentials/credentials';
 
 import './showCredentialsModal.html';
 
-import { EncryptionService } from '../../../startup/services/encryption.service';
+import { EncryptionService } from '../../startup/services/encryption.service.js';
 
 Template.showCredentialsModal.helpers({
     credentials() {
         var credentials = Credentials.findOne(Template.currentData());
         if (!credentials) {
-            NotificationService.error('Credentials not found');
+            Notification.error('Credentials not found');
             Modal.hide(this.template.view);
         }
 
