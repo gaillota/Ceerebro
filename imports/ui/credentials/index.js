@@ -3,6 +3,8 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { ReactiveVar } from "meteor/reactive-var";
+import { _ } from "lodash";
 
 import { Notification } from '../../startup/services/notification.service.js';
 
@@ -15,6 +17,7 @@ import { remove } from '../../api/credentials/methods';
 
 Template.credentials.onCreated(function credentialsCreated() {
     this.subscribe('credentials');
+    this.search = new ReactiveVar();
 });
 
 Template.credentials.helpers({
@@ -22,9 +25,23 @@ Template.credentials.helpers({
         return Counts.get('totalCredentials');
     },
     credentials() {
-        return Credentials.find({
+        const search = Template.instance().search.get();
+        let filter = {
             owner: Meteor.userId()
-        }, {
+        };
+
+        if (search) {
+            filter["$or"] = [
+                {
+                    domain: new RegExp(search)
+                },
+                {
+                    identifier: new RegExp(search)
+                }
+            ];
+        }
+
+        return Credentials.find(filter, {
             sort: {
                 domain: 1
             }
@@ -32,6 +49,9 @@ Template.credentials.helpers({
     },
     editButtonState() {
         return Session.get('masterKey') ? '' : 'disabled';
+    },
+    searching() {
+        return Template.instance().search.get();
     }
 });
 
@@ -56,5 +76,10 @@ Template.credentials.events({
                 }
             });
         }
+    },
+    'keyup .js-search-input'(event, template) {
+        const keywords = event.target.value;
+
+        template.search.set(_.trim(keywords));
     }
 });
