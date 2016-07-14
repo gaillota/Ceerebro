@@ -5,7 +5,6 @@ import '../../../../ui/layout';
 
 import '../../../../ui/admin/views/index';
 import '../../../../ui/admin/views/accounts';
-import '../../../../ui/admin/views/remove';
 
 const adminRoutes = FlowRouter.group({
     prefix: '/admin',
@@ -24,12 +23,5 @@ adminRoutes.route('/accounts', {
     name: 'admin.accounts',
     action() {
         BlazeLayout.render('layout', { page: 'adminAccounts' });
-    }
-});
-
-adminRoutes.route('/accounts/:userId/remove', {
-    name: 'admin.accounts.remove',
-    action() {
-        BlazeLayout.render('layout', { page: 'adminAccountsRemove' });
     }
 });

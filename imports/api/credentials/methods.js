@@ -13,7 +13,8 @@ export const insert = new ValidatedMethod({
         }
     }],
     run(credentials) {
-        Credentials.insert(credentials);
+        credentials.owner = Meteor.userId();
+        return Credentials.insert(credentials);
     }
 });
 
@@ -37,7 +38,7 @@ export const update = new ValidatedMethod({
             throw new Meteor.Error(403, 'You can only edit your own credentials.');
         }
 
-        Credentials.update({
+        return Credentials.update({
             _id: credentialsId
         }, {
             $set: {
@@ -68,6 +69,6 @@ export const remove = new ValidatedMethod({
             throw new Meteor.Error(403, 'You can only remove your own credentials.');
         }
 
-        Credentials.remove(credentialsId);
+        return Credentials.remove(credentialsId);
     }
 });

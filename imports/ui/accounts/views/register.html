@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <h2>{{{fa 'registered'}}} Registration</h2>
             <hr>
-            {{> quickForm schema=registrationForm id="registrationForm" buttonContent="Register"}}
+            {{> quickForm schema=registrationForm id="registrationForm" type="method" meteormethod="user.register" buttonContent="Register"}}
         </div>
         <div class="col-md-6">
             <h2>{{{fa 'cloud-download'}}} Store your login credentials</h2>

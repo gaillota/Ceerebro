@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { Roles } from "meteor/alanning:roles";
 
 import { Credentials } from '../credentials/credentials';
 
@@ -22,7 +23,7 @@ UserKeychainSchema = new SimpleSchema({
 });
 
 // User Simple Schema for server validation
-UserSchema = new SimpleSchema({
+Meteor.users.schema = new SimpleSchema({
     username: {
         type: String
     },
@@ -71,7 +72,7 @@ UserSchema = new SimpleSchema({
     }
 });
 
-Meteor.users.attachSchema(UserSchema);
+Meteor.users.attachSchema(Meteor.users.schema);
 
 // Prevent client from modifying user collection
 Meteor.users.deny({
@@ -85,5 +86,8 @@ Meteor.users.helpers({
         return Credentials.find({
             owner: this._id
         });
+    },
+    isAdmin() {
+        return Roles.userIsInRole(this._id, 'admin');
     }
 });

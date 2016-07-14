@@ -29,12 +29,14 @@
                     <td>{{credentialsCount}}</td>
                     <td>
                         <div class="pull-right">
-                            {{#if isDisabled}}
-                                <button type="button" class="btn btn-success btn-xs js-status-toggle">{{{fa 'check'}}}<span class="hidden-xs"> Enable</span></button>
-                            {{else}}
-                                <button type="button" class="btn btn-danger btn-xs js-status-toggle">{{{fa 'user-times'}}}<span class="hidden-xs"> Disable</span></button>
+                            {{#if emailNotVerified}}
+                                <button type="button" class="btn btn-success btn-xs js-activate">{{{fa 'check'}}} Activate</button>
                             {{/if}}
-                            <a href="{{pathFor 'admin.accounts.remove' userId=this._id}}" class="btn btn-danger btn-xs js-remove">{{{fa 'trash'}}}<span class="hidden-xs"> Remove</span></a>
+                            {{#if isDisabled}}
+                                <button type="button" class="btn btn-success btn-xs js-status-toggle">{{{fa 'user'}}}<span class="hidden-xs"> Unban</span></button>
+                            {{else}}
+                                <button type="button" class="btn btn-danger btn-xs js-status-toggle">{{{fa 'user-times'}}}<span class="hidden-xs"> Ban</span></button>
+                            {{/if}}
                         </div>
                     </td>
                 </tr>

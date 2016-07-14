@@ -15,9 +15,10 @@ export const EncryptionService = (function () {
      * Setup the user keychain needed to encrypt data smoothly
      *
      * @param password
+     * @param cb
      * @returns {{}}
      */
-    function setupUserKeychain(password) {
+    function setupUserKeychain(password, cb) {
         var keychain = {};
 
         // Generate 128 bits salt
@@ -36,7 +37,9 @@ export const EncryptionService = (function () {
         // Store encrypted master key using pbk's MSB key
         keychain.masterKey = CryptoJS.AES.encrypt(masterKey, passwordValidatorAndKey.key).toString();
 
-        return keychain;
+
+        // Call asynchronous callback function with the :keychain as parameter
+        cb(keychain);
     }
     /**
      * Wrapper for AES encrypt function

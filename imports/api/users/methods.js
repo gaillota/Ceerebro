@@ -5,10 +5,13 @@ import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { check } from 'meteor/check';
 import { _ } from 'lodash';
 
+import './users';
+
 import { schema as RegistrationForm } from '../../startup/forms/accounts/RegistrationForm';
+import { EncryptionService } from '../../startup/services/encryption.service';
 
 export const bootstrap = new ValidatedMethod({
-    name: 'bootstrap',
+    name: 'user.bootstrap',
     validate: new SimpleSchema({}).validator(),
     run() {
         if (!Meteor.users.find().count()) {
@@ -32,45 +35,33 @@ export const bootstrap = new ValidatedMethod({
 });
 
 export const register = new ValidatedMethod({
-    name: 'users.register',
+    name: 'user.register',
     mixins: [ValidatedMethod.mixins.schema],
-    schema: [RegistrationForm, {
-        keychain: {
-            type: Object
-        },
-        "keychain.masterKey": {
-            type: String
-        },
-        "keychain.salt" : {
-            type: String
-        },
-        "keychain.passwordValidator": {
-            type: String
-        }
-    }],
-    run({ username, email, password, keychain }) {
+    schema: [RegistrationForm],
+    run(doc) {
         // Create new user
-        const newUserId = Accounts.createUser({ username, email, password });
-
-        Meteor.users.update({
-            _id: newUserId
-        }, {
-            $set: {
-                "keychain.masterKey": keychain.masterKey,
-                "keychain.salt": keychain.salt,
-                "keychain.passwordValidator": keychain.passwordValidator
-            }
-        });
+        const newUserId = Accounts.createUser(doc);
 
         // Send verification e-mail
         Accounts.sendVerificationEmail(newUserId);
+
+        EncryptionService.setupUserKeychain(doc.password, keychain => {
+            // Set the user's keychain
+            Meteor.users.update({
+                _id: newUserId
+            }, {
+                $set: {
+                    keychain: keychain
+                }
+            });
+        });
 
         return newUserId;
     }
 });
 
 export const toggleStatus = new ValidatedMethod({
-    name: 'users.toggleStatus',
+    name: 'user.toggleStatus',
     mixins: [ValidatedMethod.mixins.isAdmin, ValidatedMethod.mixins.schema],
     schema: {
         userId: {
@@ -96,27 +87,47 @@ export const toggleStatus = new ValidatedMethod({
     }
 });
 
-export const remove = new ValidatedMethod({
-    name: 'users.remove',
+export const activate = new ValidatedMethod({
+    name: 'user.activate',
     mixins: [ValidatedMethod.mixins.isAdmin, ValidatedMethod.mixins.schema],
     schema: {
-        digest: {
-            type: String
-        },
         userId: {
             type: String,
             regEx: SimpleSchema.RegEx.Id
         }
     },
-    run({ digest, userId }) {
-        const result = Accounts._checkPassword(Meteor.user(), { digest: digest, algorithm: 'sha-256' });
-        if (result.error) {
-            throw new Meteor.Error(403, 'Wrong password');
-        }
-
-        Credentials.remove({
-            owner: userId
+    run({ userId }) {
+        return Meteor.users.update({
+            _id: userId
+        }, {
+            $set: {
+                "emails.0.verified": true
+            }
         });
-        Meteor.users.remove(userId);
     }
 });
+
+//export const remove = new ValidatedMethod({
+//    name: 'user.remove',
+//    mixins: [ValidatedMethod.mixins.isAdmin, ValidatedMethod.mixins.schema],
+//    schema: {
+//        digest: {
+//            type: String
+//        },
+//        userId: {
+//            type: String,
+//            regEx: SimpleSchema.RegEx.Id
+//        }
+//    },
+//    run({ digest, userId }) {
+//        const result = Accounts._checkPassword(Meteor.user(), { digest: digest, algorithm: 'sha-256' });
+//        if (result.error) {
+//            throw new Meteor.Error(403, 'Wrong password');
+//        }
+//
+//        Credentials.remove({
+//            owner: userId
+//        });
+//        Meteor.users.remove(userId);
+//    }
+//});

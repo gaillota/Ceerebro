@@ -1,14 +1,7 @@
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-class CredentialsCollection extends Mongo.Collection {
-    insert(doc, callback) {
-        doc.owner = Meteor.userId();
-        super.insert(doc, callback);
-    }
-}
-
-export const Credentials = new CredentialsCollection("credentials");
+export const Credentials = new Mongo.Collection("credentials");
 
 // Deny all client-side access (management through methods)
 Credentials.deny({

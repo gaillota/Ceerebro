@@ -4,6 +4,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
+import { activate } from '../../../api/users/methods';
 import { toggleStatus } from '../../../api/users/methods';
 
 Template.adminAccounts.onCreated(function adminAccountsCreated() {
@@ -22,7 +23,7 @@ Template.adminAccounts.helpers({
             }
         }, {
             sort: {
-                createdAt: 1
+                createdAt: -1
             }
         });
     },
@@ -41,6 +42,9 @@ Template.adminAccounts.helpers({
     },
     credentialsCount() {
         return this.credentials().count();
+    },
+    emailNotVerified() {
+        return !this.emails[0].verified;
     },
     isDisabled() {
         return !!this.disabled;
@@ -61,6 +65,11 @@ Template.adminAccounts.helpers({
 Template.adminAccounts.events({
     'click .js-status-toggle'() {
         toggleStatus.call({ userId: this._id }, (error) => {
+            // Display error
+        });
+    },
+    'click .js-activate'() {
+        activate.call({ userId: this._id }, (error) => {
             // Display error
         });
     }
