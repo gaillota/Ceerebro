@@ -15,10 +15,10 @@ export const EncryptionService = (function () {
      * Setup the user keychain needed to encrypt data smoothly
      *
      * @param password
-     * @param cb
+     * @param callback
      * @returns {{}}
      */
-    function setupUserKeychain(password, cb) {
+    function setupUserKeychain(password, callback) {
         var keychain = {};
 
         // Generate 128 bits salt
@@ -39,7 +39,7 @@ export const EncryptionService = (function () {
 
 
         // Call asynchronous callback function with the :keychain as parameter
-        cb(keychain);
+        callback(keychain);
     }
     /**
      * Wrapper for AES encrypt function

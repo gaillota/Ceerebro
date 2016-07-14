@@ -43,7 +43,7 @@ export const register = new ValidatedMethod({
         // Send verification e-mail
         Accounts.sendVerificationEmail(newUserId);
 
-        EncryptionService.setupUserKeychain(doc.password, keychain => {
+        EncryptionService.setupUserKeychain(doc.password, (keychain) => {
             // Set the user's keychain
             Meteor.users.update({
                 _id: newUserId

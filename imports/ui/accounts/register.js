@@ -12,11 +12,6 @@ import { EncryptionService } from '../../startup/services/encryption.service.js'
 import { register } from '../../api/users/methods';
 
 AutoForm.addHooks('registrationForm', {
-    before: {
-        method() {
-            Notification.warning('Generating your secure keychain...');
-        }
-    },
     onSuccess() {
         Notification.success('Registration successful ! Check your e-mails');
     }
