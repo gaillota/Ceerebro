@@ -4,8 +4,11 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
+import { Credentials } from "../../api/credentials/credentials";
+
 import { activate } from '../../api/users/methods';
 import { toggleStatus } from '../../api/users/methods';
+import { Notification } from "../../startup/services/notification.service";
 
 Template.adminAccounts.onCreated(function adminAccountsCreated() {
     this.subscribe('admin.accounts');
@@ -41,7 +44,9 @@ Template.adminAccounts.helpers({
         }
     },
     credentialsCount() {
-        return this.credentials().count();
+        return Credentials.find({
+            owner: this._id
+        }).count();
     },
     emailNotVerified() {
         return !this.emails[0].verified;
@@ -49,28 +54,17 @@ Template.adminAccounts.helpers({
     isDisabled() {
         return !!this.disabled;
     }
-    //userStatusAction: function() {
-    //    return !!this.disabled ? {
-    //        actionButton: 'success',
-    //        actionIcon: 'check',
-    //        actionLabel: 'Enable'
-    //    } : {
-    //        actionButton: 'danger',
-    //        actionIcon: 'user-times',
-    //        actionLabel: 'Disable'
-    //    }
-    //}
 });
 
 Template.adminAccounts.events({
     'click .js-status-toggle'() {
         toggleStatus.call({ userId: this._id }, (error) => {
-            // Display error
+            Notification.error(error.toString);
         });
     },
     'click .js-activate'() {
         activate.call({ userId: this._id }, (error) => {
-            // Display error
+            Notification.error(error.toString);
         });
     }
 });
