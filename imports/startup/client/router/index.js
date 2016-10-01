@@ -10,3 +10,4 @@ import './routes/admin';
 import './routes/credentials';
 import './routes/profile';
 import './routes/public';
+import './routes/readings';

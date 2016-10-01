@@ -1,0 +1,5 @@
+<template name="readingsAdd">
+    <h2>{{{fa 'plus'}}} Add a reading</h2>
+    <hr>
+    {{> quickForm schema=readingsForm id="addReadings" type="method" meteormethod="readings.insert"}}
+</template>
