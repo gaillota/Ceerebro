@@ -32,7 +32,6 @@ reywood:publish-composite
 blaze-html-templates
 aldeed:template-extension
 raix:handlebar-helpers
-twbs:bootstrap
 fortawesome:fontawesome
 mrt:nprogress
 peppelg:bootstrap-3-modal
