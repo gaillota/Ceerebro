@@ -49,6 +49,6 @@ AutoForm.addHooks('rea.credentials.add', {
     },
     onSuccess() {
         Notification.success('Credentials successfully added');
-        FlowRouter.go('rea.credentials');
+        FlowRouter.go('rea.credentials.index');
     }
 });

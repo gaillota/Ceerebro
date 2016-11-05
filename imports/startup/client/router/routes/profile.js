@@ -6,7 +6,7 @@ import '../../../../ui/layout';
 import '../../../../ui/rea/profile/index';
 
 FlowRouter.route('/profile', {
-    name: 'profile',
+    name: 'rea.profile.index',
     action() {
         BlazeLayout.render('layout', {page: 'rea.profile'});
     }

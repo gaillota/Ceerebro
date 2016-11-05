@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import {_} from 'lodash';
 
 /**
  * Accounts urls
@@ -22,8 +23,8 @@ Accounts.emailTemplates.verifyEmail = {
     text(user, url) {
         return "Hi " + user.username + ",\n\n"
             + "Welcome on Ceerebro ! :)\n\n"
-            + "Before you can begin, we just need you to do one last thing...\n"
-            + "Please follow this link in order to verify your e-mail address and complete your registration :\n\n"
+            + "Before you can begin, we just need you to verify one last thing...\n"
+            + "Please follow this link in order to complete your registration :\n\n"
             + url + ".\n\n"
             + "If you didn't register on Ceerebro, please ignore this e-mail.\n\n"
             + "Have an amazing day !\n"
@@ -39,21 +40,36 @@ Accounts.validateLoginAttempt(function(obj) {
         return false;
     }
 
-    if (obj.user.emails && !obj.user.emails[0].verified) {
+    const user = obj.user;
+
+    if (user.emails && !user.emails[0].verified) {
         throw new Meteor.Error(403, 'Your must activate your account before you can login. Please follow the instructions sent by e-mail');
     }
 
-    if (obj.user.disabled) {
+    if (user.disabled) {
         throw new Meteor.Error(403, 'Your account has been disabled.');
     }
 
     Meteor.users.update({
-        _id: obj.user._id
+        _id: user._id
     }, {
         $set: {
             lastConnectionAt: new Date()
         }
     });
+
+    // Prevent login tokens over-accumulation
+    const maxTokens = 2;
+    if (_.get(user, 'services resume loginTokens'.split(' '), []).length > maxTokens) {
+        Meteor.users.update(user._id, {
+            $push: {
+                "services.resume.loginTokens": {
+                    $each: [],
+                    $slice: maxTokens
+                }
+            }
+        });
+    }
 
     return true;
 });

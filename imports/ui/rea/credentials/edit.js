@@ -26,13 +26,13 @@ Template["rea.credentials.edit"].helpers({
         return CredentialsForm;
     },
     credentials() {
-        var credentialsId = Template.instance().getCredentialsId();
-        var credentials = Credentials.findOne(credentialsId);
+        const credentialsId = Template.instance().getCredentialsId();
+        const credentials = Credentials.findOne(credentialsId);
         if (!credentials) {
             return;
         }
-        var masterKey = Session.get('masterKey');
-        var plainPassword = EncryptionService.decrypt(credentials.password, masterKey, credentials.iv);
+        const masterKey = Session.get('masterKey');
+        const plainPassword = EncryptionService.decrypt(credentials.password, masterKey, credentials.iv);
 
         return {
             domain: credentials.domain,
@@ -53,8 +53,8 @@ AutoForm.addHooks('rea.credentials.edit', {
             return;
         }
 
-        var credentialsId = FlowRouter.getParam('credentialsId');
-        var credential = Credentials.findOne(credentialsId);
+        const credentialsId = FlowRouter.getParam('credentialsId');
+        const credential = Credentials.findOne(credentialsId);
 
         if (!credential) {
             this.done(new Meteor.Error('Credentials not found, could not save'));
@@ -68,6 +68,6 @@ AutoForm.addHooks('rea.credentials.edit', {
     },
     onSuccess() {
         Notification.success('Credentials edited');
-        FlowRouter.go('rea.credentials');
+        FlowRouter.go('rea.credentials.index');
     }
 });
