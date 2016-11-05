@@ -28,6 +28,9 @@ SimpleSchema.messages({
     keyNotInSchema: "[key] is not allowed by the schema"
 });
 
+// Disabling autoform default theme
+AutoForm.setDefaultTemplate('plain');
+
 // Autoform error hook
 AutoForm.addHooks(null, {
     onError: function (formType, error) {

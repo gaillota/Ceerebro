@@ -1,47 +1,37 @@
 <template name="navbar">
-    <nav class="navbar navbar-default">
+    <section class="section">
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{pathFor 'public.index'}}">
-                    {{> logo}}
-                </a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a class="nav-item is-brand" href="{{pathFor 'public.index'}}">
+                        {{> logo}}
+                    </a>
                     {{#if currentUser}}
-                        <li class="{{isActiveRoute regex='credentials'}}"><a href="{{pathFor 'rea.credentials.index'}}">{{{fa 'key'}}} Credentials</a></li>
+                        <a class="nav-item" href="{{pathFor 'rea.credentials.index'}}">{{{fa 'key'}}} Credentials</a>
                         {{#if isInRole 'admin'}}
-                            <li class="{{isActiveRoute regex='admin'}}"><a href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a></li>
+                            <a class="nav-item" href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a>
                         {{/if}}
                     {{/if}}
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+                </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <span class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+
+                <div class="nav-right nav-menu">
                     {{#with currentUser}}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                {{username}} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{pathFor 'rea.profile.index'}}">{{{fa 'user'}}} Profile</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a class="js-logout" href="#">{{{fa 'sign-out'}}} Logout</a></li>
-                            </ul>
-                        </li>
+                        <a href="{{pathFor 'rea.profile.index'}}" class="nav-item">
+                            {{{fa 'user'}}} {{username}}
+                        </a>
+                        <a class="nav-item js-logout" href="#">{{{fa 'sign-out'}}}</a>
                     {{else}}
-                        <li><a href="{{pathFor 'public.auth.register'}}">{{{fa 'registered'}}} Register</a></li>
-                        <li><a href="{{pathFor 'public.auth.login'}}">{{{fa 'sign-in'}}} Login</a></li>
+                        <a class="nav-item" href="{{pathFor 'public.auth.register'}}">{{{fa 'registered'}}} Register</a>
+                        <a class="nav-item" href="{{pathFor 'public.auth.login'}}">{{{fa 'sign-in'}}} Login</a>
                     {{/with}}
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+                </div>
+            </nav>
+        </div>
+    </section>
 </template>

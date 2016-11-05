@@ -21,6 +21,9 @@ const helpers = {
 
         return moment(date).fromNow();
     },
+    assets(path) {
+        return Meteor.absoluteUrl(path);
+    },
     userStatus(user = this) {
         const icons = {
             disabled: {
