@@ -2,6 +2,9 @@
   "name": "ceerebro",
   "version": "1.0.0",
   "description": "A secure credentials storage platform",
+  "scripts": {
+    "start": "meteor run"
+  },
   "dependencies": {
     "highcharts": "^4.2.5",
     "lodash": "^4.13.1",
