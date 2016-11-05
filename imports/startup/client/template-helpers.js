@@ -21,7 +21,7 @@ const helpers = {
 
         return moment(date).fromNow();
     },
-    userStatus(user = Meteor.user()) {
+    userStatus(user = this) {
         const icons = {
             disabled: {
                 type: 'danger',
