@@ -8,16 +8,16 @@ import {Notification} from '../../services/notification.service.js';
 FlowRouter.triggersFunctions = {
     isLoggedIn(context, redirect) {
         if (!Meteor.userId()) {
-            redirect('public.auth.login');
+            redirect(FlowRouter.path('public.auth.login'));
         }
     },
     isAdmin(context, redirect) {
         if (!Meteor.userId()) {
-            redirect('public.auth.login');
+            redirect(FlowRouter.path('public.auth.login'));
         } else {
             if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
                 Notification.error('You must be admin to access this section !');
-                redirect('public.index');
+                redirect(FlowRouter.path('public.index'));
             }
         }
     }

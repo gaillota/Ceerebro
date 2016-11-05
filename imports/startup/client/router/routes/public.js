@@ -8,8 +8,11 @@ import '../../../../ui/public/about';
 
 FlowRouter.route('/', {
     name: 'public.index',
+    triggersEnter: [function(context, redirect) {
+        redirect(FlowRouter.path('rea.credentials.index'));
+    }],
     action() {
-        FlowRouter.go('rea.credentials.index');
+        throw new Meteor.Error(403, "this should not get called");
     }
 });
 
