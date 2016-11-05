@@ -5,9 +5,8 @@ import './config';
 import './security';
 
 // Application's routes
-import './routes/accounts';
 import './routes/admin';
+import './routes/auth';
 import './routes/credentials';
 import './routes/profile';
 import './routes/public';
-import './routes/readings';

@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const schema = new SimpleSchema({
+export const ChangePasswordForm = new SimpleSchema({
     oldPassword: {
         type: String,
         label: "Current password",

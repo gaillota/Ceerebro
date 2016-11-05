@@ -1,12 +1,12 @@
-import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { check } from 'meteor/check';
-import { _ } from 'lodash';
+import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {ValidatedMethod} from 'meteor/mdg:validated-method';
+import {check} from 'meteor/check';
+import {_} from 'lodash';
 
-import { schema as RegistrationForm } from '../../startup/forms/accounts/RegistrationForm';
-import { EncryptionService } from '../../startup/services/encryption.service';
+import {RegistrationForm} from '../../startup/forms/auth/RegistrationForm';
+import {EncryptionService} from '../../startup/services/encryption.service';
 
 export const bootstrap = new ValidatedMethod({
     name: 'user.bootstrap',
@@ -66,7 +66,7 @@ export const toggleStatus = new ValidatedMethod({
             type: SimpleSchema.RegEx.Id
         }
     },
-    run({ userId }) {
+    run({userId}) {
         const user = Meteor.users.findOne({
             _id: userId
         });
@@ -94,7 +94,7 @@ export const activate = new ValidatedMethod({
             regEx: SimpleSchema.RegEx.Id
         }
     },
-    run({ userId }) {
+    run({userId}) {
         return Meteor.users.update({
             _id: userId
         }, {

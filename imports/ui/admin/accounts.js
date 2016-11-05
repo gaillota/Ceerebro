@@ -1,20 +1,20 @@
-import { Meteor } from 'meteor/meteor';
-import { Template } from 'meteor/templating';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import {Meteor} from 'meteor/meteor';
+import {Template} from 'meteor/templating';
+import {Counts} from 'meteor/tmeasday:publish-counts';
 
 import './accounts.html';
 
-import { Credentials } from "../../api/credentials/credentials";
+import {Credentials} from "../../api/credentials/credentials";
 
-import { activate } from '../../api/users/methods';
-import { toggleStatus } from '../../api/users/methods';
-import { Notification } from "../../startup/services/notification.service";
+import {activate} from '../../api/users/methods';
+import {toggleStatus} from '../../api/users/methods';
+import {Notification} from "../../startup/services/notification.service";
 
-Template.adminAccounts.onCreated(function adminAccountsCreated() {
+Template["admin.accounts"].onCreated(function adminAccountsCreated() {
     this.subscribe('admin.accounts');
 });
 
-Template.adminAccounts.helpers({
+Template["admin.accounts"].helpers({
     usersCount() {
         // Subtract current user from users count
         return Counts.get('totalAccounts');
@@ -56,14 +56,14 @@ Template.adminAccounts.helpers({
     }
 });
 
-Template.adminAccounts.events({
+Template["admin.accounts"].events({
     'click .js-status-toggle'() {
-        toggleStatus.call({ userId: this._id }, (error) => {
+        toggleStatus.call({userId: this._id}, (error) => {
             Notification.error(error.toString);
         });
     },
     'click .js-activate'() {
-        activate.call({ userId: this._id }, (error) => {
+        activate.call({userId: this._id}, (error) => {
             Notification.error(error.toString);
         });
     }

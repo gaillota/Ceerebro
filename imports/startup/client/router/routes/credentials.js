@@ -1,47 +1,42 @@
-import { Meteor } from 'meteor/meteor';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-import { BlazeLayout } from 'meteor/kadira:blaze-layout';
-import { Session } from 'meteor/session';
+import {FlowRouter} from 'meteor/kadira:flow-router';
+import {BlazeLayout} from 'meteor/kadira:blaze-layout';
+import {Session} from 'meteor/session';
 
-import { Notification } from '../../../services/notification.service.js';
+import {Notification} from '../../../services/notification.service.js';
 
 import '../../../../ui/layout';
 
-import '../../../../ui/credentials/index';
-import '../../../../ui/credentials/add';
-import '../../../../ui/credentials/edit';
+import '../../../../ui/rea/credentials/index';
+import '../../../../ui/rea/credentials/add';
+import '../../../../ui/rea/credentials/edit';
 
 var credentialsRoutes = FlowRouter.group({
     prefix: '/credentials',
-    name: 'credentialsGroup'
 });
 
 credentialsRoutes.route('/', {
-    name: 'credentials',
+    name: 'rea.credentials.index',
     action() {
-        BlazeLayout.render('layout', { page: 'credentials' });
+        BlazeLayout.render('layout', {page: 'rea.credentials.index'});
     }
 });
 
 credentialsRoutes.route('/add', {
-    name: 'credentials.add',
+    name: 'rea.credentials.add',
     action() {
-        BlazeLayout.render('layout', { page: 'credentialsAdd' });
+        BlazeLayout.render('layout', {page: 'rea.credentials.add'});
     }
 });
 
 credentialsRoutes.route('/edit/:credentialsId', {
-    name: 'credentials.edit',
-    subscriptions(params) {
-        this.register('credentialsEdit', Meteor.subscribe('credentials.edit', params.credentialsId));
-    },
+    name: 'rea.credentials.edit',
     triggersEnter(context, redirect) {
         if (!Session.get('masterKey')) {
             Notification.error('You must set your master key to be able to edit any credentials !');
-            redirect('credentials');
+            redirect('rea.credentials');
         }
     },
     action() {
-        BlazeLayout.render('layout', { page: 'credentialsEdit' });
+        BlazeLayout.render('layout', {page: 'rea.credentials.edit'});
     }
 });

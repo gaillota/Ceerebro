@@ -1,10 +1,10 @@
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { AutoForm } from 'meteor/aldeed:autoform';
-import { sAlert } from "meteor/juliancwirko:s-alert";
-import { NProgress } from 'meteor/mrt:nprogress';
-import { _ } from 'lodash';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {AutoForm} from 'meteor/aldeed:autoform';
+import {sAlert} from "meteor/juliancwirko:s-alert";
+import {NProgress} from 'meteor/mrt:nprogress';
+import {_} from 'lodash';
 
-import { Notification } from '../services/notification.service.js';
+import {Notification} from '../services/notification.service.js';
 
 // SimpleSchema errors overridden
 SimpleSchema.messages({
@@ -22,8 +22,8 @@ SimpleSchema.messages({
     notValid: "[label] is not valid",
     passwordMismatch: "The passwords don't match",
     regEx: [
-        { exp: SimpleSchema.RegEx.Url, msg: "[value] is not a valid URL" },
-        { exp: SimpleSchema.RegEx.Email, msg: "[label] must be a valid e-mail address" }
+        {exp: SimpleSchema.RegEx.Url, msg: "[value] is not a valid URL"},
+        {exp: SimpleSchema.RegEx.Email, msg: "[label] must be a valid e-mail address"}
     ],
     keyNotInSchema: "[key] is not allowed by the schema"
 });

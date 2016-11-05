@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const schema = new SimpleSchema({
+export const MasterPasswordForm = new SimpleSchema({
     password: {
         type: String,
         label: "Your password",

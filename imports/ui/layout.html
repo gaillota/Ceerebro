@@ -1,18 +1,20 @@
 <template name="layout">
+    <!--Navbar component-->
     {{> navbar }}
-    <div class="container" style="margin-bottom: 20px;">
-        {{#if loggingIn}}
-            {{> loading}}
-        {{else}}
-            {{#if Template.subscriptionsReady}}
-                {{#if currentUser}}
-                    {{> masterKeyButton}}
-                {{/if}}
-                {{> Template.dynamic template=page}}
-            {{else}}
-                {{> loading}}
+
+    {{#if loggingIn}}
+        {{> loading}}
+    {{else}}
+        {{#if Template.subscriptionsReady}}
+            {{#if currentUser}}
+                {{> masterKeyButton}}
             {{/if}}
+            {{> Template.dynamic template=page}}
+        {{else}}
+            {{> loading}}
         {{/if}}
-    </div>
+    {{/if}}
+
+    <!--Alerts components-->
     {{> sAlert}}
 </template>

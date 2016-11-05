@@ -1,6 +1,6 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const schema = new SimpleSchema({
+export const ReadingsForm = new SimpleSchema({
     value: {
         type: Number,
         min: 0

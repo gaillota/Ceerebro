@@ -1,4 +1,4 @@
 import './config';
 import '../common/validated-method-mixins';
-import './handlebars';
+import './template-helpers';
 import './router';
