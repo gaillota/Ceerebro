@@ -1,63 +1,64 @@
-import { Template } from 'meteor/templating';
-import { moment } from 'meteor/momentjs:moment';
-import { _ } from 'lodash';
+import {Template} from 'meteor/templating';
+import {moment} from 'meteor/momentjs:moment';
+import {_} from 'lodash';
 
-Template.registerHelper('fa', function(icon) {
-    return '<i class="fa fa-' + icon + '"></i>';
-});
-
-Template.registerHelper('formatDate', function(date) {
-    if (!date) {
-        return 'undefined';
-    }
-
-    date = moment(date);
-    return date.isSame(new Date(), 'day') ? date.format('HH:mm') : date.isSame(new Date(), 'year') ? date.format('MMMM Do') : date.format('MMMM Do YYYY');
-});
-
-Template.registerHelper('formatDateRelative', function(date, defaultValue) {
-    if (!date) {
-        return defaultValue || 'undefined';
-    }
-
-    return moment(date).fromNow();
-});
-
-Template.registerHelper('userStatus', function(user) {
-    user = user || this;
-    if (user.disabled) {
-        return {
-            type: 'danger',
-            icon: 'user-times',
-            text: 'Banned'
+const helpers = {
+    fa(icon) {
+        return `<i class="fa fa-${icon}"></i>`;
+    },
+    formatDate(date) {
+        if (!date) {
+            return '-1';
         }
-    } else if (user.emails[0].verified) {
-        return {
-            type: 'success',
-            icon: 'check-square-o',
-            text: 'Active'
+
+        date = moment(date);
+        return date.isSame(new Date(), 'day') ? date.format('HH:mm') : date.isSame(new Date(), 'year') ? date.format('MMMM Do') : date.format('MMMM Do YYYY');
+    },
+    formatDateRelative(date) {
+        if (!date) {
+            return '-1';
         }
-    } else {
-        return {
-            type: 'warning',
-            icon: 'clock-o',
-            text: 'Waiting...'
+
+        return moment(date).fromNow();
+    },
+    userStatus(user = Meteor.user()) {
+        const icons = {
+            disabled: {
+                type: 'danger',
+                icon: 'user-times',
+                text: 'Banned'
+            },
+            verified: {
+                type: 'success',
+                icon: 'check-square-o',
+                text: 'Active'
+            },
+            waiting: {
+                type: 'warning',
+                icon: 'clock-o',
+                text: 'Waiting...'
+            }
+        };
+
+        return user.disabled ? icons.disabled : user.emails[0].verified ? icons.verified : icons.waiting;
+    },
+    masterKeyIsSet() {
+        return Session.get('masterKey');
+    },
+    // lodash isEmpty function does not work on cursors
+    isEmpty(data) {
+        if (!data) {
+            return true;
         }
-    }
-});
 
-Template.registerHelper('masterKeyIsSet', function() {
-    return Session.get('masterKey');
-});
+        if (_.isArray(data) || _.isString(data)) {
+            return !data.length;
+        }
 
-Template.registerHelper('isEmpty', function(data) {
-    if (!data) {
-        return true;
+        return !data.count();
     }
-    
-    if (_.isArray(data) || _.isString(data)) {
-        return !data.length;
-    }
+};
 
-    return !data.count();
+_.forEach(helpers, (func, name) => {
+    Template.registerHelper(name, func);
 });

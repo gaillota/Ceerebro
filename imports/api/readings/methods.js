@@ -1,9 +1,9 @@
-import { Meteor } from 'meteor/meteor';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import { moment } from 'meteor/momentjs:moment';
+import {Meteor} from 'meteor/meteor';
+import {ValidatedMethod} from 'meteor/mdg:validated-method';
+import {moment} from 'meteor/momentjs:moment';
 
-import { Readings } from './readings';
-import { schema as ReadingsForm } from '../../startup/forms/readings/ReadingsForm';
+import {Readings} from './readings';
+import {ReadingsForm} from '../../startup/forms/readings/ReadingsForm';
 
 export const insert = new ValidatedMethod({
     name: 'readings.insert',
@@ -11,7 +11,7 @@ export const insert = new ValidatedMethod({
     schema: [ReadingsForm],
     run(readings) {
         // Check if reading with same selected date already exists
-        if (Readings.find({ createdAt: readings.createdAt }).count()) {
+        if (Readings.find({createdAt: readings.createdAt}).count()) {
             throw new Meteor.Error(403, 'You can only add one reading with the same selected date');
         }
 
@@ -50,7 +50,7 @@ export const update = new ValidatedMethod({
     name: 'readings.update',
     mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
     schema: [ReadingsForm],
-    run({ readingsId, value }) {
+    run({readingsId, value}) {
         const readings = Readings.findOne(readingsId);
 
         if (!readings) {
@@ -79,7 +79,7 @@ export const remove = new ValidatedMethod({
             type: String
         }
     },
-    run({ readingsId }) {
+    run({readingsId}) {
         const readings = Readings.findOne(readingsId);
 
         if (!readings) {

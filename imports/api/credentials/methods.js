@@ -1,8 +1,8 @@
-import { Meteor } from 'meteor/meteor';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import {Meteor} from 'meteor/meteor';
+import {ValidatedMethod} from 'meteor/mdg:validated-method';
 
-import { Credentials } from './credentials';
-import { schema as CredentialsForm } from '../../startup/forms/credentials/CredentialsForm';
+import {Credentials} from './credentials';
+import {CredentialsForm} from '../../startup/forms/credentials/CredentialsForm';
 
 export const insert = new ValidatedMethod({
     name: 'credentials.insert',
@@ -27,7 +27,7 @@ export const update = new ValidatedMethod({
             regEx: SimpleSchema.RegEx.Id
         }
     }],
-    run({ credentialsId, domain, identifier, password }) {
+    run({credentialsId, domain, identifier, password}) {
         const credentials = Credentials.findOne(credentialsId);
 
         if (!credentials) {
@@ -58,7 +58,7 @@ export const remove = new ValidatedMethod({
             type: String
         }
     },
-    run({ credentialsId }) {
+    run({credentialsId}) {
         const credentials = Credentials.findOne(credentialsId);
 
         if (!credentials) {

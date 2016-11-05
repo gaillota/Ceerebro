@@ -2,8 +2,6 @@ import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
-import {check} from 'meteor/check';
-import {_} from 'lodash';
 
 import {RegistrationForm} from '../../startup/forms/auth/RegistrationForm';
 import {EncryptionService} from '../../startup/services/encryption.service';

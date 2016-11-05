@@ -1,15 +1,15 @@
-import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
-import { check } from 'meteor/check';
+import {Meteor} from 'meteor/meteor';
+import {Counts} from 'meteor/tmeasday:publish-counts';
+import {check} from 'meteor/check';
 
-import { Credentials } from '../credentials';
+import {Credentials} from '../credentials';
 
 Meteor.publish('credentials', function credentials() {
     if (!this.userId) {
         return this.ready();
     }
 
-    Counts.publish(this, 'totalCredentials', Credentials.find({ owner: this.userId }));
+    Counts.publish(this, 'totalCredentials', Credentials.find({owner: this.userId}));
 
     return Credentials.find({
         owner: this.userId

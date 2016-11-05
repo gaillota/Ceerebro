@@ -1,13 +1,19 @@
-import { Mongo } from 'meteor/mongo';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import {Mongo} from 'meteor/mongo';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 export const Credentials = new Mongo.Collection("credentials");
 
 // Deny all client-side access (management through methods)
 Credentials.deny({
-    insert() { return true; },
-    update() { return true; },
-    remove() { return true; }
+    insert() {
+        return true;
+    },
+    update() {
+        return true;
+    },
+    remove() {
+        return true;
+    }
 });
 
 Credentials.schema = new SimpleSchema({
@@ -29,7 +35,7 @@ Credentials.schema = new SimpleSchema({
     },
     createdAt: {
         type: Date,
-        autoValue: function() {
+        autoValue: function () {
             if (this.isInsert && !this.isSet) {
                 return new Date();
             }

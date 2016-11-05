@@ -1,8 +1,8 @@
-import { Meteor } from 'meteor/meteor';
-import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-import { Roles } from "meteor/alanning:roles";
+import {Meteor} from 'meteor/meteor';
+import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {Roles} from "meteor/alanning:roles";
 
-import { Credentials } from '../credentials/credentials';
+import {Credentials} from '../credentials/credentials';
 
 UserKeychainSchema = new SimpleSchema({
     masterKey: {
@@ -76,9 +76,15 @@ Meteor.users.attachSchema(Meteor.users.schema);
 
 // Prevent client from modifying user collection
 Meteor.users.deny({
-    insert() { return true; },
-    update() { return true; },
-    remove() { return true; }
+    insert() {
+        return true;
+    },
+    update() {
+        return true;
+    },
+    remove() {
+        return true;
+    }
 });
 
 Meteor.users.helpers({
