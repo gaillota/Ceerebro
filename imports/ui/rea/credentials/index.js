@@ -48,7 +48,7 @@ Template["rea.credentials.index"].helpers({
         });
     },
     editButtonState() {
-        return Session.get('masterKey') ? '' : 'disabled';
+        return !Session.get('masterKey') && 'is-disabled';
     },
     searching() {
         return Template.instance().search.get();
