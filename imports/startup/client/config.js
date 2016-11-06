@@ -1,8 +1,9 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {AutoForm} from 'meteor/aldeed:autoform';
+import {ActiveRoute} from 'meteor/zimme:active-route';
 import {sAlert} from "meteor/juliancwirko:s-alert";
 import {NProgress} from 'meteor/mrt:nprogress';
-import {_} from 'lodash';
 
 import {Notification} from '../services/notification.service.js';
 
@@ -44,6 +45,10 @@ AutoForm.addHooks(null, {
 
         Notification.error(error.toString());
     }
+});
+
+ActiveRoute.configure({
+    activeClass: 'is-active'
 });
 
 // Alerts configuration
