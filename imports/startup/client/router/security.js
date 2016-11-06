@@ -24,11 +24,9 @@ FlowRouter.triggersFunctions = {
 };
 
 const NON_AUTH_ROUTES = [
-    'public.index',
+    'public.about',
     'public.auth.register',
     'public.auth.login',
-    'public.auth.forgot-password',
-    'public.auth.reset-password',
     'public.auth.verify-email'
 ];
 

@@ -9,11 +9,11 @@
                         </a>
                         {{#if currentUser}}
                             <a class="nav-item" href="{{pathFor 'rea.credentials.index'}}">
-                                {{> icon name='key'}} Credentials
+                                {{> icon name='key' size='is-small'}} Credentials
                             </a>
                             {{#if isInRole 'admin'}}
                                 <a class="nav-item" href="{{pathFor 'admin'}}">
-                                    {{> icon name='terminal'}} Administration
+                                    {{> icon name='terminal' size='is-small'}} Administration
                                 </a>
                             {{/if}}
                         {{/if}}
@@ -28,15 +28,15 @@
                     <div class="nav-right nav-menu">
                         {{#with currentUser}}
                             <a href="{{pathFor 'rea.profile.index'}}" class="nav-item">
-                                {{> icon name='user'}} {{username}}
+                                {{> icon name='user' size='is-small'}} {{username}}
                             </a>
                             <a class="nav-item js-logout" href="#">{{{fa 'sign-out'}}}</a>
                         {{else}}
                             <a class="nav-item" href="{{pathFor 'public.auth.register'}}">
-                                {{> icon name='registered'}} Register
+                                {{> icon name='registered' size='is-small'}} Register
                             </a>
                             <a class="nav-item" href="{{pathFor 'public.auth.login'}}">
-                                {{> icon name='sign-in'}} Login
+                                {{> icon name='sign-in' size='is-small'}} Login
                             </a>
                         {{/with}}
                     </div>
