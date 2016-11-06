@@ -1,7 +1,13 @@
-<template name="about">
-    <h2>{{{fa 'info-circle'}}} About Ceerebro <small>Encryption algorithm</small></h2>
-    <hr>
-    <a href="/img/schema.png" target="_blank">
-        <img src="/img/schema.png" alt="Schema" class="img-responsive center-block">
-    </a>
+<template name="public.about">
+    <section class="section">
+        <div class="container">
+            <h1 class="title">{{> icon name='info-circle' size='is-medium'}} About Ceerebro
+                <small>Encryption algorithm</small>
+            </h1>
+            <hr>
+            <a href="{{assets 'img/schema.png'}}" target="_blank">
+                <img src="{{assets 'img/schema.png'}}" alt="Schema" class="image">
+            </a>
+        </div>
+    </section>
 </template>
