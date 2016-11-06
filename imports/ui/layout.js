@@ -4,3 +4,4 @@ import './layout.html';
 import './components/navbar';
 import './components/loading';
 import './components/master-key.button';
+import './components/icon';

@@ -1,35 +1,45 @@
 <template name="navbar">
-    <section class="section">
-        <div class="container">
+    <section class="hero is-light">
+        <div class="hero-header">
             <nav class="nav">
-                <div class="nav-left">
-                    <a class="nav-item is-brand" href="{{pathFor 'public.index'}}">
-                        {{> logo}}
-                    </a>
-                    {{#if currentUser}}
-                        <a class="nav-item" href="{{pathFor 'rea.credentials.index'}}">{{{fa 'key'}}} Credentials</a>
-                        {{#if isInRole 'admin'}}
-                            <a class="nav-item" href="{{pathFor 'admin'}}">{{{fa 'terminal'}}} Administration</a>
-                        {{/if}}
-                    {{/if}}
-                </div>
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <span class="nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-
-                <div class="nav-right nav-menu">
-                    {{#with currentUser}}
-                        <a href="{{pathFor 'rea.profile.index'}}" class="nav-item">
-                            {{{fa 'user'}}} {{username}}
+                <div class="container">
+                    <div class="nav-left">
+                        <a class="nav-item is-brand" href="{{pathFor 'public.index'}}">
+                            {{> logo}}
                         </a>
-                        <a class="nav-item js-logout" href="#">{{{fa 'sign-out'}}}</a>
-                    {{else}}
-                        <a class="nav-item" href="{{pathFor 'public.auth.register'}}">{{{fa 'registered'}}} Register</a>
-                        <a class="nav-item" href="{{pathFor 'public.auth.login'}}">{{{fa 'sign-in'}}} Login</a>
-                    {{/with}}
+                        {{#if currentUser}}
+                            <a class="nav-item" href="{{pathFor 'rea.credentials.index'}}">
+                                {{> icon name='key'}} Credentials
+                            </a>
+                            {{#if isInRole 'admin'}}
+                                <a class="nav-item" href="{{pathFor 'admin'}}">
+                                    {{> icon name='terminal'}} Administration
+                                </a>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <span class="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+
+                    <div class="nav-right nav-menu">
+                        {{#with currentUser}}
+                            <a href="{{pathFor 'rea.profile.index'}}" class="nav-item">
+                                {{> icon name='user'}} {{username}}
+                            </a>
+                            <a class="nav-item js-logout" href="#">{{{fa 'sign-out'}}}</a>
+                        {{else}}
+                            <a class="nav-item" href="{{pathFor 'public.auth.register'}}">
+                                {{> icon name='registered'}} Register
+                            </a>
+                            <a class="nav-item" href="{{pathFor 'public.auth.login'}}">
+                                {{> icon name='sign-in'}} Login
+                            </a>
+                        {{/with}}
+                    </div>
                 </div>
             </nav>
         </div>
