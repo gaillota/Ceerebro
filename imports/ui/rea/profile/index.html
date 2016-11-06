@@ -1,28 +1,44 @@
 <template name="rea.profile">
-    <h2>{{{fa 'user'}}} Profile</h2>
-    <hr>
-    <div class="row">
-        {{#with currentUser}}
-            <div class="col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">{{{fa 'list-alt'}}} Informations</div>
-                    <ul class="list-group">
-                        <li class="list-group-item">{{{fa 'user'}}} Username : {{username}}</li>
-                        <li class="list-group-item">{{{fa 'envelope'}}} Email : {{emails.[0].address}}</li>
-                        <li class="list-group-item">{{{fa 'registered'}}} Registration : {{formatDate createdAt}}</li>
-                    </ul>
-                </div>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">{{> icon name='user' size='is-medium'}} Profile</h1>
+            <hr>
+            <div class="columns">
+                {{#with currentUser}}
+                    <div class="column">
+                        <div class="panel">
+                            <p class="panel-heading">
+                                {{> icon name='list-alt'}} Informations
+                            </p>
+                            <div class="panel-block">
+                                {{> icon name='user'}} Username : {{username}}
+                            </div>
+                            <div class="panel-block">
+                                {{> icon name='envelope'}} Email : {{emails.[0].address}}
+                            </div>
+                            <div class="panel-block">
+                                {{> icon name='registered'}} Registration : {{formatDate createdAt}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                {{> icon name='key'}} Keychain
+                            </div>
+                            <div class="panel-block" style="word-break: break-all;">
+                                <strong>Salt</strong> : {{keychain.salt}}
+                            </div>
+                            <div class="panel-block" style="word-break: break-all;">
+                                <strong>Password Validator</strong> : {{keychain.passwordValidator}}
+                            </div>
+                            <div class="panel-block" style="word-break: break-all;">
+                                <strong>Master key</strong> : {{keychain.masterKey}}
+                            </div>
+                        </div>
+                    </div>
+                {{/with}}
             </div>
-            <div class="col-md-6">
-                <div class="panel panel-success">
-                    <div class="panel-heading">{{{fa 'key'}}} Keychain</div>
-                    <ul class="list-group">
-                        <li class="list-group-item" style="word-break: break-all;"><strong>Salt</strong> : {{keychain.salt}}</li>
-                        <li class="list-group-item" style="word-break: break-all;"><strong>Password Validator</strong> : {{keychain.passwordValidator}}</li>
-                        <li class="list-group-item" style="word-break: break-all;"><strong>Master key</strong> : {{keychain.masterKey}}</li>
-                    </ul>
-                </div>
-            </div>
-        {{/with}}
-    </div>
+        </div>
+    </section>
 </template>
