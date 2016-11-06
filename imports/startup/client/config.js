@@ -28,6 +28,9 @@ SimpleSchema.messages({
     keyNotInSchema: "[key] is not allowed by the schema"
 });
 
+// Set the blaze root node to body
+BlazeLayout.setRoot('body');
+
 // Disabling autoform default theme
 AutoForm.setDefaultTemplate('plain');
 

@@ -9,8 +9,7 @@ import {_} from "lodash";
 import {Notification} from '../../../startup/services/notification.service.js';
 
 import './index.html';
-import '../../components/master-password.modal';
-import '../../components/show-credentials.modal';
+import '../../components/modals/show-credentials.modal';
 
 import {Credentials} from '../../../api/credentials/credentials';
 import {remove} from '../../../api/credentials/methods';

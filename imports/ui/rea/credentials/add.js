@@ -13,8 +13,6 @@ import {EncryptionService} from '../../../startup/services/encryption.service.js
 
 import {insert} from '../../../api/credentials/methods';
 
-import '../../components/master-password.modal';
-
 Template["rea.credentials.add"].helpers({
     credentialsForm() {
         return CredentialsForm;

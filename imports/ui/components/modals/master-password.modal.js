@@ -6,8 +6,8 @@ import {CryptoJS} from 'meteor/jparker:crypto-core';
 
 import './master-password.modal.html';
 
-import {MasterPasswordForm} from '../../startup/forms/global/MasterPasswordForm';
-import {EncryptionService} from '../../startup/services/encryption.service';
+import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordForm';
+import {EncryptionService} from '../../../startup/services/encryption.service';
 
 Template.masterPasswordModal.helpers({
     masterPasswordForm() {
