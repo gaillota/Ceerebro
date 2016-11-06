@@ -1,14 +1,20 @@
 <template name="admin.index">
-    <h2>{{{fa 'terminal'}}} Administration</h2>
-    <hr>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="well text-center">
-                <a href="{{pathFor 'admin.accounts'}}" style="font-size: 100px;">
-                    {{{fa 'users'}}}
-                </a>
-                <h4 class="text-center">Users</h4>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                {{> icon name='terminal' size='is-medium'}}
+                <span>Administration</span>
+            </h1>
+            <div class="tabs is-centered">
+                <ul>
+                    {{#each tabs}}
+                        <li class="{{isActiveTab}}">
+                            <a href="{{pathFor route}}">{{text}}</a>
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
+            {{> Template.dynamic template=tab}}
         </div>
-    </div>
+    </section>
 </template>

@@ -1,1 +1,29 @@
+import {Template} from "meteor/templating";
+
 import './index.html';
+
+Template["admin.index"].onCreated(function adminIndexCreated() {
+    this.subscribe('count.admin.users');
+    this.getCurrentRoute = new ReactiveVar();
+
+    this.autorun(() => {
+        FlowRouter.watchPathChange();
+        this.getCurrentRoute.set(FlowRouter.current().route);
+    });
+});
+
+Template["admin.index"].helpers({
+    tabs() {
+        const countUsers = Counts.get('count.users');
+        return [
+            {
+                text: `Users (${countUsers})`,
+                route: 'admin.users'
+            }
+        ]
+    },
+    isActiveTab() {
+        return Template.instance().getCurrentRoute.get().name === this.route && 'is-active';
+    }
+});
+

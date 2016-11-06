@@ -18,7 +18,7 @@ Template.navbar.events({
                 Notification.error(error.toString());
             } else {
                 removeMasterKey();
-                FlowRouter.go('index');
+                FlowRouter.go('public.index');
             }
         });
     }

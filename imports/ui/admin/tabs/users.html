@@ -1,0 +1,62 @@
+<template name="admin.users">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Username</th>
+            <th>Email address</th>
+            <th>Created at</th>
+            <th class="has-text-centered">Status</th>
+            <th># cred.</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each users}}
+            <tr>
+                <td class="has-text-centered">
+                    <i class="fa fa-circle" style="color: {{userConnectionStatus}};"></i>
+                </td>
+                <td>{{username}}</td>
+                <td>{{emails.[0].address}}</td>
+                <td>{{formatDate createdAt}}</td>
+                <td class="has-text-centered">
+                    {{#with userStatus}}
+                        <span class="tag is-small is-{{type}}">
+                            {{> icon name=icon size='is-small'}}
+                            <span>{{text}}</span>
+                        </span>
+                    {{/with}}
+                </td>
+                <td>{{credentialsCount}}</td>
+                <td>
+                    <div class="is-pulled-right">
+                        {{#if emailNotVerified}}
+                            <button type="button" class="button is-success is-small js-activate">
+                                {{> icon name='check' size='is-small'}}
+                                <span>Activate</span>
+                            </button>
+                        {{/if}}
+                        {{#if isDisabled}}
+                            <button type="button" class="button is-success is-small js-status-toggle">
+                                {{> icon name='user' size='is-small'}}
+                                <span class="is-hidden-mobile"> Unban</span>
+                            </button>
+                        {{else}}
+                            <button type="button" class="button is-danger is-small js-status-toggle">
+                                {{> icon name='user-times' size='is-small'}}
+                                <span class="is-hidden-mobile"> Ban</span>
+                            </button>
+                        {{/if}}
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    {{#if isEmpty users}}
+        <h5 class="title is-5 text-center">
+            No users for now...
+        </h5>
+    {{/if}}
+</template>

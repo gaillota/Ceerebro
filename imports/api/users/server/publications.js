@@ -20,15 +20,13 @@ Meteor.publish(null, function userKeychain() {
     });
 });
 
-Meteor.publishComposite('admin.accounts', {
+Meteor.publishComposite('admin.users', {
     find() {
         if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
             return this.ready();
         }
 
         const QUERY_FILTER = {_id: {$ne: this.userId}};
-
-        Counts.publish(this, 'totalAccounts', Meteor.users.find(QUERY_FILTER));
         return Meteor.users.find(QUERY_FILTER);
     },
     children: [
@@ -44,4 +42,14 @@ Meteor.publishComposite('admin.accounts', {
             }
         }
     ]
+});
+
+Meteor.publish('count.admin.users', function countAdminUsers() {
+    if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
+        return this.ready();
+    }
+
+    const QUERY_FILTER = {_id: {$ne: this.userId}};
+
+    Counts.publish(this, 'count.users', Meteor.users.find(QUERY_FILTER));
 });

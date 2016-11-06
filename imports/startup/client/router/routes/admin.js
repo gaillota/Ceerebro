@@ -4,7 +4,7 @@ import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import '../../../../ui/layout';
 
 import '../../../../ui/admin/index';
-import '../../../../ui/admin/accounts';
+import '../../../../ui/admin/tabs/users';
 
 const adminRoutes = FlowRouter.group({
     prefix: '/admin',
@@ -13,14 +13,17 @@ const adminRoutes = FlowRouter.group({
 
 adminRoutes.route('/', {
     name: 'admin.index',
+    triggersEnter: [function(context, redirect) {
+        redirect(FlowRouter.path('admin.users'));
+    }],
     action() {
-        BlazeLayout.render('layout', {page: 'admin.index'});
+        throw new Meteor.Error(403, "this should not get called");
     }
 });
 
-adminRoutes.route('/accounts', {
-    name: 'admin.accounts',
+adminRoutes.route('/users', {
+    name: 'admin.users',
     action() {
-        BlazeLayout.render('layout', {page: 'admin.accounts'});
+        BlazeLayout.render('layout', {page: 'admin.index', tab: 'admin.users'});
     }
 });

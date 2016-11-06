@@ -2,23 +2,19 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import './accounts.html';
+import './users.html';
 
-import {Credentials} from "../../api/credentials/credentials";
+import {Credentials} from "../../../api/credentials/credentials";
 
-import {activate} from '../../api/users/methods';
-import {toggleStatus} from '../../api/users/methods';
-import {Notification} from "../../startup/services/notification.service";
+import {activate} from '../../../api/users/methods';
+import {toggleStatus} from '../../../api/users/methods';
+import {Notification} from "../../../startup/services/notification.service";
 
-Template["admin.accounts"].onCreated(function adminAccountsCreated() {
-    this.subscribe('admin.accounts');
+Template["admin.users"].onCreated(function adminAccountsCreated() {
+    this.subscribe('admin.users');
 });
 
-Template["admin.accounts"].helpers({
-    usersCount() {
-        // Subtract current user from users count
-        return Counts.get('totalAccounts');
-    },
+Template["admin.users"].helpers({
     users() {
         return Meteor.users.find({
             _id: {
@@ -56,7 +52,7 @@ Template["admin.accounts"].helpers({
     }
 });
 
-Template["admin.accounts"].events({
+Template["admin.users"].events({
     'click .js-status-toggle'() {
         toggleStatus.call({userId: this._id}, (error) => {
             Notification.error(error.toString);
