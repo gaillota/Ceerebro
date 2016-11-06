@@ -8,11 +8,11 @@
                             {{> logo}}
                         </a>
                         {{#if currentUser}}
-                            <a class="nav-item {{isActiveRoute regex='credentials'}}" href="{{pathFor 'rea.credentials.index'}}">
+                            <a class="nav-item {{isActivePath regex='credentials'}}" href="{{pathFor 'rea.credentials.index'}}">
                                 {{> icon name='key' size='is-small'}} Credentials
                             </a>
                             {{#if isInRole 'admin'}}
-                                <a class="nav-item {{isActiveRoute regex='admin'}}" href="{{pathFor 'admin'}}">
+                                <a class="nav-item {{isActivePath regex='admin'}}" href="{{pathFor 'admin'}}">
                                     {{> icon name='terminal' size='is-small'}} Administration
                                 </a>
                             {{/if}}
@@ -31,13 +31,13 @@
                                 {{> icon name='user' size='is-small'}}
                                 <span>{{username}}</span>
                             </a>
-                            <a class="nav-item js-logout" href="#">{{{fa 'sign-out' size='is-small'}}}</a>
+                            <a class="nav-item js-logout" href="#">{{> icon name='sign-out' size='is-small'}}</a>
                         {{else}}
-                            <a class="nav-item {{isActiveRoute regex='register'}}" href="{{pathFor 'public.auth.register'}}">
+                            <a class="nav-item {{isActivePath regex='register'}}" href="{{pathFor 'public.auth.register'}}">
                                 {{> icon name='registered' size='is-small'}}
                                 <span>Register</span>
                             </a>
-                            <a class="nav-item {{isActiveRoute regex='login'}}" href="{{pathFor 'public.auth.login'}}">
+                            <a class="nav-item {{isActivePath regex='login'}}" href="{{pathFor 'public.auth.login'}}">
                                 {{> icon name='sign-in' size='is-small'}}
                                 <span>Login</span>
                             </a>
