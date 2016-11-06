@@ -1,7 +1,11 @@
 <template name="masterKeyButton">
-    {{#if masterKeyIsSet}}
-        <button type="button" class="btn btn-danger js-remove-key">Remove Master Key</button>
-    {{else}}
-        <button type="button" class="btn btn-success js-set-key">Set Master Key</button>
-    {{/if}}
+    <section class="section">
+        <div class="container">
+            {{#if masterKeyIsSet}}
+                <button type="button" class="button is-danger js-remove-key">Remove Master Key</button>
+            {{else}}
+                <button type="button" class="button is-success js-set-key">Set Master Key</button>
+            {{/if}}
+        </div>
+    </section>
 </template>
