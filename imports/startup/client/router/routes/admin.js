@@ -5,7 +5,7 @@ import {_} from 'lodash';
 import '../../../../ui/layout';
 
 import '../../../../ui/admin/index';
-import '../../../../ui/admin/tabs/users';
+import '../../../../ui/admin/tabs/index';
 
 export const adminRoutes = [
     {
