@@ -12,6 +12,7 @@ import '../../components/modals/show-credential.modal.js';
 
 import {Credentials} from '../../../api/credentials/credentials';
 import {remove} from '../../../api/credentials/methods';
+import {showMasterPasswordModal, showCredentialModal} from '../../../startup/utilities/functions';
 
 Template["rea.credentials.index"].onCreated(function credentialsCreated() {
     this.subscribe('credentials');
@@ -55,15 +56,15 @@ Template["rea.credentials.index"].helpers({
 
 Template["rea.credentials.index"].events({
     'click .js-credentials-see'() {
-        var masterKey = Session.get('masterKey');
+        const masterKey = Session.get('masterKey');
         if (!masterKey) {
             Session.set('passwordOnHold', this._id);
-            Session.set('master-password.modal');
+            showMasterPasswordModal();
             
             return;
         }
 
-        Session.get('showCredential', this._id);
+        showCredentialModal(this._id);
     },
     'click .js-credentials-remove'() {
         if (confirm('Are you sure ?')) {
@@ -79,6 +80,6 @@ Template["rea.credentials.index"].events({
     'keyup .js-search-input'(event, template) {
         const keywords = event.target.value;
 
-        template.search.set(keywords.trim());
+        template.search.set(keywords.trim().toLowerCase());
     }
 });

@@ -31,7 +31,7 @@ adminGroup.route('/', {
     }
 });
 
-_.each(adminRoutes, (route) => {
+adminRoutes.forEach((route) => {
     adminGroup.route(route.path, {
         name: route.name,
         action() {

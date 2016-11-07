@@ -1,38 +1,45 @@
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 
-import {Notification} from '../../../startup/services/notification.service.js';
-
 import {Credentials} from '../../../api/credentials/credentials';
 
 import './show-credential.modal.html';
 
+import {Notification} from '../../../startup/services/notification.service.js';
 import {EncryptionService} from '../../../startup/services/encryption.service.js';
+import {hideCredentialModal} from '../../../startup/utilities/functions';
 
-Template["show-credential.modal"].onCreated(function showCredentialCreated() {
-    this.getCredentialsId = () => Session.get('showCredential');
+Template["showCredentialModal"].onCreated(function showCredentialCreated() {
+    this.getCredentialId = () => Session.get('credential.modal');
 });
 
-Template["show-credential.modal"].helpers({
+Template["showCredentialModal"].helpers({
     isActive() {
-        return Session.get('showCredential') && 'is-active';
+        return Template.instance().getCredentialId() && 'is-active';
     },
     credentials() {
-        var credentials = Credentials.findOne(Template.instance()).getCredentialsId();
+        const credentials = Credentials.findOne(Template.instance().getCredentialId());
         if (!credentials) {
-            Notification.error('Credentials not found');
-            Session.set('showCredential', undefined);
+            hideCredentialModal();
         }
 
         return credentials;
     },
     plainPassword() {
-        var masterKey = Session.get('masterKey');
+        const masterKey = Session.get('masterKey');
         if (!masterKey) {
             alert('Cannot decrypt password. Master key missing.');
             return "encrypted";
         }
 
         return EncryptionService.decrypt(this.password, masterKey, this.iv);
+    }
+});
+
+Template["showCredentialModal"].events({
+    'click .modal-background, click .modal-close'(event) {
+        event.preventDefault();
+
+        hideCredentialModal();
     }
 });

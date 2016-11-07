@@ -7,8 +7,9 @@ import './master-password.modal.html';
 
 import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordForm';
 import {EncryptionService} from '../../../startup/services/encryption.service';
+import {setMasterKey, hideMasterPasswordModal, showCredentialModal} from '../../../startup/utilities/functions';
 
-Template.masterPasswordModal.helpers({
+Template["masterPasswordModal"].helpers({
     isActive() {
         return Session.get('master-password.modal') && 'is-active';
     },
@@ -17,27 +18,39 @@ Template.masterPasswordModal.helpers({
     }
 });
 
+Template["masterPasswordModal"].events({
+    'click .modal-background, click .modal-close'(event) {
+        event.preventDefault();
+
+        hideMasterPasswordModal();
+    }
+});
+
 AutoForm.addHooks('masterPasswordForm', {
     onSubmit(doc) {
         this.event.preventDefault();
 
-        var keychain = Meteor.user().keychain;
-        var pbk = EncryptionService.generatePasswordBasedKey(doc.password, keychain.salt);
-        var pvaek = EncryptionService.splitKeyInHalf(pbk);
+        const keychain = Meteor.user().keychain;
+        const pbk = EncryptionService.generatePasswordBasedKey(doc.password, keychain.salt);
+        const pvaek = EncryptionService.splitKeyInHalf(pbk);
 
         if (keychain.passwordValidator !== pvaek.passwordValidator) {
             this.done(new Meteor.Error('Wrong password !'));
             return;
         }
 
-        var masterKey = CryptoJS.AES.decrypt(keychain.masterKey, pvaek.key).toString(CryptoJS.enc.Utf8);
-        Session.set('masterKey', masterKey);
-        Session.set('master-password.modal', undefined);
+        const masterKey = CryptoJS.AES.decrypt(keychain.masterKey, pvaek.key).toString(CryptoJS.enc.Utf8);
+
+        setMasterKey(masterKey);
+        hideMasterPasswordModal();
+
+        this.done();
+
         if (Session.get('passwordOnHold')) {
             Meteor.setTimeout(function () {
-                const toShow = Session.get('passwordOnHold');
+                const credentialId = Session.get('passwordOnHold');
 
-                Session.set('showCredential', toShow);
+                showCredentialModal(credentialId);
                 Session.set('passwordOnHold', undefined);
             }, 500);
         }

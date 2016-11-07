@@ -12,7 +12,7 @@
                                 {{> icon name='key' size='is-small'}} Credentials
                             </a>
                             {{#if isInRole 'admin'}}
-                                <a class="nav-item {{isActiveRoute regex='^admin'}}" href="{{pathFor 'admin'}}">
+                                <a class="nav-item {{isActiveRoute regex='^admin'}}" href="{{pathFor 'admin.index'}}">
                                     {{> icon name='terminal' size='is-small'}} Administration
                                 </a>
                             {{/if}}
@@ -28,10 +28,13 @@
                     <div class="nav-right nav-menu">
                         {{#with currentUser}}
                             {{#if masterKeyIsSet}}
-                                <a href="#" class="nav-item active js-remove-master-key">Remove master key</a>
+                                <a href="#" class="nav-item active js-remove-master-key">
+                                    {{> icon name='lock' size='is-small'}}
+                                    <span>Remove</span>
+                                </a>
                             {{else}}
                                 <a href="#" class="nav-item js-set-master-key">Set master key</a>
-                            {{/if}}}
+                            {{/if}}
                             <a href="{{pathFor 'rea.profile.index'}}" class="nav-item {{isActiveRoute regex='profile'}}">
                                 {{> icon name='user' size='is-small'}}
                                 <span>{{username}}</span>

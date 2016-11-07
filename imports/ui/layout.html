@@ -11,6 +11,12 @@
 
             <!--Footer component-->
             {{> footer}}
+
+            <!--Modals components-->
+            {{#if currentUser}}
+                {{> masterPasswordModal}}
+                {{> showCredentialModal}}
+            {{/if}}
         {{else}}
             {{> loading}}
         {{/if}}
