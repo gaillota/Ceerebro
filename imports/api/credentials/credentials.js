@@ -1,5 +1,6 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
+import {HTTP} from 'meteor/http';
 
 export const Credentials = new Mongo.Collection("credentials");
 
@@ -48,5 +49,21 @@ Credentials.attachSchema(Credentials.schema);
 Credentials.helpers({
     isOwner(userId) {
         return this.owner = userId;
+    },
+    favicon() {
+        let url = this.domain;
+        if (!/http/i.test(url)) {
+            url = 'http://' + url;
+        }
+        url = url + '/favicon.ico';
+
+        HTTP.get(url, (error, result) => {
+            // Handle error
+        });
+
+        return {
+            link: url,
+            name: this.domain
+        };
     }
 });

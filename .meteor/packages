@@ -28,6 +28,11 @@ matb33:collection-hooks
 tmeasday:publish-counts
 reywood:publish-composite
 
+# methods and mixins
+mdg:validated-method
+tunifight:loggedin-mixin
+rlivingston:simple-schema-mixin
+
 # ui
 blaze-html-templates
 aldeed:template-extension
@@ -53,15 +58,6 @@ accounts-base
 accounts-password
 alanning:roles
 mizzao:user-status
-
-# methods and mixins
-mdg:validated-method
-tunifight:loggedin-mixin
-rlivingston:simple-schema-mixin
-
-# geolocation
-mdg:geolocation
-dburles:google-maps
 
 # utilities
 momentjs:moment

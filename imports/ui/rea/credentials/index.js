@@ -17,6 +17,8 @@ import {showMasterPasswordModal, showCredentialModal} from '../../../startup/uti
 
 Template["rea.credentials.index"].onCreated(function credentialsCreated() {
     this.subscribe('credentials');
+    this.subscribe('favicons');
+
     this.search = new ReactiveVar();
 });
 
