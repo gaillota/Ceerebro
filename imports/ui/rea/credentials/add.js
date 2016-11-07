@@ -19,6 +19,13 @@ Template["rea.credentials.add"].helpers({
 });
 
 Template["rea.credentials.add"].events({
+    'change .js-show-password'(event) {
+        if (event.target.checked) {
+            $('input.js-password-input').attr('type', 'text');
+        } else {
+            $('input.js-password-input').attr('type', 'password');
+        }
+    },
     'click .js-set-key'(event) {
         if (!Session.get('masterKey')) {
             event.preventDefault();
