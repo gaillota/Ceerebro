@@ -8,7 +8,6 @@ import {Notification} from '../../services/notification.service.js';
 FlowRouter.triggersFunctions = {
     isLoggedIn(context, redirect) {
         if (!Meteor.userId()) {
-            console.log('redirection');
             redirect(FlowRouter.path('public.auth.login'));
         }
     },

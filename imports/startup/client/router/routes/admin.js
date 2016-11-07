@@ -7,14 +7,14 @@ import '../../../../ui/layout';
 import '../../../../ui/admin/index';
 import '../../../../ui/admin/tabs/users';
 
-export const adminRoutes = {
-    users: {
+export const adminRoutes = [
+    {
         path: '/users',
         name: 'admin.users',
         template: 'admin.users',
         text: 'Users'
     }
-};
+];
 
 const adminGroup = FlowRouter.group({
     prefix: '/admin',

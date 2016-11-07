@@ -1,4 +1,5 @@
 import {Template} from "meteor/templating";
+import {_} from 'lodash';
 
 import './index.html';
 
@@ -16,16 +17,16 @@ Template["admin.index"].onCreated(function adminIndexCreated() {
 
 Template["admin.index"].helpers({
     tabs() {
-        const countUsers = Counts.get('count.users');
-        let routes = adminRoutes;
-        if (routes.users) {
-            routes.users.text += `(${countUsers})`;
-        }
-
-        return routes;
+        return adminRoutes;
     },
     isActiveTab() {
         return Template.instance().getCurrentRoute.get().name === this.name && 'is-active';
+    },
+    count() {
+        if (this.name == 'admin.users') {
+            const countUsers = Counts.get('count.users');
+            return ` (${countUsers})`;
+        }
     }
 });
 
