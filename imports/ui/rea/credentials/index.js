@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
+import {$} from 'meteor/jquery';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {ReactiveVar} from "meteor/reactive-var";
 import {_} from "lodash";
@@ -32,10 +33,10 @@ Template["rea.credentials.index"].helpers({
         if (search) {
             query["$or"] = [
                 {
-                    domain: new RegExp(search.toLowerCase())
+                    domain: new RegExp(search)
                 },
                 {
-                    identifier: new RegExp(search.toLowerCase())
+                    identifier: new RegExp(search)
                 }
             ];
         }
@@ -81,5 +82,12 @@ Template["rea.credentials.index"].events({
         const keywords = event.target.value;
 
         template.search.set(keywords.trim().toLowerCase());
+    },
+    'click .js-reset'(event, template) {
+        event.preventDefault();
+
+        $('input.js-search-input').val('');
+
+        template.search.set(false);
     }
 });
