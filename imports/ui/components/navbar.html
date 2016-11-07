@@ -27,6 +27,11 @@
 
                     <div class="nav-right nav-menu">
                         {{#with currentUser}}
+                            {{#if masterKeyIsSet}}
+                                <a href="#" class="nav-item active js-remove-master-key">Remove master key</a>
+                            {{else}}
+                                <a href="#" class="nav-item js-set-master-key">Set master key</a>
+                            {{/if}}}
                             <a href="{{pathFor 'rea.profile.index'}}" class="nav-item {{isActiveRoute regex='profile'}}">
                                 {{> icon name='user' size='is-small'}}
                                 <span>{{username}}</span>

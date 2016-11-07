@@ -2,7 +2,6 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {Session} from 'meteor/session';
-import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 
 import {Notification} from '../../../startup/services/notification.service.js';
 import {Credentials} from '../../../api/credentials/credentials';

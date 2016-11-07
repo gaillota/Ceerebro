@@ -1,21 +1,27 @@
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
-import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 
 import {Notification} from '../../../startup/services/notification.service.js';
 
 import {Credentials} from '../../../api/credentials/credentials';
 
-import './show-credentials.modal.html';
+import './show-credential.modal.html';
 
 import {EncryptionService} from '../../../startup/services/encryption.service.js';
 
-Template.showCredentialsModal.helpers({
+Template["show-credential.modal"].onCreated(function showCredentialCreated() {
+    this.getCredentialsId = () => Session.get('showCredential');
+});
+
+Template["show-credential.modal"].helpers({
+    isActive() {
+        return Session.get('showCredential') && 'is-active';
+    },
     credentials() {
-        var credentials = Credentials.findOne(Template.currentData());
+        var credentials = Credentials.findOne(Template.instance()).getCredentialsId();
         if (!credentials) {
             Notification.error('Credentials not found');
-            Modal.hide(this.template.view);
+            Session.set('showCredential', undefined);
         }
 
         return credentials;

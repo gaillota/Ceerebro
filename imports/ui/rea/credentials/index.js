@@ -2,14 +2,13 @@ import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 import {Counts} from 'meteor/tmeasday:publish-counts';
-import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 import {ReactiveVar} from "meteor/reactive-var";
 import {_} from "lodash";
 
 import {Notification} from '../../../startup/services/notification.service.js';
 
 import './index.html';
-import '../../components/modals/show-credentials.modal';
+import '../../components/modals/show-credential.modal.js';
 
 import {Credentials} from '../../../api/credentials/credentials';
 import {remove} from '../../../api/credentials/methods';
@@ -59,11 +58,12 @@ Template["rea.credentials.index"].events({
         var masterKey = Session.get('masterKey');
         if (!masterKey) {
             Session.set('passwordOnHold', this._id);
-            Modal.show('masterPasswordModal');
+            Session.set('master-password.modal');
+            
             return;
         }
 
-        Modal.show('showCredentialsModal', this._id);
+        Session.get('showCredential', this._id);
     },
     'click .js-credentials-remove'() {
         if (confirm('Are you sure ?')) {

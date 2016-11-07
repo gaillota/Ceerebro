@@ -10,6 +10,16 @@ import './logo';
 import './navbar.html';
 
 Template.navbar.events({
+    'click .js-set-master-key'(event) {
+        event.preventDefault();
+        
+        Session.set('master-password.modal', true);
+    },
+    'click .js-remove-master-key'(event) {
+        event.preventDefault();
+        
+        removeMasterKey();
+    },
     'click .js-logout'(event) {
         event.preventDefault();
 

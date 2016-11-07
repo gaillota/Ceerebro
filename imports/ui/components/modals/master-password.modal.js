@@ -1,7 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {AutoForm} from 'meteor/aldeed:autoform';
 import {Session} from 'meteor/session';
-import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 import {CryptoJS} from 'meteor/jparker:crypto-core';
 
 import './master-password.modal.html';
@@ -10,6 +9,9 @@ import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordFo
 import {EncryptionService} from '../../../startup/services/encryption.service';
 
 Template.masterPasswordModal.helpers({
+    isActive() {
+        return Session.get('master-password.modal') && 'is-active';
+    },
     masterPasswordForm() {
         return MasterPasswordForm;
     }
@@ -30,10 +32,12 @@ AutoForm.addHooks('masterPasswordForm', {
 
         var masterKey = CryptoJS.AES.decrypt(keychain.masterKey, pvaek.key).toString(CryptoJS.enc.Utf8);
         Session.set('masterKey', masterKey);
-        Modal.hide(this.template.view);
+        Session.set('master-password.modal', undefined);
         if (Session.get('passwordOnHold')) {
             Meteor.setTimeout(function () {
-                Modal.show('showCredentialsModal', Session.get('passwordOnHold'));
+                const toShow = Session.get('passwordOnHold');
+
+                Session.set('showCredential', toShow);
                 Session.set('passwordOnHold', undefined);
             }, 500);
         }

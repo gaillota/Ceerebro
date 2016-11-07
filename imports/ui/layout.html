@@ -6,10 +6,10 @@
         {{> loading}}
     {{else}}
         {{#if Template.subscriptionsReady}}
-            {{#if currentUser}}
-                {{> masterKeyButton}}
-            {{/if}}
+            <!--Template-->
             {{> Template.dynamic template=page}}
+
+            <!--Footer component-->
             {{> footer}}
         {{else}}
             {{> loading}}
