@@ -9,6 +9,10 @@ import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordFo
 import {EncryptionService} from '../../../startup/services/encryption.service';
 import {setMasterKey, hideMasterPasswordModal, showCredentialModal} from '../../../startup/utilities/functions';
 
+Template["masterPasswordModal"].onRendered(function masterPasswordModalRendered() {
+    // Add focus on input
+});
+
 Template["masterPasswordModal"].helpers({
     isActive() {
         return Session.get('master-password.modal') && 'is-active';
