@@ -10,10 +10,17 @@ import '../../../../ui/public/auth/register';
 import '../../../../ui/public/auth/login';
 
 
+FlowRouter.route('/login', {
+    name: 'public.auth.login',
+    action() {
+        BlazeLayout.render('public.auth.login');
+    }
+});
+
 FlowRouter.route('/register', {
     name: 'public.auth.register',
     action() {
-        BlazeLayout.render('layout', {page: 'public.auth.register'});
+        BlazeLayout.render('public.auth.register');
     }
 });
 
@@ -28,12 +35,5 @@ FlowRouter.route('/verify-email/:token', {
             }
             FlowRouter.go('public.index');
         });
-    }
-});
-
-FlowRouter.route('/login', {
-    name: 'public.auth.login',
-    action() {
-        BlazeLayout.render('public.auth.login');
     }
 });
