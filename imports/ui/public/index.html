@@ -1,0 +1,98 @@
+<template name="public.index">
+    <section class="hero is-primary is-large header-image">
+        <div class="hero-head">
+            <header class="nav">
+                <div class="container">
+                    <div class="nav-left">
+                        <a class="nav-item is-brand" href="{{pathFor 'public.index'}}">
+                            {{> logo}}
+                        </a>
+                    </div>
+                      <span class="nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </span>
+                    <div class="nav-right nav-menu">
+                        <a class="nav-item is-active">
+                            Home
+                        </a>
+                        <a class="nav-item">
+                            Examples
+                        </a>
+                        <a class="nav-item">
+                            Documentation
+                        </a>
+            <span class="nav-item">
+              <a href="{{pathFor 'public.auth.register'}}" class="button is-success is-outlined is-inverted">
+                {{> icon name='registered'}}
+                <span>Register</span>
+              </a>
+            </span>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-2">
+                    Safely store your credentials
+                </h1>
+                <h2 class="subtitle is-5">
+                    Ceerebro allows you to store every credentials used on your daily life.
+                </h2>
+                <p>
+                    <a class="button is-outlined">
+            {{> icon name='registered'}}
+            <span>
+              Register
+            </span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <div class="hero-cta">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <p class="title">0 users</p>
+            </div>
+        </nav>
+    </div>
+    <div class="section main">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-4">
+                    <div class="panel">
+                        <div class="panel-block section">
+                            <p class="has-text-centered"><i class="fa fa-camera-retro icon-block"></i></p>
+                            <br>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="panel">
+                        <div class="panel-block section">
+                            <p class="has-text-centered"><i class="fa fa-bar-chart icon-block"></i></p>
+                            <br>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="column is-4">
+                    <div class="panel">
+                        <div class="panel-block section">
+                            <p class="has-text-centered"><i class="fa fa-cloud icon-block"></i></p>
+                            <br>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> footer}}
+</template>
