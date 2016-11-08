@@ -24,6 +24,7 @@ FlowRouter.triggersFunctions = {
 };
 
 const NON_AUTH_ROUTES = [
+    'public.index',
     'public.about',
     'public.auth.register',
     'public.auth.login',
