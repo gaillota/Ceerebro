@@ -55,42 +55,21 @@
             </div>
         </div>
     </section>
-    <div class="section main">
+    <div class="section">
         <div class="container">
             <div class="columns is-multiline">
-                <div class="column is-4">
-                    <div class="panel">
-                        <div class="panel-block section">
-                            <p class="has-text-centered"><i class="fa fa-camera-retro icon-block"></i></p>
-                            <br>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa
-                                fringilla egestas. Nullam condimentum luctus turpis.</p>
+                {{#each panelContent}}
+                    <div class="column is-4">
+                        <div class="panel">
+                            <div class="panel-block section">
+                                <p class="has-text-centered"><i class="fa fa-{{icon}} icon-block"></i></p>
+                                <h1 class="title has-text-centered">{{title}}</h1>
+                                <p>{{text}}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="column is-4">
-                    <div class="panel">
-                        <div class="panel-block section">
-                            <p class="has-text-centered"><i class="fa fa-bar-chart icon-block"></i></p>
-                            <br>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa
-                                fringilla egestas. Nullam condimentum luctus turpis.</p>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="column is-4">
-                    <div class="panel">
-                        <div class="panel-block section">
-                            <p class="has-text-centered"><i class="fa fa-cloud icon-block"></i></p>
-                            <br>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa
-                                fringilla egestas. Nullam condimentum luctus turpis.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="column is-4">
+                {{/each}}
+                <!--<div class="column is-4">
                     <h1 class="title">{{> icon name='cloud-download' size='is-medium'}} Store your login credentials</h1>
                     <hr>
                     <div class="content">
@@ -112,7 +91,7 @@
                         </ul>
                         <p>If you did not understand a single word of this jibber jabber, or if you just want to know a little bit more, <a href="{{pathFor 'public.about'}}">click here</a>.</p>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
