@@ -34,7 +34,7 @@ Template["public.index"].helpers({
             {
                 icon: 'universal-access',
                 title: 'Accessibility',
-                text: 'Easy-to-use, Ceerebro is a turnkey solution for all of your every day connection issues. Just remember one password, and Ceerebro takes care of the rest.'
+                text: 'Easy-to-use, Ceerebro is a turnkey solution for all of your every day connection troubles. Just remember one password, and Ceerebro takes care of the rest.'
             }
         ]
     }

@@ -1,5 +1,5 @@
 <template name="public.index">
-    <section class="hero is-primary is-large header-image">
+    <section class="hero is-dark is-large header-image">
         <div class="hero-head">
             <header class="nav">
                 <div class="container">
@@ -48,14 +48,16 @@
             </div>
         </div>
     </section>
-    <section class="hero is-light">
+    <section class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <p class="title">{{> icon name='users' size='is-medium'}} {{countUsers}} hooman already trust Ceerebro.</p>
+                <p class="title">{{> icon name='users' size='is-medium'}} {{countUsers}} {{pluralize countUsers
+                                                                                                     'hooman'}} already
+                    trust Ceerebro.</p>
             </div>
         </div>
     </section>
-    <div class="section">
+    <section class="section">
         <div class="container">
             <div class="columns is-multiline">
                 {{#each panelContent}}
@@ -64,36 +66,33 @@
                             <div class="panel-block section">
                                 <p class="has-text-centered"><i class="fa fa-{{icon}} icon-block"></i></p>
                                 <h1 class="title has-text-centered">{{title}}</h1>
+                                <hr>
                                 <p>{{text}}</p>
                             </div>
                         </div>
                     </div>
                 {{/each}}
-                <!--<div class="column is-4">
-                    <h1 class="title">{{> icon name='cloud-download' size='is-medium'}} Store your login credentials</h1>
-                    <hr>
-                    <div class="content">
-                        <h3>With Ceerebro you can safely store all of your credentials.</h3>
-                        <p>You can then access them from anywhere around the world.</p>
-                        <p>Here is how it goes down :</p>
-                        <ul>
-                            <li>When you create an account, Ceerebro creates a <strong>keychain</strong> associated with your account.</li>
-                            <li>This keychain contains 3 elements:
-                                <ul>
-                                    <li>a <em>salt</em></li>
-                                    <li>a <em>password validator</em></li>
-                                    <li>a <em>master key</em></li>
-                                </ul>
-                            </li>
-                            <li>This <strong>master key</strong> is used to encrypt each credential that you store in Ceerebro, using <a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank">AES-256</a> algorithm.</li>
-                            <li>This <strong>master key</strong> is encrypted before being stored in Ceerebro, using AES-256 as well. Its encryption uses one half of a key generated from your password and your keychain salt. The other half is your password validator.</li>
-                            <li>This way, only <strong>you</strong> can have access to your credentials, and <strong>no one else</strong> !</li>
-                        </ul>
-                        <p>If you did not understand a single word of this jibber jabber, or if you just want to know a little bit more, <a href="{{pathFor 'public.about'}}">click here</a>.</p>
-                    </div>
-                </div>-->
             </div>
         </div>
-    </div>
+    </section>
+    <section class="hero is-dark is-large algorithm-image">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-2">
+                    Curious about how Ceerebro works ?
+                </h1>
+                <h2 class="subtitle is-5">
+                    Ceerebro uses an open algorithm to encrypt every credentials stored.
+                </h2>
+                <p>
+                    <a href="{{pathFor 'public.about'}}" class="button is-outlined">
+                        <span>
+                          Find out more
+                        </span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </section>
     {{> footer}}
 </template>

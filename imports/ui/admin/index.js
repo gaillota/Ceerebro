@@ -24,7 +24,7 @@ Template["admin.index"].helpers({
     },
     count() {
         if (this.name == 'admin.users') {
-            const countUsers = Counts.get('count.users');
+            const countUsers = Counts.get('count.admin.users');
             return ` (${countUsers})`;
         }
     }

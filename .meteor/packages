@@ -37,7 +37,6 @@ rlivingston:simple-schema-mixin
 blaze-html-templates
 aldeed:template-extension
 raix:handlebar-helpers
-fortawesome:fontawesome
 mrt:nprogress
 juliancwirko:s-alert
 juliancwirko:s-alert-scale

@@ -57,5 +57,5 @@ Meteor.publish('count.admin.users', function countAdminUsers() {
 
     const QUERY_FILTER = {_id: {$ne: this.userId}};
 
-    Counts.publish(this, 'count.admin.users', Meteor.users.find(QUERY_FILTER, {fields: _id}));
+    Counts.publish(this, 'count.admin.users', Meteor.users.find(QUERY_FILTER));
 });

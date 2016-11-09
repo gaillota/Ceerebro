@@ -11,7 +11,7 @@ import {toggleStatus} from '../../../api/users/methods';
 import {Notification} from "../../../startup/services/notification.service";
 
 Template["admin.users"].onCreated(function adminAccountsCreated() {
-    this.subscribe('count.admin.users');
+    this.subscribe('admin.users');
 });
 
 Template["admin.users"].helpers({
