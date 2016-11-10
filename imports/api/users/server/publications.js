@@ -44,6 +44,12 @@ Meteor.publishComposite('admin.users', {
     ]
 });
 
+Meteor.publish('count.users', function countAdminUsers() {
+    const QUERY_FILTER = {roles: {$nin: ['admin']}};
+
+    Counts.publish(this, 'count.users', Meteor.users.find(QUERY_FILTER));
+});
+
 Meteor.publish('count.admin.users', function countAdminUsers() {
     if (!this.userId || !Roles.userIsInRole(this.userId, 'admin')) {
         return this.ready();
@@ -51,5 +57,5 @@ Meteor.publish('count.admin.users', function countAdminUsers() {
 
     const QUERY_FILTER = {_id: {$ne: this.userId}};
 
-    Counts.publish(this, 'count.users', Meteor.users.find(QUERY_FILTER));
+    Counts.publish(this, 'count.admin.users', Meteor.users.find(QUERY_FILTER));
 });

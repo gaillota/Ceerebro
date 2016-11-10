@@ -24,6 +24,9 @@ const helpers = {
     assets(path) {
         return Meteor.absoluteUrl(path);
     },
+    pluralize(count = 0, singular = '') {
+        return count > 1 ? singular + 's' : singular;
+    },
     userStatus(user = this) {
         const icons = {
             disabled: {
