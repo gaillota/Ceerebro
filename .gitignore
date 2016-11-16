@@ -4,3 +4,4 @@ node_modules
 .idea/
 mup.json
 settings.json
+.deploy/

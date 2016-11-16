@@ -30,11 +30,14 @@
                         {{#with currentUser}}
                             {{#if masterKeyIsSet}}
                                 <a href="#" class="nav-item active js-remove-master-key">
-                                    {{> icon name='lock' size='is-small'}}
-                                    <span>Remove</span>
+                                    {{> icon name='times' size='is-small'}}
+                                    <span>Remove master key</span>
                                 </a>
                             {{else}}
-                                <a href="#" class="nav-item js-set-master-key">Set master key</a>
+                                <a href="#" class="nav-item js-set-master-key">
+                                    {{> icon name='unlock-alt' size='is-small'}}
+                                    <span>Set master key</span>
+                                </a>
                             {{/if}}
                             <a href="{{pathFor 'rea.profile.index'}}"
                                class="nav-item {{isActiveRoute regex='profile'}}">
