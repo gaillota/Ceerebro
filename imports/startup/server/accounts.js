@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
+import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 import {_} from 'lodash';
 
 /**
@@ -35,7 +35,7 @@ Accounts.emailTemplates.verifyEmail = {
 /**
  * Accounts login hook
  */
-Accounts.validateLoginAttempt(function(obj) {
+Accounts.validateLoginAttempt(function (obj) {
     if (!obj.user) {
         return false;
     }
@@ -58,18 +58,19 @@ Accounts.validateLoginAttempt(function(obj) {
         }
     });
 
-    // Prevent login tokens over-accumulation
-    const maxTokens = 2;
-    if (_.get(user, 'services resume loginTokens'.split(' '), []).length > maxTokens) {
-        Meteor.users.update(user._id, {
-            $push: {
-                "services.resume.loginTokens": {
-                    $each: [],
-                    $slice: maxTokens
+    // Flush login tokens older than a day, preventing over-accumulation
+    const timestamp = Date.now() - (24 * 60 * 60 * 1000);
+    Meteor.users.update(user._id, {
+        $pull: {
+            "services.resume.loginTokens": {
+                "when": {
+                    $lt: new Date(timestamp)
                 }
             }
-        });
-    }
+        }
+    }, {
+        multi: true
+    });
 
     return true;
 });
