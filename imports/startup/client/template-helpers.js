@@ -36,7 +36,7 @@ const helpers = {
             },
             verified: {
                 type: 'success',
-                icon: 'check-square-o',
+                icon: 'check',
                 text: 'Active'
             },
             waiting: {

@@ -1,12 +1,13 @@
 <template name="admin.users">
-    <table class="table">
+    <table class="table is-striped">
         <thead>
         <tr>
             <th></th>
             <th>Username</th>
             <th>Email address</th>
             <th>Created at</th>
-            <th class="has-text-centered">Status</th>
+            <th>Status</th>
+            <th>Last conn.</th>
             <th># cred.</th>
             <th></th>
         </tr>
@@ -20,13 +21,16 @@
                 <td>{{username}}</td>
                 <td>{{emails.[0].address}}</td>
                 <td>{{formatDate createdAt}}</td>
-                <td class="has-text-centered">
+                <td>
                     {{#with userStatus}}
                         <span class="tag is-small is-{{type}}">
                             {{> icon name=icon size='is-small'}}
                             <span>{{text}}</span>
                         </span>
                     {{/with}}
+                </td>
+                <td>
+                    {{formatDate lastConnectionAt}}
                 </td>
                 <td>{{credentialsCount}}</td>
                 <td>

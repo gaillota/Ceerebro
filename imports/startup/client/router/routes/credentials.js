@@ -10,7 +10,7 @@ import '../../../../ui/rea/credentials/index';
 import '../../../../ui/rea/credentials/add';
 import '../../../../ui/rea/credentials/edit';
 
-var credentialsRoutes = FlowRouter.group({
+const credentialsRoutes = FlowRouter.group({
     prefix: '/credentials',
 });
 
