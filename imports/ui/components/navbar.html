@@ -22,13 +22,13 @@
                         {{/if}}
                     </div>
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <span class="nav-toggle">
+                    <span id="nav-toggle" class="nav-toggle {{navbarToggle}}">
                         <span></span>
                         <span></span>
                         <span></span>
                     </span>
 
-                    <div class="nav-right nav-menu">
+                    <div class="nav-right nav-menu {{navbarToggle}}">
                         {{#with currentUser}}
                             {{#if masterKeyIsSet}}
                                 <a href="#" class="nav-item active js-remove-master-key">

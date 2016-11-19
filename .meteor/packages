@@ -18,6 +18,7 @@ less
 email
 http
 reactive-var
+reactive-dict
 
 # data
 mongo
