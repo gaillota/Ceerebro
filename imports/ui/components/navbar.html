@@ -10,11 +10,13 @@
                         {{#if currentUser}}
                             <a class="nav-item {{isActiveRoute regex='^credentials'}}"
                                href="{{pathFor 'rea.credentials.index'}}">
-                                {{> icon name='key' size='is-small'}} Credentials
+                                {{> icon name='key' size='is-small'}}
+                                <span class="is-hidden-mobile">Credentials</span>
                             </a>
                             {{#if isInRole 'admin'}}
                                 <a class="nav-item {{isActiveRoute regex='^admin'}}" href="{{pathFor 'admin.index'}}">
-                                    {{> icon name='terminal' size='is-small'}} Administration
+                                    {{> icon name='terminal' size='is-small'}}
+                                    <span class="is-hidden-mobile">Administration</span>
                                 </a>
                             {{/if}}
                         {{/if}}
