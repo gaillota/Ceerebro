@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "description": "A secure credentials storage platform",
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run --settings settings.json"
   },
   "dependencies": {
     "highcharts": "^4.2.5",
+    "leaflet": "^1.0.1",
+    "leaflet-providers": "^1.1.16",
+    "leaflet.markercluster": "^1.0.0",
     "lodash": "^4.13.1",
-    "meteor-node-stubs": "^0.2.3"
+    "meteor-node-stubs": "^0.2.3",
+    "node-fetch": "^1.6.3",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {},
   "repository": {

@@ -19,17 +19,17 @@ export const EncryptionService = (function () {
      * @returns {{}}
      */
     function setupUserKeychain(password, callback) {
-        var keychain = {};
+        let keychain = {};
 
         // Generate 128 bits salt
-        var salt = generateKey(128);
+        const salt = generateKey(128);
         // Generate 512 bits password-based key
-        var pbk = generatePasswordBasedKey(password, salt);
+        const pbk = generatePasswordBasedKey(password, salt);
         // Get password validator and encryption key from the pbk above
-        var passwordValidatorAndKey = splitKeyInHalf(pbk);
+        const passwordValidatorAndKey = splitKeyInHalf(pbk);
         // Generate a master key which will be used to encrypt every data stored
         // (AES-256 requires 256 bits key)
-        var masterKey = generateKey(256);
+        const masterKey = generateKey(256);
 
         // Store data in database
         keychain.salt = salt;
@@ -71,7 +71,7 @@ export const EncryptionService = (function () {
      */
     function splitKeyInHalf(key) {
         check(key, String);
-        var half = key.length / 2;
+        const half = key.length / 2;
 
         return {
             key: key.substr(0, half),

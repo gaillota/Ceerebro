@@ -8,5 +8,6 @@ import './security';
 import './routes/admin';
 import './routes/auth';
 import './routes/credentials';
+import './routes/map';
 import './routes/profile';
 import './routes/public';

@@ -59,6 +59,9 @@ accounts-password
 alanning:roles
 mizzao:user-status
 
+# map
+bevanhunt:leaflet
+
 # utilities
 momentjs:moment
 digilord:faker

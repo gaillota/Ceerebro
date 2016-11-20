@@ -1,0 +1,36 @@
+<template name="rea.map.popup">
+    <div class="content">
+        <h5>{{name}}</h5>
+    </div>
+    <div class="notification">
+        <span class="icon is-small">
+            <i class="fa fa-map-marker"></i>
+        </span>
+        <span>{{address}}</span>
+    </div>
+    <div class="notification is-info has-text-centered">
+        <h1 class="title is-2">
+            {{bike_stands}}
+        </h1>
+    </div>
+    <div class="columns">
+        <div class="column">
+            <div class="notification is-success has-text-centered">
+                <h1 class="title is-2">
+                    {{available_bikes}}
+                </h1>
+            </div>
+        </div>
+        <div class="column">
+            <div class="notification is-danger has-text-centered">
+                <h1 class="title is-2">{{available_bike_stands}}</h1>
+            </div>
+        </div>
+    </div>
+    <span class="is-pulled-right">
+        <small>
+            Last update: {{last_update}}
+        </small>
+    </span>
+    <div class="is-cleafix"></div>
+</template>
