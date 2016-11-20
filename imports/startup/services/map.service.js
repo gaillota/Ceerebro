@@ -63,8 +63,9 @@ export const MapService = (function () {
             ...opt,
             riseOnHover: true,
             icon: L.divIcon({
-                iconSize: [48, 48],
-                popupAnchor: [0, -51],
+                iconSize: [40, 40],
+                iconAnchor: [16, 46],
+                popupAnchor: [0, -45],
                 html: `<div class="leaflet-marker bounce" style="background: linear-gradient(to top right, ${color} ${ratio}%, white ${ratio}%);"></div>`
             })
         };
