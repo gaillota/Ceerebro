@@ -2,24 +2,17 @@ import {Template} from 'meteor/templating';
 import {moment} from 'meteor/momentjs:moment';
 import {_} from 'lodash';
 
+import {formatDate, formatDateRelative} from '../utilities/functions';
+
 const helpers = {
     fa(icon) {
         return `<i class="fa fa-${icon}"></i>`;
     },
     formatDate(date) {
-        if (!date) {
-            return '-1';
-        }
-
-        date = moment(date);
-        return date.isSame(new Date(), 'day') ? date.format('HH:mm') : date.isSame(new Date(), 'year') ? date.format('MMMM Do') : date.format('MMMM Do YYYY');
+        return formatDate(date);
     },
     formatDateRelative(date) {
-        if (!date) {
-            return '-1';
-        }
-
-        return moment(date).fromNow();
+        return formatDateRelative(date);
     },
     assets(path) {
         return Meteor.absoluteUrl(path);

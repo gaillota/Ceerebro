@@ -35,10 +35,12 @@ export const MapService = (function () {
         stations.forEach(function (station) {
             const marker = _getMarker(station);
 
-            const div = document.createElement('div');
-
-            Blaze.renderWithData(Template["rea.map.popup"], station, div);
-            marker.bindPopup(div).openPopup();
+            marker.bindPopup("Loading...");
+            marker.on('click', function() {
+                const div = document.createElement('div');
+                Blaze.renderWithData(Template["rea.map.popup"], station, div);
+                marker.bindPopup(div).openPopup();
+            });
 
             markers.addLayer(marker);
         });
