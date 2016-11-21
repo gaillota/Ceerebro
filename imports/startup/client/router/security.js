@@ -2,17 +2,20 @@ import {Meteor} from 'meteor/meteor';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Roles} from 'meteor/alanning:roles';
+import {Session} from 'meteor/session';
 
 import {Notification} from '../../services/notification.service.js';
 
 FlowRouter.triggersFunctions = {
     isLoggedIn(context, redirect) {
         if (!Meteor.userId()) {
+            Session.set('context', context);
             redirect(FlowRouter.path('public.auth.login'));
         }
     },
     isAdmin(context, redirect) {
         if (!Meteor.userId()) {
+            Session.set('context', context);
             redirect(FlowRouter.path('public.auth.login'));
         } else {
             if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
