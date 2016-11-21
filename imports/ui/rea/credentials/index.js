@@ -19,12 +19,7 @@ Template["rea.credentials.index"].onCreated(function credentialsCreated() {
     this.subscribe('credentials');
     this.subscribe('favicons');
 
-    this.queryParam = () => FlowRouter.getQueryParam('q') || '';
-
-    this.search = new ReactiveVar(this.queryParam());
-    this.autorun(() => {
-        FlowRouter.go('rea.credentials.index', {}, {q: this.search.get()});
-    });
+    this.search = new ReactiveVar();
 });
 
 Template["rea.credentials.index"].helpers({
@@ -32,7 +27,7 @@ Template["rea.credentials.index"].helpers({
         return Counts.get('totalCredentials');
     },
     queryParam() {
-        return Template.instance().queryParam();
+        return Template.instance().search.get();
     },
     credentials() {
         const search = Template.instance().search.get();
@@ -62,9 +57,6 @@ Template["rea.credentials.index"].helpers({
     },
     editButtonState() {
         return !Session.get('masterKey') && 'is-disabled';
-    },
-    searching() {
-        return !!Template.instance().search.get();
     }
 });
 
@@ -101,6 +93,5 @@ Template["rea.credentials.index"].events({
 
         $('input.js-search-input').val('');
         template.search.set('');
-        FlowRouter.go('rea.credentials.index');
     }
 });
