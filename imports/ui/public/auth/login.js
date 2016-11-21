@@ -4,6 +4,7 @@ import {AutoForm} from 'meteor/aldeed:autoform';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 
 import {Notification} from '../../../startup/services/notification.service.js';
+import {getDispatcherPath} from '../../../startup/utilities/functions';
 
 import './login.html';
 
@@ -25,7 +26,7 @@ AutoForm.addHooks('public.auth.login', {
         if (Meteor.user()) {
             Notification.success("Welcome back " + Meteor.user().username + " ! :)");
         }
-        const next = Session.get('context') ? Session.get('context').path : 'public.index';
+        const next = getDispatcherPath() || 'public.index';
         FlowRouter.go(next);
     }
 });

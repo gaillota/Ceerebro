@@ -1,12 +1,11 @@
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Accounts} from 'meteor/accounts-base';
-import {Session} from 'meteor/session';
 
 import {Notification} from '../../../services/notification.service.js';
+import {resetDispatcher} from '../../../utilities/functions';
 
 import '../../../../ui/layout';
-
 import '../../../../ui/public/auth/register';
 import '../../../../ui/public/auth/login';
 
@@ -16,9 +15,7 @@ FlowRouter.route('/login', {
     action() {
         BlazeLayout.render('public.auth.login');
     },
-    triggersExit: [function() {
-        Session.set('context', undefined);
-    }]
+    triggersExit: [resetDispatcher]
 });
 
 FlowRouter.route('/register', {

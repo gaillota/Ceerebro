@@ -1,6 +1,9 @@
 import {Session} from 'meteor/session';
 import {moment} from 'meteor/momentjs:moment';
 
+/**
+ * Date helpers
+ */
 export const formatDate = (date) => {
     if (!date) {
         return '-1';
@@ -19,7 +22,22 @@ export const formatDateRelative = (date) => {
 };
 
 /**
- * Master key
+ * Dispatcher helpers
+ */
+export const setDispatcherPath = (path) => {
+    Session.set('dispatcher.path', path);
+};
+
+export const getDispatcherPath = () => {
+    return Session.get('dispatcher.path');
+};
+
+export const resetDispatcher = () => {
+    Session.set('dispatcher.path', undefined);
+};
+
+/**
+ * Master key helpers
  */
 export const setMasterKey = (masterKey) => {
     Session.set('masterKey', masterKey);
@@ -30,7 +48,7 @@ export const removeMasterKey = () => {
 };
 
 /**
- * Master password modal
+ * Master password modal helpers
  */
 export const showMasterPasswordModal = () => {
     Session.set('master-password.modal', true);
@@ -41,7 +59,7 @@ export const hideMasterPasswordModal = () => {
 };
 
 /**
- * Credential modal
+ * Credential modal helpers
  */
 export const showCredentialModal = (credentialId) => {
     Session.set('credential.modal', credentialId);
