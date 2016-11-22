@@ -4,7 +4,6 @@ export const CredentialsForm = new SimpleSchema({
     domain: {
         type: String,
         label: 'Domain',
-        regEx: SimpleSchema.RegEx.Url,
         autoform: {
             type: 'url',
             autofocus: true,
