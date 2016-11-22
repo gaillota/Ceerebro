@@ -64,17 +64,23 @@ Template["admin.users"].helpers({
 Template["admin.users"].events({
     'click .js-status-toggle'() {
         toggleStatus.call({userId: this._id}, (error) => {
-            Notification.error(error.toString);
+            if (error) {
+                Notification.error(error.toString);
+            }
         });
     },
     'click .js-activate'() {
         activate.call({userId: this._id}, (error) => {
-            Notification.error(error.toString);
+            if (error) {
+                Notification.error(error.toString);
+            }
         });
     },
     'click .js-make-admin'() {
         makeAdmin.call({userId: this._id}, (error) => {
-            Notification.error(error.toString());
+            if (error) {
+                Notification.error(error.toString());
+            }
         });
     }
 });
