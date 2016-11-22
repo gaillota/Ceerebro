@@ -1,6 +1,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {Counts} from 'meteor/tmeasday:publish-counts';
+import {Roles} from 'meteor/alanning:roles';
 
 import './users.html';
 
@@ -43,6 +44,9 @@ Template["admin.users"].helpers({
             owner: this._id
         }).count();
     },
+    adminTag() {
+        return Roles.userIsInRole(this._id, 'admin') && 'is-info';
+    },
     emailNotVerified() {
         return !this.emails[0].verified;
     },
@@ -51,6 +55,9 @@ Template["admin.users"].helpers({
     },
     statusButtonText() {
         return !!this.disabled ? 'Unban' : 'Ban';
+    },
+    notAdmin() {
+        return !Roles.userIsInRole(this._id, 'admin');
     }
 });
 

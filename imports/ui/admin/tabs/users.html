@@ -19,7 +19,11 @@
                     <td class="has-text-centered">
                         <i class="fa fa-circle" style="color: {{userConnectionStatus}};"></i>
                     </td>
-                    <td>{{username}}</td>
+                    <td>
+                        <span class="tag {{adminTag}}">
+                            {{username}}
+                        </span>
+                    </td>
                     <td>{{emails.[0].address}}</td>
                     <td>{{formatDate createdAt}}</td>
                     <td>
@@ -46,10 +50,12 @@
                                 {{> icon name='user-times' size='is-small'}}
                                 <span class="is-hidden-mobile">{{statusButtonText}}</span>
                             </button>
-                            <button class="button is-small js-make-admin">
-                                {{> icon name='terminal' size='is-small'}}
-                                <span class="is-hidden-mobile">Set admin</span>
-                            </button>
+                            {{#if notAdmin}}
+                                <button class="button is-small js-make-admin">
+                                    {{> icon name='terminal' size='is-small'}}
+                                    <span class="is-hidden-mobile">Set admin</span>
+                                </button>
+                            {{/if}}
                         </div>
                     </td>
                 </tr>
@@ -58,7 +64,7 @@
         </table>
     </div>
     {{#if isEmpty users}}
-        <h5 class="title is-5 text-center">
+        <h5 class="title is-5 has-text-center">
             No users for now...
         </h5>
     {{/if}}
