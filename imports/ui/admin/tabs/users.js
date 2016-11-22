@@ -6,8 +6,7 @@ import './users.html';
 
 import {Credentials} from "../../../api/credentials/credentials";
 
-import {activate} from '../../../api/users/methods';
-import {toggleStatus} from '../../../api/users/methods';
+import {activate, toggleStatus, makeAdmin} from '../../../api/users/methods';
 import {Notification} from "../../../startup/services/notification.service";
 
 Template["admin.users"].onCreated(function adminAccountsCreated() {
@@ -47,8 +46,11 @@ Template["admin.users"].helpers({
     emailNotVerified() {
         return !this.emails[0].verified;
     },
-    isDisabled() {
-        return !!this.disabled;
+    statusButtonColor() {
+        return !!this.disabled ? 'is-success' : 'is-danger';
+    },
+    statusButtonText() {
+        return !!this.disabled ? 'Unban' : 'Ban';
     }
 });
 
@@ -61,6 +63,11 @@ Template["admin.users"].events({
     'click .js-activate'() {
         activate.call({userId: this._id}, (error) => {
             Notification.error(error.toString);
+        });
+    },
+    'click .js-make-admin'() {
+        makeAdmin.call({userId: this._id}, (error) => {
+            Notification.error(error.toString());
         });
     }
 });

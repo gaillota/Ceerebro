@@ -2,6 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
+import {Roles} from 'meteor/alanning:roles';
 
 import {RegistrationForm} from '../../startup/forms/auth/RegistrationForm';
 import {EncryptionService} from '../../startup/services/encryption.service';
@@ -56,6 +57,34 @@ export const register = new ValidatedMethod({
     }
 });
 
+export const harakiri = new ValidatedMethod({
+    name: 'user.harakiri',
+    mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
+    schema: {
+        digest: {
+            type: String
+        }
+    },
+    run({ digest }) {
+        const result = Accounts._checkPassword(this.userId, { digest: digest, algorithm: 'sha-256' });
+        if (result.error) {
+            throw new Meteor.Error(403, 'Wrong password');
+        }
+
+        throw new Meteor.Error(404, 'This function is not available yet...');
+
+        // Credentials.remove({
+        //     owner: userId
+        // }, {
+        //     multi: true
+        // });
+        // Meteor.users.remove(userId);
+    }
+});
+
+/**
+ * Admin methods
+ */
 export const toggleStatus = new ValidatedMethod({
     name: 'user.toggleStatus',
     mixins: [ValidatedMethod.mixins.isAdmin, ValidatedMethod.mixins.schema],
@@ -103,27 +132,16 @@ export const activate = new ValidatedMethod({
     }
 });
 
-export const harakiri = new ValidatedMethod({
-   name: 'user.harakiri',
-   mixins: [ValidatedMethod.mixins.isLoggedIn, ValidatedMethod.mixins.schema],
-   schema: {
-       digest: {
-           type: String
-       }
-   },
-   run({ digest }) {
-       const result = Accounts._checkPassword(this.userId, { digest: digest, algorithm: 'sha-256' });
-       if (result.error) {
-           throw new Meteor.Error(403, 'Wrong password');
-       }
-
-       throw new Meteor.Error(404, 'This function is not available yet...');
-
-       // Credentials.remove({
-       //     owner: userId
-       // }, {
-       //     multi: true
-       // });
-       // Meteor.users.remove(userId);
-   }
+export const makeAdmin = new ValidatedMethod({
+    name: 'user.makeAdmin',
+    mixins: [ValidatedMethod.mixins.isAdmin, ValidatedMethod.mixins.schema],
+    schema: {
+        userId: {
+            type: String,
+            regEx: SimpleSchema.RegEx.Id
+        }
+    },
+    run({userId}) {
+        return Roles.setUserRoles(userId, 'admin');
+    }
 });

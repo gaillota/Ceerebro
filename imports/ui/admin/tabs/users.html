@@ -42,17 +42,14 @@
                                     <span>Activate</span>
                                 </button>
                             {{/if}}
-                            {{#if isDisabled}}
-                                <button type="button" class="button is-success is-small js-status-toggle">
-                                    {{> icon name='user' size='is-small'}}
-                                    <span class="is-hidden-mobile"> Unban</span>
-                                </button>
-                            {{else}}
-                                <button type="button" class="button is-danger is-small js-status-toggle">
-                                    {{> icon name='user-times' size='is-small'}}
-                                    <span class="is-hidden-mobile"> Ban</span>
-                                </button>
-                            {{/if}}
+                            <button type="button" class="button {{statusButtonColor}} is-small js-status-toggle">
+                                {{> icon name='user-times' size='is-small'}}
+                                <span class="is-hidden-mobile">{{statusButtonText}}</span>
+                            </button>
+                            <button class="button is-small js-make-admin">
+                                {{> icon name='terminal' size='is-small'}}
+                                <span class="is-hidden-mobile">Set admin</span>
+                            </button>
                         </div>
                     </td>
                 </tr>
