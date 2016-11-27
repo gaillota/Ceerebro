@@ -7,7 +7,15 @@ import './master-password.modal.html';
 
 import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordForm';
 import {EncryptionService} from '../../../startup/services/encryption.service';
-import {setMasterKey, hideMasterPasswordModal, showCredentialModal} from '../../../startup/utilities';
+import {
+    setMasterKey,
+    hideMasterPasswordModal,
+    showCredentialModal,
+    isMasterPasswordModalVisible,
+    showPasswordError,
+    hidePasswordError,
+    hasPasswordError
+} from '../../../startup/utilities';
 
 Template["masterPasswordModal"].onRendered(function masterPasswordModalRendered() {
     // Add focus on input
@@ -15,10 +23,13 @@ Template["masterPasswordModal"].onRendered(function masterPasswordModalRendered(
 
 Template["masterPasswordModal"].helpers({
     isActive() {
-        return Session.get('master-password.modal') && 'is-active';
+        return isMasterPasswordModalVisible() && 'is-active';
     },
     masterPasswordForm() {
         return MasterPasswordForm;
+    },
+    hasPasswordError() {
+        return hasPasswordError();
     }
 });
 
@@ -27,6 +38,9 @@ Template["masterPasswordModal"].events({
         event.preventDefault();
 
         hideMasterPasswordModal();
+    },
+    'click .js-notification-delete'() {
+        hidePasswordError();
     }
 });
 
@@ -39,7 +53,8 @@ AutoForm.addHooks('masterPasswordForm', {
         const pvaek = EncryptionService.splitKeyInHalf(pbk);
 
         if (keychain.passwordValidator !== pvaek.passwordValidator) {
-            this.done(new Meteor.Error('Wrong password !'));
+            this.done(new Error("Surprise mahafaka !"));
+            showPasswordError();
             return;
         }
 
@@ -47,6 +62,7 @@ AutoForm.addHooks('masterPasswordForm', {
 
         setMasterKey(masterKey);
         hideMasterPasswordModal();
+        hidePasswordError();
 
         this.done();
 
