@@ -59,18 +59,18 @@ Accounts.validateLoginAttempt(function (obj) {
     });
 
     // Flush login tokens older than a day, preventing over-accumulation
-    const timestamp = Date.now() - (24 * 60 * 60 * 1000);
-    Meteor.users.update(user._id, {
-        $pull: {
-            "services.resume.loginTokens": {
-                "when": {
-                    $lt: new Date(timestamp)
-                }
-            }
-        }
-    }, {
-        multi: true
-    });
+    // const timestamp = Date.now() - (24 * 60 * 60 * 1000);
+    // Meteor.users.update(user._id, {
+    //     $pull: {
+    //         "services.resume.loginTokens": {
+    //             "when": {
+    //                 $lt: new Date(timestamp)
+    //             }
+    //         }
+    //     }
+    // }, {
+    //     multi: true
+    // });
 
     return true;
 });
