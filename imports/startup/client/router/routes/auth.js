@@ -1,9 +1,10 @@
+import {Meteor} from 'meteor/meteor';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Accounts} from 'meteor/accounts-base';
 
 import {Notification} from '../../../services/notification.service.js';
-import {resetDispatcher} from '../../../utilities/functions';
+import {resetDispatcher} from '../../../utilities';
 
 import '../../../../ui/layout';
 import '../../../../ui/public/auth/register';
@@ -13,6 +14,9 @@ import '../../../../ui/public/auth/login';
 FlowRouter.route('/login', {
     name: 'public.auth.login',
     action() {
+        if (Meteor.loggingIn()) {
+            console.log('action - logging in progress...');
+        }
         BlazeLayout.render('public.auth.login');
     },
     triggersExit: [resetDispatcher]

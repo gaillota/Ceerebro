@@ -8,7 +8,7 @@ import '../../../../ui/public/about';
 
 FlowRouter.route('/', {
     name: 'public.index',
-    triggersEnter: [function(context, redirect) {
+    triggersEnter: [function (context, redirect) {
         if (Meteor.userId()) {
             redirect(FlowRouter.path('rea.credentials.index'));
         }

@@ -4,16 +4,24 @@ import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Roles} from 'meteor/alanning:roles';
 
 import {Notification} from '../../services/notification.service.js';
-import {setDispatcherPath} from '../../utilities/functions';
+import {setDispatcherPath} from '../../utilities';
 
 FlowRouter.triggersFunctions = {
     isLoggedIn(context, redirect) {
+        if (Meteor.loggingIn()) {
+            return;
+        }
+
         if (!Meteor.userId()) {
             setDispatcherPath(context.path);
             redirect(FlowRouter.path('public.auth.login'));
         }
     },
     isAdmin(context, redirect) {
+        if (Meteor.loggingIn()) {
+            return;
+        }
+
         if (!Meteor.userId()) {
             setDispatcherPath(context.path);
             redirect(FlowRouter.path('public.auth.login'));
