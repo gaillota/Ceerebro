@@ -2,7 +2,7 @@ import {Template} from 'meteor/templating';
 import {moment} from 'meteor/momentjs:moment';
 import {_} from 'lodash';
 
-import {formatDate, formatDateRelative} from '../utilities/functions';
+import {formatDate, formatDateRelative} from '../utilities';
 
 const helpers = {
     fa(icon) {
