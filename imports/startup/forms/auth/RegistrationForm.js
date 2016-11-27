@@ -7,7 +7,7 @@ export const RegistrationForm = new SimpleSchema({
         min: 3,
         max: 20,
         autoform: {
-            autofocus: true
+            autofocus: ''
         }
     },
     email: {

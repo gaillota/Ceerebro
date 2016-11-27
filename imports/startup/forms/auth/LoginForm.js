@@ -6,7 +6,7 @@ export const LoginForm = new SimpleSchema({
         label: 'E-mail address / Username',
         autoform: {
             type: 'email',
-            autofocus: true
+            autofocus: ''
         }
     },
     password: {

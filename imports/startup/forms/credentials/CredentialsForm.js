@@ -6,7 +6,7 @@ export const CredentialsForm = new SimpleSchema({
         label: 'Domain',
         autoform: {
             type: 'url',
-            autofocus: true,
+            autofocus: '',
             autocomplete: false
         }
     },

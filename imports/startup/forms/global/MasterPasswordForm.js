@@ -6,7 +6,7 @@ export const MasterPasswordForm = new SimpleSchema({
         label: "Your password",
         autoform: {
             type: "password",
-            autofocus: true
+            autofocus: ''
         }
     }
 });

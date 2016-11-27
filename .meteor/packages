@@ -64,8 +64,8 @@ bevanhunt:leaflet
 
 # utilities
 momentjs:moment
-digilord:faker
 jparker:crypto-aes
+okgrow:analytics
 
 # production
 standard-minifier-css
