@@ -13,6 +13,16 @@ Template["rea.map.index"].hooks({
     rendered() {
         const map = MapService.loadMap('map');
 
+        map.locate({
+            setView: true,
+            enableHighAccuracy: true
+        });
+
+        map.on('locationfound', (e) => {
+            const radius = e.accuracy / 6;
+            L.circle(e.latlng, radius).addTo(map);
+        });
+
         VelibService.fetchStations('Paris')
             .then(response => response.json())
             .then(data => {

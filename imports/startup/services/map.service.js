@@ -9,12 +9,12 @@ export const MapService = (function () {
     const config = Meteor.settings.public.api.mapBox;
 
     /**
-     * Load map into the HTML element with {idContainer} as id
-     * @param idContainer
+     * Load map into the HTML element with {selector} as id
+     * @param selector
      */
-    function loadMap(idContainer) {
+    function loadMap(selector) {
         L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images/';
-        const map = L.map(idContainer, {
+        const map = L.map(selector, {
             attributionControl: false,
             minZoom: 3
         });
