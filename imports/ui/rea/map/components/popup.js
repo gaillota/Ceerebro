@@ -1,6 +1,6 @@
 import {Template} from "meteor/templating";
 
-import {formatDateRelative} from '../../../../startup/utilities/functions';
+import {formatDateRelative} from '../../../../startup/utilities';
 
 import './popup.html';
 

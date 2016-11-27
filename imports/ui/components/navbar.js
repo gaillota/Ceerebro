@@ -4,7 +4,7 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
 import {Notification} from '../../startup/services/notification.service.js';
-import {showMasterPasswordModal, removeMasterKey} from '../../startup/utilities/functions';
+import {showMasterPasswordModal, removeMasterKey} from '../../startup/utilities';
 
 import './logo';
 

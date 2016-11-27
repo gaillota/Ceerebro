@@ -8,16 +8,16 @@
                             {{> logo}}
                         </a>
                         {{#if currentUser}}
-                            <a href="{{pathFor 'rea.credentials.index'}}" class="nav-item {{isActiveRoute regex='^credentials'}}">
+                            <a href="{{pathFor 'rea.credentials.index'}}" class="nav-item {{isActiveRoute regex='credentials'}}">
                                 {{> icon name='key' size='is-small'}}
                                 <span class="is-hidden-mobile">Credentials</span>
                             </a>
-                            <a href="{{pathFor 'rea.map.index'}}" class="nav-item {{isActiveRoute regex='^map'}}">
+                            <a href="{{pathFor 'rea.map.index'}}" class="nav-item {{isActiveRoute regex='map'}}">
                                 {{> icon name='map' size='is-small'}}
                                 <span class="is-hidden-mobile">Map</span>
                             </a>
                             {{#if isInRole 'admin'}}
-                                <a href="{{pathFor 'admin.index'}}" class="nav-item {{isActiveRoute regex='^admin'}}">
+                                <a href="{{pathFor 'admin.index'}}" class="nav-item {{isActiveRoute regex='admin'}}">
                                     {{> icon name='terminal' size='is-small'}}
                                     <span class="is-hidden-mobile">Administration</span>
                                 </a>

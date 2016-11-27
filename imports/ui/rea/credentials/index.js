@@ -13,7 +13,7 @@ import '../../components/modals/show-credential.modal.js';
 
 import {Credentials} from '../../../api/credentials/credentials';
 import {remove} from '../../../api/credentials/methods';
-import {showMasterPasswordModal, showCredentialModal} from '../../../startup/utilities/functions';
+import {showMasterPasswordModal, showCredentialModal} from '../../../startup/utilities';
 
 Template["rea.credentials.index"].onCreated(function credentialsCreated() {
     this.subscribe('credentials');

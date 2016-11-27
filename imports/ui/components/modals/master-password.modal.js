@@ -7,7 +7,7 @@ import './master-password.modal.html';
 
 import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordForm';
 import {EncryptionService} from '../../../startup/services/encryption.service';
-import {setMasterKey, hideMasterPasswordModal, showCredentialModal} from '../../../startup/utilities/functions';
+import {setMasterKey, hideMasterPasswordModal, showCredentialModal} from '../../../startup/utilities';
 
 Template["masterPasswordModal"].onRendered(function masterPasswordModalRendered() {
     // Add focus on input

@@ -7,7 +7,7 @@ import './show-credential.modal.html';
 
 import {Notification} from '../../../startup/services/notification.service.js';
 import {EncryptionService} from '../../../startup/services/encryption.service.js';
-import {hideCredentialModal} from '../../../startup/utilities/functions';
+import {hideCredentialModal} from '../../../startup/utilities';
 
 Template["showCredentialModal"].onCreated(function showCredentialCreated() {
     this.getCredentialId = () => Session.get('credential.modal');
