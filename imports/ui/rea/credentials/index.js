@@ -61,7 +61,9 @@ Template["rea.credentials.index"].helpers({
 });
 
 Template["rea.credentials.index"].events({
-    'click .js-credentials-see'() {
+    'click .js-credentials-see'(event) {
+        event.preventDefault();
+
         const masterKey = Session.get('masterKey');
         if (!masterKey) {
             Session.set('passwordOnHold', this._id);
