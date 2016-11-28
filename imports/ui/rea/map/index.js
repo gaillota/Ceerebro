@@ -1,10 +1,11 @@
 import {Template} from "meteor/templating";
 import {ReactiveVar} from 'meteor/reactive-var';
 
-import {Notification} from '../../../startup/services/notification.service';
 import {VelibService} from '../../../startup/services/velib.service';
 import {MapService} from '../../../startup/services/map.service';
 import {GeocodingService} from '../../../startup/services/geocoding.service';
+
+import {SearchForm} from '../../../startup/forms/map/SearchForm';
 
 import './components/popup';
 import './index.html';
@@ -21,15 +22,19 @@ Template["rea.map.index"].hooks({
             enableHighAccuracy: true
         });
 
+        L.easyButton('fa-crosshairs fa-lg', (btn, map) => {
+            map.setView(this.location.get() || [48.859266, 2.342015], 16)
+        }).addTo(map);
+
         map.on('locationfound', (e) => {
-            const radius = e.accuracy / 6;
+            const radius = e.accuracy / 10;
 
             this.location.set({lat: e.latitude, lng: e.longitude});
-            L.circle(e.latlng, radius).addTo(map);
-        });
-
-        GeocodingService.geocode("4 allée de la Ferme", (data) => {
-            console.log(data);
+            L.circleMarker(e.latlng, radius, {
+                opacity: 1,
+                fill: true,
+                fillOpacity: 1
+            }).addTo(map);
         });
 
         VelibService.fetchStations('Paris', data => {
@@ -40,4 +45,8 @@ Template["rea.map.index"].hooks({
     }
 });
 
-Template["rea.map.index"].helpers({});
+Template["rea.map.index"].helpers({
+    searchForm() {
+        return SearchForm;
+    }
+});

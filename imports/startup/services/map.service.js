@@ -1,6 +1,7 @@
 import {Blaze} from 'meteor/blaze';
 import 'leaflet';
 import 'leaflet-providers';
+import 'leaflet-easybutton';
 import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
