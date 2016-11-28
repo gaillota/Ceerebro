@@ -3,9 +3,6 @@ import {ReactiveVar} from 'meteor/reactive-var';
 
 import {VelibService} from '../../../startup/services/velib.service';
 import {MapService} from '../../../startup/services/map.service';
-import {GeocodingService} from '../../../startup/services/geocoding.service';
-
-import {SearchForm} from '../../../startup/forms/map/SearchForm';
 
 import './components/popup';
 import './index.html';
@@ -45,8 +42,4 @@ Template["rea.map.index"].hooks({
     }
 });
 
-Template["rea.map.index"].helpers({
-    searchForm() {
-        return SearchForm;
-    }
-});
+Template["rea.map.index"].helpers({});
