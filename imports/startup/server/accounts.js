@@ -2,6 +2,8 @@ import {Meteor} from 'meteor/meteor';
 import {Accounts} from 'meteor/accounts-base';
 import {_} from 'lodash';
 
+import {sleep} from '../../startup/utilities';
+
 /**
  * Accounts urls
  */
@@ -57,20 +59,6 @@ Accounts.validateLoginAttempt(function (obj) {
             lastConnectionAt: new Date()
         }
     });
-
-    // Flush login tokens older than a day, preventing over-accumulation
-    // const timestamp = Date.now() - (24 * 60 * 60 * 1000);
-    // Meteor.users.update(user._id, {
-    //     $pull: {
-    //         "services.resume.loginTokens": {
-    //             "when": {
-    //                 $lt: new Date(timestamp)
-    //             }
-    //         }
-    //     }
-    // }, {
-    //     multi: true
-    // });
 
     return true;
 });
