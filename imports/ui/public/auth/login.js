@@ -26,7 +26,6 @@ AutoForm.addHooks('public.auth.login', {
         if (Meteor.user()) {
             Notification.success("Welcome back " + Meteor.user().username + " ! :)");
         }
-        const next = getDispatcherPath() || 'public.index';
-        FlowRouter.go(next);
+        FlowRouter.go(getDispatcherPath() || 'public.index');
     }
 });

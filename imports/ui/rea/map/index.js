@@ -24,8 +24,6 @@ Template["rea.map.index"].hooks({
         }).addTo(map);
 
         map.on('locationfound', (e) => {
-            const radius = e.accuracy / 10;
-
             this.location.set({lat: e.latitude, lng: e.longitude});
             L.circleMarker(e.latlng, {
                 opacity: 1,

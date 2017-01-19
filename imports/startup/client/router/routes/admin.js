@@ -1,6 +1,5 @@
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
-import {_} from 'lodash';
 
 import '../../../../ui/layout';
 
@@ -12,7 +11,8 @@ export const adminRoutes = [
         path: '/users',
         name: 'admin.users',
         template: 'admin.users',
-        text: 'Users'
+        text: 'Users',
+        default: true
     }
 ];
 
@@ -21,17 +21,19 @@ const adminGroup = FlowRouter.group({
     triggersEnter: [FlowRouter.triggersFunctions.isAdmin]
 });
 
-adminGroup.route('/', {
-    name: 'admin.index',
-    triggersEnter: [function(context, redirect) {
-        redirect(FlowRouter.path('admin.users'));
-    }],
-    action() {
-        throw new Meteor.Error(403, "this should not get called");
-    }
-});
-
 adminRoutes.forEach((route) => {
+    if (route.default) {
+        adminGroup.route('/', {
+            name: 'admin.index',
+            triggersEnter: [function(context, redirect) {
+                redirect(FlowRouter.path(route.name));
+            }],
+            action() {
+                throw new Meteor.Error(403, "this should not get called");
+            }
+        });
+    }
+
     adminGroup.route(route.path, {
         name: route.name,
         action() {
