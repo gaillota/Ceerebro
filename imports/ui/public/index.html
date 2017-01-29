@@ -38,7 +38,7 @@
                     Ceerebro allows you to store every credentials used on your daily life.
                 </h2>
                 <p>
-                    <a href="{{pathFor 'public.auth.register'}}" class="button is-outlined register-button">
+                    <a href="{{pathFor 'public.auth.register'}}" class="button is-outlined is-large register-button">
                         {{> icon name='registered'}}
                         <span>
               Register
@@ -62,8 +62,8 @@
             <div class="columns is-multiline">
                 {{#each panelContent}}
                     <div class="column is-4">
-                        <div class="panel">
-                            <div class="panel-block section">
+                        <div class="card">
+                            <div class="card-content section">
                                 <p class="has-text-centered"><i class="fa fa-{{icon}} icon-block"></i></p>
                                 <h1 class="title has-text-centered">{{title}}</h1>
                                 <hr>
@@ -85,7 +85,7 @@
                     Ceerebro uses an open algorithm to encrypt every credentials stored.
                 </h2>
                 <p>
-                    <a href="{{pathFor 'public.about'}}" class="button is-outlined">
+                    <a href="{{pathFor 'public.about'}}" class="button is-info">
                         <span>
                           Find out more
                         </span>
