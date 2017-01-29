@@ -8,15 +8,13 @@
                         <div class="box">
                             {{#autoForm schema=loginForm id="public.auth.login"}}
                                 <label class="label">{{afFieldLabelText name="email"}}</label>
-                                <p class="control has-icon">
+                                <p class="control">
                                     {{> afFieldInput name="email" class="input"}}
-                                    <i class="fa fa-envelope"></i>
                                     <span class="help is-danger">{{{afFieldMessage name='email'}}}</span>
                                 </p>
                                 <label class="label">{{afFieldLabelText name="password"}}</label>
-                                <p class="control has-icon">
+                                <p class="control">
                                     {{> afFieldInput name="password" class="input"}}
-                                    <i class="fa fa-lock"></i>
                                     <span class="help is-danger">{{{afFieldMessage name='password'}}}</span>
                                 </p>
                                 <hr>
