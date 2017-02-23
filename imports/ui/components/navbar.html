@@ -52,13 +52,10 @@
                             <a class="nav-item js-logout" href="#">{{> icon name='sign-out' size='is-small'}}</a>
                         {{else}}
                             <a href="{{pathFor 'public.auth.login'}}" class="nav-item">
-                                {{> icon name='sign-in' size='is-small'}}
                                 <span>Login</span>
                             </a>
                             <span class="nav-item">
-                              <a href="{{pathFor 'public.auth.register'}}"
-                                 class="button is-primary is-outlined is-inverted">
-                                {{> icon name='registered' size='is-small'}}
+                              <a href="{{pathFor 'public.auth.register'}}" class="button is-primary is-outlined">
                                   <span>Register</span>
                               </a>
                             </span>

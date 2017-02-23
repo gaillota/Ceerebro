@@ -15,13 +15,11 @@
                       </span>
                     <div class="nav-right nav-menu">
                         <a href="{{pathFor 'public.auth.login'}}" class="nav-item">
-                            {{> icon name='sign-in' size='is-small'}}
                             <span>Login</span>
                         </a>
                         <span class="nav-item">
                           <a href="{{pathFor 'public.auth.register'}}"
                              class="button is-primary is-outlined is-inverted">
-                            {{> icon name='registered' size='is-small'}}
                               <span>Register</span>
                           </a>
                         </span>
@@ -41,8 +39,8 @@
                     <a href="{{pathFor 'public.auth.register'}}" class="button is-outlined is-large register-button">
                         {{> icon name='registered'}}
                         <span>
-              Register
-            </span>
+                            Register
+                        </span>
                     </a>
                 </p>
             </div>
@@ -61,7 +59,7 @@
         <div class="container">
             <div class="columns is-multiline">
                 {{#each panelContent}}
-                    <div class="column is-4">
+                    <div class="column is-3">
                         <div class="card">
                             <div class="card-content section">
                                 <p class="has-text-centered"><i class="fa fa-{{icon}} icon-block"></i></p>

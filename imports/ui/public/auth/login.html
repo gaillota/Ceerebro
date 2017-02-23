@@ -1,7 +1,10 @@
 <template name="public.auth.login">
-    <section class="hero is-fullheight is-primary is-bold">
+    <section class="hero">
         <div class="hero-body">
             <div class="container">
+                <figure class="image is-128x128" style="margin: 0 auto 20px;">
+                    <img src="{{assets 'img/lock.png'}}" alt="lock">
+                </figure>
                 <div class="columns">
                     <div class="column is-4 is-offset-4">
                         <h1 class="title">{{> icon name='sign-in' size='is-medium'}} Log in</h1>
@@ -36,7 +39,4 @@
             </div>
         </div>
     </section>
-
-    <!--Alerts components-->
-    {{> sAlert}}
 </template>

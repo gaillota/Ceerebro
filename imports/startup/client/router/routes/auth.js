@@ -14,10 +14,7 @@ import '../../../../ui/public/auth/login';
 FlowRouter.route('/login', {
     name: 'public.auth.login',
     action() {
-        if (Meteor.loggingIn()) {
-            console.log('action - logging in progress...');
-        }
-        BlazeLayout.render('public.auth.login');
+        BlazeLayout.render('layout', {page: 'public.auth.login'});
     },
     triggersExit: [resetDispatcher]
 });
@@ -25,7 +22,7 @@ FlowRouter.route('/login', {
 FlowRouter.route('/register', {
     name: 'public.auth.register',
     action() {
-        BlazeLayout.render('public.auth.register');
+        BlazeLayout.render('layout', {page:'public.auth.register'});
     }
 });
 

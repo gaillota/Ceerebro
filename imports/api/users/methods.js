@@ -39,8 +39,10 @@ export const register = new ValidatedMethod({
         // Create new user
         const newUserId = Accounts.createUser(doc);
 
-        // Send verification e-mail
-        Accounts.sendVerificationEmail(newUserId);
+        if (!this.isSimulation) {
+            // Send verification e-mail
+            Accounts.sendVerificationEmail(newUserId);
+        }
 
         EncryptionService.setupUserKeychain(doc.password, (keychain) => {
             // Set the user's keychain

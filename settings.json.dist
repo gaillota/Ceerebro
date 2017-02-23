@@ -1,6 +1,22 @@
 {
-  // Fill if necessary
+  // Fill with your own values
   "public": {
-
+    "api": {
+      "google": {
+        "apiKey": "YOUR_API_KEY"
+      },
+      "velib": {
+        "apiKey": "YOUR_API_KEY"
+      },
+      "mapBox": {
+        "id": "YOUR_MAPBOX_ID",
+        "accessToken": "YOUR_MAPBOX_TOKEN"
+      }
+    },
+    "analyticsSettings": {
+      "Google Analytics": {
+        "trackingId": "YOUR_TRACKING_ID"
+      }
+    }
   }
 }
