@@ -49,12 +49,10 @@ Accounts.validateLoginAttempt(function (obj) {
     }
 
     if (user.disabled) {
-        throw new Meteor.Error(403, 'Your account has been disabled.');
+        throw new Meteor.Error(403, 'Sorry, your account has been disabled.');
     }
 
-    Meteor.users.update({
-        _id: user._id
-    }, {
+    Meteor.users.update(user._id, {
         $set: {
             lastConnectionAt: new Date()
         }

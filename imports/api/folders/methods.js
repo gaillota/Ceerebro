@@ -3,19 +3,11 @@ import {ValidatedMethod} from 'meteor/mdg:validated-method';
 
 import {Folders} from './folders';
 import {FolderForm} from '../../startup/forms/storage/folder.form';
+import {idSchema} from '../helpers';
 
 const mixins = ValidatedMethod.mixins;
-const idRequired = (idName) => {
-    let obj = {};
-    obj[idName] = {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id
-    };
-
-    return obj;
-};
-const FOLDER_ID_REQUIRED = idRequired("folderId");
-const PARENT_ID_REQUIRED = idRequired("parentId");
+const FOLDER_ID_REQUIRED = idSchema("folderId");
+const PARENT_ID_REQUIRED = idSchema("parentId");
 
 export const create = new ValidatedMethod({
     name: 'folders.create',

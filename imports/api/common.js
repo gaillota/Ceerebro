@@ -1,5 +1,6 @@
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
+// Helper for denying client code
 export const denyAll = {
     insert() {
         return true;
@@ -12,6 +13,7 @@ export const denyAll = {
     }
 };
 
+// Field common to all collections
 export const defaultSchema = {
     createdAt: {
         type: Date,
@@ -29,10 +31,12 @@ export const defaultSchema = {
                 return new Date();
             }
         },
+        optional: true,
         denyInsert: true
     }
 };
 
+// Default schema for "count" fields
 export const countSchema = {
     type: Number,
     min: 0,

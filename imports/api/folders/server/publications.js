@@ -5,14 +5,7 @@ import {Folders} from '../folders';
 Meteor.publishComposite('folder', (folderId) => {
     return {
         find() {
-            if (!this.userId) {
-                return this.ready();
-            }
-
-            return Folders.find({
-                _id: folderId,
-                ownerId: this.userId,
-            });
+            return !this.userId ? this.ready() : Folders.find({_id: folderId, ownerId: this.userId});
         }
     };
 });
@@ -20,14 +13,7 @@ Meteor.publishComposite('folder', (folderId) => {
 Meteor.publishComposite('folders.in', (folderId) => {
     return {
         find() {
-            if (!this.userId) {
-                return this.ready();
-            }
-
-            return Folders.find({
-                parentId: folderId,
-                ownerId: this.userId,
-            });
+            return !this.userId ? this.ready() : Folders.find({parentId: folderId, ownerId: this.userId});
         }
     };
 });

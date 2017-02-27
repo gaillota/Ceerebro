@@ -90,7 +90,7 @@ Meteor.users.deny({
 Meteor.users.helpers({
     credentials() {
         return Credentials.find({
-            owner: this._id
+            ownerId: this._id
         });
     },
     isAdmin() {

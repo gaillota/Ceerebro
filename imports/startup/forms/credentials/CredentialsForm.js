@@ -7,7 +7,7 @@ export const CredentialsForm = new SimpleSchema({
         autoform: {
             type: 'url',
             autofocus: '',
-            autocomplete: false
+            autocomplete: 'off'
         }
     },
     identifier: {
@@ -15,15 +15,14 @@ export const CredentialsForm = new SimpleSchema({
         label: 'Identifier',
         autoform: {
             type: 'email',
-            autocomplete: false
+            autocomplete: 'off'
         }
     },
     password: {
         type: String,
         label: 'Password',
         autoform: {
-            type: 'password',
-            autocomplete: false
+            type: 'password'
         }
     }
 });

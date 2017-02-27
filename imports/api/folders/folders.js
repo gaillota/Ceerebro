@@ -31,7 +31,7 @@ Folders.attachSchema(Folders.schema);
 
 Folders.helpers({
     isOwner(userId) {
-        return this.owner = userId;
+        return this.ownerId = userId;
     },
     parentFolder() {
         return Folders.findOne(this.parentId);

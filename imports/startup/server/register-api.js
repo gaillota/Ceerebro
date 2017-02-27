@@ -7,7 +7,7 @@ import '../../api/credentials/server/publications';
 /**
  * Files API
  */
-import '../../api/files/folders';
+import '../../api/files/files';
 import '../../api/files/server/publications';
 
 /**

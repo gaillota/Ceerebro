@@ -22,7 +22,7 @@ Readings.schema = new SimpleSchema({
         decimal: true,
         min: 0
     },
-    owner: {
+    ownerId: {
         type: String,
         regEx: SimpleSchema.RegEx.Id
     },
@@ -40,6 +40,6 @@ Readings.attachSchema(Readings.schema);
 
 Readings.helpers({
     isOwner(userId) {
-        return this.owner = userId;
+        return this.ownerId = userId;
     }
 });

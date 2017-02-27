@@ -1,23 +1,17 @@
+import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {HTTP} from 'meteor/http';
 
+import {denyAll, defaultSchema} from '../common';
+
 export const Credentials = new Mongo.Collection("credentials");
 
 // Deny all client-side access (management through methods)
-Credentials.deny({
-    insert() {
-        return true;
-    },
-    update() {
-        return true;
-    },
-    remove() {
-        return true;
-    }
-});
+Credentials.deny(denyAll);
 
 Credentials.schema = new SimpleSchema({
+    ...defaultSchema,
     domain: {
         type: String
     },
@@ -30,17 +24,15 @@ Credentials.schema = new SimpleSchema({
     iv: {
         type: String
     },
-    owner: {
+    ownerId: {
         type: String,
-        regEx: SimpleSchema.RegEx.Id
-    },
-    createdAt: {
-        type: Date,
-        autoValue: function () {
+        regEx: SimpleSchema.RegEx.Id,
+        autoValue: function() {
             if (this.isInsert && !this.isSet) {
-                return new Date();
+                return Meteor.userId();
             }
-        }
+        },
+        denyUpdate: true
     }
 });
 
@@ -48,7 +40,7 @@ Credentials.attachSchema(Credentials.schema);
 
 Credentials.helpers({
     isOwner(userId) {
-        return this.owner = userId;
+        return this.ownerId = userId;
     },
     favicon() {
         let url = this.domain;

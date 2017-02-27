@@ -8,6 +8,10 @@
                             {{> logo}}
                         </a>
                         {{#if currentUser}}
+                            <a href="#" class="nav-item">
+                                {{> icon name='folder'}}
+                                <span class="is-hidden-mobile">Files</span>
+                            </a>
                             <a href="{{pathFor 'rea.credentials.index'}}" class="nav-item {{isActiveRoute regex='credentials'}}">
                                 {{> icon name='key' size='is-small'}}
                                 <span class="is-hidden-mobile">Credentials</span>

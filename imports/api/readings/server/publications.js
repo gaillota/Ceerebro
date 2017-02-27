@@ -9,10 +9,10 @@ Meteor.publish('readings', function readings() {
         return this.ready();
     }
 
-    Counts.publish(this, 'totalReadings', Readings.find({owner: this.userId}));
+    Counts.publish(this, 'totalReadings', Readings.find({ownerId: this.userId}));
 
     return Readings.find({
-        owner: this.userId
+        ownerId: this.userId
     });
 });
 
@@ -24,6 +24,6 @@ Meteor.publish('readings.edit', function readingsEdit(readingsId) {
 
     return Readings.find({
         _id: readingsId,
-        owner: this.userId
+        ownerId: this.userId
     });
 });

@@ -32,7 +32,7 @@ Template["rea.credentials.index"].helpers({
     credentials() {
         const search = Template.instance().search.get();
         let query = {
-            owner: Meteor.userId()
+            ownerId: Meteor.userId()
         };
 
         if (search) {

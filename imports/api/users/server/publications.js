@@ -33,10 +33,10 @@ Meteor.publishComposite('admin.users', {
         {
             find(user) {
                 return Credentials.find({
-                    owner: user._id
+                    ownerId: user._id
                 }, {
                     fields: {
-                        owner: 1
+                        ownerId: 1
                     }
                 });
             }

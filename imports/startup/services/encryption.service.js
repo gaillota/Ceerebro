@@ -1,16 +1,9 @@
-import { check } from 'meteor/check';
-import { CryptoJS } from 'meteor/jparker:crypto-core';
+import {check} from 'meteor/check';
+import {CryptoJS} from 'meteor/jparker:crypto-core';
+
+import {getMasterKey} from '../utilities';
 
 export const EncryptionService = (function () {
-    return {
-        setupUserKeychain: setupUserKeychain,
-        encrypt: encrypt,
-        decrypt: decrypt,
-        splitKeyInHalf: splitKeyInHalf,
-        generatePasswordBasedKey: generatePasswordBasedKey,
-        generateKey: generateKey
-    };
-
     /**
      * Setup the user keychain needed to encrypt data smoothly
      *
@@ -41,28 +34,39 @@ export const EncryptionService = (function () {
         // Call asynchronous callback function with the :keychain as parameter
         callback(keychain);
     }
+
     /**
      * Wrapper for AES encrypt function
      *
      * @param text
-     * @param key
      * @param iv
      * @returns {string|*}
      */
-    function encrypt(text, key, iv) {
-        return CryptoJS.AES.encrypt(text, key, { iv: iv }).toString();
+    function encrypt(text, iv) {
+        const key = getMasterKey();
+        if (!key) {
+            return;
+        }
+
+        return CryptoJS.AES.encrypt(text, key, {iv: iv}).toString();
     }
+
     /**
      * Wrapper for AES decrypt function
      *
      * @param cipher
-     * @param key
      * @param iv
      * @returns {string|*}
      */
-    function decrypt(cipher, key, iv) {
-        return CryptoJS.AES.decrypt(cipher, key, { iv: iv }).toString(CryptoJS.enc.Utf8);
+    function decrypt(cipher, iv) {
+        const key = getMasterKey();
+        if (!key) {
+            return;
+        }
+
+        return CryptoJS.AES.decrypt(cipher, key, {iv: iv}).toString(CryptoJS.enc.Utf8);
     }
+
     /**
      * Get password validator (LSB) and encryption key (MSB) from password based key.
      *
@@ -78,6 +82,7 @@ export const EncryptionService = (function () {
             passwordValidator: key.substr(half)
         };
     }
+
     /**
      * Generate 512 bits password-based key from user {password} and {salt}
      *
@@ -88,8 +93,9 @@ export const EncryptionService = (function () {
     function generatePasswordBasedKey(password, salt) {
         check(password, String);
         check(salt, String);
-        return CryptoJS.EvpKDF(password, salt, { keySize: 512/32, iterations: 1000 }).toString();
+        return CryptoJS.EvpKDF(password, salt, {keySize: 512 / 32, iterations: 1000}).toString();
     }
+
     /**
      * Return {bits} bits length key
      *
@@ -98,6 +104,15 @@ export const EncryptionService = (function () {
      */
     function generateKey(bits) {
         check(bits, Number);
-        return CryptoJS.lib.WordArray.random(bits/8).toString();
+        return CryptoJS.lib.WordArray.random(bits / 8).toString();
     }
+
+    return {
+        setupUserKeychain: setupUserKeychain,
+        encrypt: encrypt,
+        decrypt: decrypt,
+        splitKeyInHalf: splitKeyInHalf,
+        generatePasswordBasedKey: generatePasswordBasedKey,
+        generateKey: generateKey
+    };
 })();

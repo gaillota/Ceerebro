@@ -41,7 +41,7 @@ export const insert = new ValidatedMethod({
             throw new Meteor.Error(403, 'Value must be under next reading');
         }
 
-        readings.owner = Meteor.userId();
+        readings.ownerId = Meteor.userId();
         return Readings.insert(readings);
     }
 });

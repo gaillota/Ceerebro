@@ -41,7 +41,7 @@ Template["admin.users"].helpers({
     },
     credentialsCount() {
         return Credentials.find({
-            owner: this._id
+            ownerId: this._id
         }).count();
     },
     adminTag() {
