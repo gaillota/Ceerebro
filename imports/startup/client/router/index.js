@@ -11,3 +11,4 @@ import './routes/credentials';
 import './routes/map';
 import './routes/profile';
 import './routes/public';
+import './routes/storage';

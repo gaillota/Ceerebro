@@ -7,13 +7,13 @@ import '../../api/credentials/server/publications';
 /**
  * Files API
  */
-import '../../api/files/files';
+// import '../../api/files/methods';
 import '../../api/files/server/publications';
 
 /**
  * Folders API
  */
-import '../../api/folders/folders';
+import '../../api/folders/methods';
 import '../../api/folders/server/publications';
 
 /**

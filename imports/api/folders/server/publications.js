@@ -13,7 +13,7 @@ Meteor.publishComposite('folder', (folderId) => {
 Meteor.publishComposite('folders.in', (folderId) => {
     return {
         find() {
-            return !this.userId ? this.ready() : Folders.find({parentId: folderId, ownerId: this.userId});
+            return !this.userId ? this.ready() : Folders.find({parentId: folderId || {$exists: false}, ownerId: this.userId});
         }
     };
 });

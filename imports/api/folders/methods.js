@@ -12,11 +12,10 @@ const PARENT_ID_REQUIRED = idSchema("parentId");
 export const create = new ValidatedMethod({
     name: 'folders.create',
     mixins: [mixins.isLoggedIn, mixins.schema],
-    schema: [FolderForm, PARENT_ID_REQUIRED],
+    schema: [FolderForm, idSchema("parentId", true)],
     run({name, parentId}) {
         const folder = {
-            name,
-            ownerId: this.userId
+            name
         };
 
         if (parentId) {

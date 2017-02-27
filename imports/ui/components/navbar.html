@@ -8,7 +8,7 @@
                             {{> logo}}
                         </a>
                         {{#if currentUser}}
-                            <a href="#" class="nav-item">
+                            <a href="{{pathFor 'storage.root'}}" class="nav-item {{isActiveRoute regex='storage'}}">
                                 {{> icon name='folder'}}
                                 <span class="is-hidden-mobile">Files</span>
                             </a>

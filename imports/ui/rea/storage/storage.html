@@ -1,0 +1,36 @@
+<template name="rea.storage">
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Storage</h1>
+            <div class="columns">
+                <div class="column is-2">
+                    {{> quickForm schema=folderForm id="rea.storage.folder" resetOnSuccess=true}}
+                </div>
+                <div class="column">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nom</th>
+                            <th>Size</th>
+                            <th>Uploaded at</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each folders}}
+                            <tr>
+                                <td></td>
+                                <td>{{name}}</td>
+                                <td>0 Mo</td>
+                                <td>{{formatDate createdAt}}</td>
+                                <td></td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

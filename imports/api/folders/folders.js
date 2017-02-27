@@ -16,7 +16,13 @@ Folders.schema = new SimpleSchema({
     },
     ownerId: {
         type: String,
-        regEx: SimpleSchema.RegEx.Id
+        regEx: SimpleSchema.RegEx.Id,
+        autoValue: function() {
+            if (this.isInsert && !this.isSet) {
+                return Meteor.userId();
+            }
+        },
+        denyUpdate: true
     },
     parentId: {
         type: String,
