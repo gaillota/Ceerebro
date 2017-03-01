@@ -2,5 +2,5 @@
 - Refactor publish with repositories
 - Use service for modals
 - Use templateName X
-- Template helpers
+- Template helpers X
 - Change password

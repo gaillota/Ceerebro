@@ -1,77 +1,98 @@
 <template name="navbar">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{pathFor 'public.index'}}">
+                    <img src="{{assets 'img/logo.png'}}" width="30" height="30" class="d-inline-block align-top" alt="Ceerebro">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {{#if currentUser}}
+                        <li class="{{isActiveRoute regex='storage'}}">
+                            <a href="{{pathFor 'storage.root'}}">
+                                {{> icon name='folder'}}
+                                <span class="is-hidden-mobile">Files</span>
+                            </a>
+                        </li>
+                        <li class="{{isActiveRoute regex='credentials'}}">
+                            <a href="{{pathFor 'rea.credentials.index'}}">
+                                {{> icon name='key'}}
+                                <span class="is-hidden-mobile">Credentials</span>
+                            </a>
+                        </li>
+                        <li class="{{isActiveRoute regex='map'}}">
+                            <a href="{{pathFor 'rea.map.index'}}">
+                                {{> icon name='map'}}
+                                <span class="is-hidden-mobile">Map</span>
+                            </a>
+                        </li>
+                        {{#if isInRole 'admin'}}
+                            <li class="{{isActiveRoute regex='admin'}}">
+                                <a href="{{pathFor 'admin.index'}}">
+                                    {{> icon name='terminal'}}
+                                    <span class="hidden-mobile">Administration</span>
+                                </a>
+                            </li>
+                        {{/if}}
+                    {{/if}}
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {{#with currentUser}}
+                        <li>
+                            {{#if masterKeyIsSet}}
+                                <a href="#" class="js-remove-master-key">
+                                    {{> icon name='times'}}
+                                    <span>Remove master key</span>
+                                </a>
+                            {{else}}
+                                <a href="#" class="js-set-master-key">
+                                    {{> icon name='unlock-alt'}}
+                                    <span>Set master key</span>
+                                </a>
+                            {{/if}}
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{pathFor 'rea.profile.index'}}">
+                                        {{> icon name='user'}} Profile
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" class="js-logout">{{> icon name='sign-out'}} Logout</a></li>
+                            </ul>
+                        </li>
+                    {{else}}
+                        <li>
+                            <a href="{{pathFor 'public.auth.login'}}">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{pathFor 'public.auth.register'}}">Register</a>
+                        </li>
+                    {{/with}}
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="{{pathFor 'public.index'}}">
-            <img src="{{assets 'img/logo.png'}}" width="30" height="30" class="d-inline-block align-top" alt="Ceerebro">
-        </a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                {{#if currentUser}}
-                <li class="nav-item {{isActiveRoute regex='storage'}}">
-                    <a href="{{pathFor 'storage.root'}}" class="nav-link">
-                        {{> icon name='folder'}}
-                        <span class="is-hidden-mobile">Files</span>
-                    </a>
-                </li>
-                <li class="nav-item {{isActiveRoute regex='credentials'}}">
-                    <a href="{{pathFor 'rea.credentials.index'}}" class="nav-link">
-                        {{> icon name='key'}}
-                        <span class="is-hidden-mobile">Credentials</span>
-                    </a>
-                </li>
-                <li class="nav-item {{isActiveRoute regex='map'}}">
-                    <a href="{{pathFor 'rea.map.index'}}" class="nav-link">
-                        {{> icon name='map'}}
-                        <span class="is-hidden-mobile">Map</span>
-                    </a>
-                </li>
-                {{#if isInRole 'admin'}}
-                <li class="nav-item">
-                    <a href="{{pathFor 'admin.index'}}" class="nav-link {{isActiveRoute regex='admin'}}">
-                        {{> icon name='terminal'}}
-                        <span class="is-hidden-mobile">Administration</span>
-                    </a>
-                </li>
-                {{/if}}
-                {{/if}}
-            </ul>
 
             <ul class="navbar-nav">
-            {{#with currentUser}}
-                <li class="nav-item">
-                    {{#if masterKeyIsSet}}
-                    <a href="#" class="nav-link active js-remove-master-key">
-                        {{> icon name='times'}}
-                        <span>Remove master key</span>
-                    </a>
-                    {{else}}
-                    <a href="#" class="nav-link js-set-master-key">
-                        {{> icon name='unlock-alt'}}
-                        <span>Set master key</span>
-                    </a>
-                    {{/if}}
-                </li>
-                <li class="nav-item">
-                    <a href="{{pathFor 'rea.profile.index'}}" class="nav-link {{isActiveRoute regex='profile'}}">
-                        {{> icon name='user'}} {{username}}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item js-logout" href="#">{{> icon name='sign-out'}}</a>
-                </li>
-            {{else}}
-                <li class="nav-item">
-                    <a href="{{pathFor 'public.auth.login'}}" class="nav-link">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{pathFor 'public.auth.register'}}" class="nav-link">Register</a>
-                </li>
-            {{/with}}
             </ul>
         </div>
     </nav>
