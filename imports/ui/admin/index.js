@@ -1,11 +1,12 @@
 import {Template} from "meteor/templating";
 import {_} from 'lodash';
 
-import './index.html';
-
 import {adminRoutes} from '../../startup/client/router/routes/admin';
 
-Template["admin.index"].onCreated(function adminIndexCreated() {
+import './index.html';
+
+const templateName = 'admin.index';
+Template[templateName].onCreated(function adminIndexCreated() {
     this.subscribe('count.admin.users');
     this.getCurrentRoute = new ReactiveVar();
 
@@ -15,7 +16,7 @@ Template["admin.index"].onCreated(function adminIndexCreated() {
     });
 });
 
-Template["admin.index"].helpers({
+Template[templateName].helpers({
     tabs() {
         return adminRoutes;
     },

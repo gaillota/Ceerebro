@@ -4,8 +4,8 @@ import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
 import {Roles} from 'meteor/alanning:roles';
 
-import {RegistrationForm} from '../../startup/forms/auth/RegistrationForm';
-import {EncryptionService} from '../../startup/services/encryption.service';
+import {RegistrationForm} from '../../startup/common/forms/auth/registration.form';
+import {EncryptionService} from '../../startup/services';
 
 export const bootstrap = new ValidatedMethod({
     name: 'user.bootstrap',

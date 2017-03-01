@@ -5,8 +5,8 @@ import {CryptoJS} from 'meteor/jparker:crypto-core';
 
 import './master-password.modal.html';
 
-import {MasterPasswordForm} from '../../../startup/forms/global/MasterPasswordForm';
-import {EncryptionService} from '../../../startup/services/encryption.service';
+import {MasterPasswordForm} from '../../../startup/common/forms/global/master-password.form';
+import {EncryptionService} from '../../../startup/services';
 import {
     setMasterKey,
     hideMasterPasswordModal,
@@ -17,11 +17,13 @@ import {
     hasPasswordError
 } from '../../../startup/utilities';
 
-Template["masterPasswordModal"].onRendered(function masterPasswordModalRendered() {
+const templateName  = 'master-password.modal';
+
+Template[templateName].onRendered(function masterPasswordModalRendered() {
     // Add focus on input
 });
 
-Template["masterPasswordModal"].helpers({
+Template[templateName].helpers({
     isActive() {
         return isMasterPasswordModalVisible() && 'is-active';
     },
@@ -33,7 +35,7 @@ Template["masterPasswordModal"].helpers({
     }
 });
 
-Template["masterPasswordModal"].events({
+Template[templateName].events({
     'click .modal-background, click .modal-close'(event) {
         event.preventDefault();
 
@@ -53,7 +55,7 @@ AutoForm.addHooks('masterPasswordForm', {
         const pvaek = EncryptionService.splitKeyInHalf(pbk);
 
         if (keychain.passwordValidator !== pvaek.passwordValidator) {
-            this.done(new Error("Surprise mahafaka !"));
+            this.done(new Error("Surprise madafaka !"));
             showPasswordError();
             return;
         }

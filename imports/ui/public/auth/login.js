@@ -3,20 +3,20 @@ import {Template} from 'meteor/templating';
 import {AutoForm} from 'meteor/aldeed:autoform';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 
-import {Notification} from '../../../startup/services/notification.service.js';
+import {NotificationService} from '../../../startup/services';
 import {getDispatcherPath} from '../../../startup/utilities';
+import {LoginForm} from '../../../startup/common/forms/auth/login.form';
 
 import './login.html';
 
-import {LoginForm} from '../../../startup/forms/auth/LoginForm';
-
-Template["public.auth.login"].helpers({
+const templateName = 'public.auth.login';
+Template[templateName].helpers({
     loginForm() {
         return LoginForm;
     }
 });
 
-AutoForm.addHooks('public.auth.login', {
+AutoForm.addHooks('public.auth.login.form', {
     onSubmit(doc) {
         this.event.preventDefault();
 
@@ -24,7 +24,7 @@ AutoForm.addHooks('public.auth.login', {
     },
     onSuccess() {
         if (Meteor.user()) {
-            Notification.success("Welcome back " + Meteor.user().username + " ! :)");
+            NotificationService.success("Welcome back " + Meteor.user().username + " ! :)");
         }
         FlowRouter.go(getDispatcherPath() || 'public.index');
     }

@@ -1,20 +1,21 @@
-import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import {Template} from 'meteor/templating';
+import {FlowRouter} from 'meteor/kadira:flow-router';
 
-import { Notification } from '../../../startup/services/notification.service.js';
-import { schema as ReadingsForm } from '../../../startup/forms/readings/ReadingsForm';
+import {NotificationService} from '../../../startup/services';
+import {schema as ReadingsForm} from '../../../startup/common/forms/readings/readings.form';
 
 import './add.html';
 
-Template["rea.readings.add"].helpers({
+const templateName = 'rea.readings.add';
+Template[templateName].helpers({
     readingsForm() {
         return ReadingsForm;
     }
 });
 
-AutoForm.addHooks('rea.readings.add', {
+AutoForm.addHooks('rea.readings.add.form', {
     onSuccess() {
-        Notification.success('Reading successfully added');
+        NotificationService.success('Reading successfully added');
         FlowRouter.go('readings');
     }
 });

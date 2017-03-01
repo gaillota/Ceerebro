@@ -5,7 +5,9 @@ import {ActiveRoute} from 'meteor/zimme:active-route';
 import {sAlert} from "meteor/juliancwirko:s-alert";
 import {NProgress} from 'meteor/mrt:nprogress';
 
-import {Notification} from '../services/notification.service.js';
+import {NotificationService} from '../services';
+
+import './nprogress';
 
 // SimpleSchema errors overridden
 SimpleSchema.messages({
@@ -33,7 +35,7 @@ SimpleSchema.messages({
 BlazeLayout.setRoot('body');
 
 // Disabling autoform default theme
-AutoForm.setDefaultTemplate('plain');
+// AutoForm.setDefaultTemplate('plain');
 
 // Autoform error hook
 AutoForm.addHooks(null, {
@@ -43,13 +45,13 @@ AutoForm.addHooks(null, {
             return;
         }
 
-        Notification.error(error.toString());
+        NotificationService.error(error.toString());
     }
 });
 
-ActiveRoute.configure({
-    activeClass: 'is-active'
-});
+// ActiveRoute.configure({
+//     activeClass: 'is-active'
+// });
 
 // Alerts configuration
 sAlert.config({

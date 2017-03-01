@@ -4,7 +4,8 @@ import {formatDateRelative} from '../../../../startup/utilities';
 
 import './popup.html';
 
-Template["rea.map.popup"].helpers({
+const templateName = 'rea.map.popup';
+Template[templateName].helpers({
     updatedAt() {
         return formatDateRelative(this.last_update);
     }

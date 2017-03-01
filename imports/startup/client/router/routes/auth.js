@@ -3,7 +3,7 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Accounts} from 'meteor/accounts-base';
 
-import {Notification} from '../../../services/notification.service.js';
+import {NotificationService} from '../../../services';
 import {resetDispatcher} from '../../../utilities';
 
 import '../../../../ui/layout';
@@ -31,9 +31,9 @@ FlowRouter.route('/verify-email/:token', {
     action(params) {
         Accounts.verifyEmail(params.token, function (error) {
             if (error) {
-                Notification.error(error.toString());
+                NotificationService.error(error.toString());
             } else {
-                Notification.success('Your account is now activated. Thanks !');
+                NotificationService.success('Your account is now activated. Thanks !');
             }
             FlowRouter.go('public.index');
         });

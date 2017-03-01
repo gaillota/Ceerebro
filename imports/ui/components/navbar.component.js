@@ -3,12 +3,10 @@ import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
-import {Notification} from '../../startup/services/notification.service.js';
+import {NotificationService} from '../../startup/services';
 import {showMasterPasswordModal, removeMasterKey} from '../../startup/utilities';
 
-import './logo';
-
-import './navbar.html';
+import './navbar.component.html';
 
 Template["navbar"].onCreated(function onCreatedFunction() {
     this.state = new ReactiveDict();
@@ -42,7 +40,7 @@ Template["navbar"].events({
 
         Meteor.logout(function (error) {
             if (error) {
-                Notification.error(error.toString());
+                NotificationService.error(error.toString());
             } else {
                 removeMasterKey();
                 FlowRouter.go('public.index');

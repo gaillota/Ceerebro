@@ -2,11 +2,12 @@ import {Template} from "meteor/templating";
 import {FlowRouter} from 'meteor/kadira:flow-router';
 
 import {harakiri} from "../../../api/users/methods";
-import {Notification} from "../../../startup/services/notification.service";
+import {NotificationService} from "../../../startup/services";
 
 import './index.html';
 
-Template["rea.profile"].events({
+const templateName = 'rea.profile';
+Template[templateName].events({
     'click .js-harakiri'(event) {
         event.preventDefault();
 
@@ -19,7 +20,7 @@ Template["rea.profile"].events({
                     digest: Package.sha.SHA256(password)
                 }, (error) => {
                     if (error) {
-                        Notification.error(error.toString());
+                        NotificationService.error(error.toString());
                         return;
                     }
 

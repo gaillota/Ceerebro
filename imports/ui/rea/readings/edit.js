@@ -1,13 +1,14 @@
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 
-import {Notification} from '../../../startup/services/notification.service.js';
+import {NotificationService} from '../../../startup/services';
 import {Readings} from '../../../api/readings/readings';
-import {ReadingsForm} from '../../../startup/forms/readings/ReadingsForm';
+import {ReadingsForm} from '../../../startup/common/forms/readings/readings.form';
 
 import './edit.html';
 
-Template["rea.readings.edit"].helpers({
+const templateName = 'rea.readings.edit';
+Template[templateName].helpers({
     readingsForm() {
         return ReadingsForm;
     },
@@ -16,9 +17,9 @@ Template["rea.readings.edit"].helpers({
     }
 });
 
-AutoForm.addHooks('editReadings', {
+AutoForm.addHooks('rea.readings.edit.form', {
     onSuccess() {
-        Notification.success('Reading edited');
+        NotificationService.success('Reading edited');
         FlowRouter.go('rea.readings');
     }
 });

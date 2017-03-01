@@ -1,13 +1,13 @@
 import {Template} from "meteor/templating";
 import {ReactiveVar} from 'meteor/reactive-var';
 
-import {VelibService} from '../../../startup/services/velib.service';
-import {MapService} from '../../../startup/services/map.service';
+import {VelibService, MapService} from '../../../startup/services';
 
 import './components/popup';
 import './index.html';
 
-Template["rea.map.index"].hooks({
+const templateName = 'rea.map.index';
+Template[templateName].hooks({
     created() {
         this.location = new ReactiveVar();
     },
@@ -40,4 +40,4 @@ Template["rea.map.index"].hooks({
     }
 });
 
-Template["rea.map.index"].helpers({});
+Template[templateName].helpers({});

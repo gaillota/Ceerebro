@@ -1,9 +1,9 @@
 import {Template} from 'meteor/templating';
 import {Session} from 'meteor/session';
 
-import {Credentials} from '../../../api/credentials/credentials';
-import {EncryptionService} from '../../../startup/services';
-import {hideCredentialModal} from '../../../startup/utilities';
+import {Credentials} from '../../../../api/credentials/credentials';
+import {EncryptionService} from '../../../../startup/services';
+import {hideCredentialModal} from '../../../../startup/utilities';
 
 import './show-credential.modal.html';
 

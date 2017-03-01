@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {ValidatedMethod} from 'meteor/mdg:validated-method';
 
 import {Folders} from './folders';
-import {FolderForm} from '../../startup/forms/storage/folder.form';
+import {FolderForm} from '../../startup/common/forms/storage/folder.form';
 import {idSchema} from '../helpers';
 
 const mixins = ValidatedMethod.mixins;

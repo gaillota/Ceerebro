@@ -2,6 +2,7 @@ import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
 import {denyAll, defaultSchema, countSchema} from '../common';
+import {idSchema} from '../helpers';
 
 export const Folders = new Mongo.Collection("folders");
 
@@ -9,26 +10,12 @@ export const Folders = new Mongo.Collection("folders");
 Folders.deny(denyAll);
 
 Folders.schema = new SimpleSchema({
-    ...defaultSchema,
+    ...defaultSchema(),
     name: {
         type: String,
         max: 255
     },
-    ownerId: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id,
-        autoValue: function() {
-            if (this.isInsert && !this.isSet) {
-                return Meteor.userId();
-            }
-        },
-        denyUpdate: true
-    },
-    parentId: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id,
-        optional: true
-    },
+    ...idSchema("parentId"),
     foldersCount: countSchema,
     filesCount: countSchema
 });
@@ -41,5 +28,17 @@ Folders.helpers({
     },
     parentFolder() {
         return Folders.findOne(this.parentId);
+    },
+    files() {
+        return Files.collection.find({
+            "meta.folderId": this._id,
+            "meta.ownerId": this.ownerId
+        });
+    },
+    folders() {
+        return Folders.find({
+            ownerId: this.ownerId,
+            parentId: this._id
+        });
     }
 });

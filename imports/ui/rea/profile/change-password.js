@@ -3,7 +3,7 @@
 // import {AutoForm} from 'meteor/aldeed:autoform';
 //
 // import {ChangePasswordForm} from '../../../startup/forms/profile/ChangePasswordForm';
-// import {Notification} from '../../../startup/services/notification.service.js';
+// import {NotificationService} from '../../../startup/services';
 //
 // import './change-password.html';
 //

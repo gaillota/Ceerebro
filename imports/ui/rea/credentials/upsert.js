@@ -2,16 +2,14 @@ import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {AutoForm} from 'meteor/aldeed:autoform';
 
-import {Notification} from '../../../startup/services/notification.service.js';
+import {NotificationService, EncryptionService} from '../../../startup/services';
 import {Credentials} from '../../../api/credentials/credentials';
-import {CredentialsForm} from '../../../startup/forms/credentials/CredentialsForm';
-import {EncryptionService} from '../../../startup/services/encryption.service.js';
+import {CredentialsForm} from '../../../startup/common/forms/credentials/credentials.form';
 import {upsert} from '../../../api/credentials/methods';
 
 import './upsert.html';
 
-const templateName = "rea.credentials.upsert";
-
+const templateName = 'rea.credentials.upsert';
 Template[templateName].onCreated(function reaCredentialsEditCreated() {
     this.getCredentialsId = () => FlowRouter.getParam('credentialsId');
 
@@ -35,7 +33,7 @@ Template[templateName].helpers({
     }
 });
 
-AutoForm.addHooks('manageCredentials', {
+AutoForm.addHooks('rea.credentials.upsert.form', {
     onSubmit(doc) {
         this.event.preventDefault();
 
@@ -46,7 +44,7 @@ AutoForm.addHooks('manageCredentials', {
         upsert.call(doc, this.done);
     },
     onSuccess() {
-        Notification.success('Credentials edited');
+        NotificationService.success('Credentials edited');
         FlowRouter.go('rea.credentials.index');
     },
 });

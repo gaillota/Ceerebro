@@ -4,11 +4,10 @@ import {Session} from 'meteor/session';
 /**
  * Master password modal helpers
  */
-export const showMasterPasswordModal = () => Session.set('master-password.modal', true);
-
-export const hideMasterPasswordModal = () => Session.set('master-password.modal', undefined);
-
-export const isMasterPasswordModalVisible = () => Session.get('master-password.modal');
+const masterPasswordModalName = 'master-password.modal';
+export const showMasterPasswordModal = () => toggleModal(masterPasswordModalName);
+export const hideMasterPasswordModal = () => toggleModal(masterPasswordModalName);
+export const isMasterPasswordModalVisible = () => getModalData(masterPasswordModalName);
 
 export const showPasswordError = () => {
     Session.set('master-password.error', true);
@@ -22,6 +21,11 @@ export const hasPasswordError = () => Session.get('master-password.error');
 /**
  * Credential modal helpers
  */
-export const showCredentialModal = (credentialId) => Session.set('credential.modal', credentialId);
+export const showCredentialModal = (credentialId) => toggleModal('credential.modal', credentialId);
+export const hideCredentialModal = () => toggleModal('credential.modal');
 
-export const hideCredentialModal = () => Session.set('credential.modal', undefined);
+/**
+ * Modal helpers
+ */
+export const toggleModal = (modal, data) => Session.set(`${modal}.active`, data || !getModalData(modal));
+export const getModalData = modal => Session.get(`${modal}.active`);

@@ -3,33 +3,20 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Roles} from 'meteor/alanning:roles';
 
-import {Notification} from '../../services/notification.service.js';
+import {NotificationService} from '../../services';
 import {setDispatcherPath} from '../../utilities';
 
 FlowRouter.triggersFunctions = {
     isLoggedIn(context, redirect) {
-        if (Meteor.loggingIn()) {
-            return;
-        }
-
-        if (!Meteor.userId()) {
+        if (!Meteor.loggingIn() && !Meteor.userId()) {
             setDispatcherPath(context.path);
-            redirect(FlowRouter.path('public.auth.login'));
+            redirect('public.auth.login');
         }
     },
     isAdmin(context, redirect) {
-        if (Meteor.loggingIn()) {
-            return;
-        }
-
-        if (!Meteor.userId()) {
-            setDispatcherPath(context.path);
-            redirect(FlowRouter.path('public.auth.login'));
-        } else {
-            if (!Roles.userIsInRole(Meteor.userId(), 'admin')) {
-                Notification.error('You must be admin to access this section !');
-                redirect(FlowRouter.path('public.index'));
-            }
+        if (!Meteor.loggingIn() && !Roles.userIsInRole(Meteor.userId(), 'ADMIN')) {
+            NotificationService.error('You must be admin to access this section.');
+            redirect('rea.index');
         }
     }
 };

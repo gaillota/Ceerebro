@@ -6,7 +6,7 @@
                     <div class="column is-4 is-offset-4">
                         <h1 class="title">{{> icon name='registered' size='is-medium'}} Register an account</h1>
                         <div class="box">
-                            {{#autoForm schema=registrationForm id="public.auth.register" type="method" meteormethod="user.register"}}
+                            {{#autoForm schema=registrationForm id="public.auth.register.form" type="method" meteormethod="user.register"}}
                                 <label class="label">{{afFieldLabelText name="username"}}</label>
                                 <p class="control">
                                     {{> afFieldInput name="username" class="input"}}

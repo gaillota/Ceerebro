@@ -11,7 +11,7 @@ export const Credentials = new Mongo.Collection("credentials");
 Credentials.deny(denyAll);
 
 Credentials.schema = new SimpleSchema({
-    ...defaultSchema,
+    ...defaultSchema(),
     domain: {
         type: String
     },
@@ -23,16 +23,6 @@ Credentials.schema = new SimpleSchema({
     },
     iv: {
         type: String
-    },
-    ownerId: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id,
-        autoValue: function() {
-            if (this.isInsert && !this.isSet) {
-                return Meteor.userId();
-            }
-        },
-        denyUpdate: true
     }
 });
 

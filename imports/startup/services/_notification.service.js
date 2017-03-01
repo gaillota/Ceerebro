@@ -1,6 +1,6 @@
 import { sAlert } from "meteor/juliancwirko:s-alert";
 
-export const Notification = (function() {
+export const NotificationService = (function() {
     let functions = {};
     const types = [
         'success',

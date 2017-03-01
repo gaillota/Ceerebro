@@ -3,7 +3,7 @@ import {ValidatedMethod} from 'meteor/mdg:validated-method';
 import {moment} from 'meteor/momentjs:moment';
 
 import {Readings} from './readings';
-import {ReadingsForm} from '../../startup/forms/readings/ReadingsForm';
+import {ReadingsForm} from '../../startup/common/forms/readings/readings.form';
 
 export const insert = new ValidatedMethod({
     name: 'readings.insert',

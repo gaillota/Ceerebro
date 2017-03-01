@@ -1,6 +1,6 @@
 import {_} from 'lodash';
 
-import {Notification} from './notification.service';
+import {NotificationService} from './';
 
 export const GeocodingService = (function () {
     const apiKey = Meteor.settings.public.api.google.apiKey;
@@ -23,7 +23,7 @@ export const GeocodingService = (function () {
             .then(res => res.json())
             .then(handler)
             .catch(error => {
-                Notification.error('An error occured while calling Google API...');
+                NotificationService.error('An error occured while calling Google API...');
                 console.log(error);
             });
     }

@@ -3,13 +3,12 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {AutoForm} from 'meteor/aldeed:autoform';
 
 import {Folders} from '../../../api/folders/folders';
-import {FolderForm} from '../../../startup/forms/storage/folder.form';
+import {FolderForm} from '../../../startup/common/forms/storage/folder.form';
 import {create} from '../../../api/folders/methods';
 
 import './storage.html';
 
-const templateName = "rea.storage";
-
+const templateName = 'rea.storage';
 Template[templateName].onCreated(function () {
     this.getFolderId = () => FlowRouter.getParam('folderId');
 

@@ -4,17 +4,18 @@ import {Session} from 'meteor/session';
 import {Counts} from 'meteor/tmeasday:publish-counts';
 import {Highcharts} from 'highcharts/highstock';
 
-import {Notification} from '../../../startup/services/notification.service.js';
+import {NotificationService} from '../../../startup/services';
 import {Readings} from '../../../api/readings/readings';
 import {remove} from '../../../api/readings/methods';
 
 import './index.html';
 
-Template["rea.readings"].onCreated(function readingsCreated() {
+const templateName = 'rea.readings';
+Template[templateName].onCreated(function readingsCreated() {
     this.subscribe('readings');
 });
 
-Template["rea.readings"].helpers({
+Template[templateName].helpers({
     countReadings() {
         return Counts.get('totalReadings');
     },
@@ -32,14 +33,14 @@ Template["rea.readings"].helpers({
     }
 });
 
-Template["rea.readings"].events({
+Template[templateName].events({
     'click .js-readings-remove'() {
         if (confirm('Are you sure ?')) {
             remove.call({readingsId: this._id}, (error) => {
                 if (error) {
-                    Notification.error(error.toString());
+                    NotificationService.error(error.toString());
                 } else {
-                    Notification.success('Reading successfully removed !')
+                    NotificationService.success('Reading successfully removed !')
                 }
             });
         }

@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-import {Notification} from './notification.service';
+import {NotificationService} from './';
 
 export const VelibService = (function () {
     const apiKey = Meteor.settings.public.api.velib.apiKey;
@@ -14,7 +14,7 @@ export const VelibService = (function () {
      */
     function fetchStations(contract = 'Paris', handler) {
         if (!apiKey) {
-            Notification.error('No API key for JCDecaux API. Please provide one.');
+            NotificationService.error('No API key for JCDecaux API. Please provide one.');
             return;
         }
 
@@ -25,7 +25,7 @@ export const VelibService = (function () {
             .then(res => res.json())
             .then(handler)
             .catch((error) => {
-                Notification.error('Could not retrieve stations...');
+                NotificationService.error('Could not retrieve stations...');
                 console.log(error);
             });
     }

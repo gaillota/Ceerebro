@@ -1,38 +1,19 @@
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 
+import {denyAll, defaultSchema} from '../common';
+
 export const Readings = new Mongo.Collection("readings");
 
 // Deny all client-side access (management through methods)
-Readings.deny({
-    insert() {
-        return true;
-    },
-    update() {
-        return true;
-    },
-    remove() {
-        return true;
-    }
-});
+Readings.deny(denyAll);
 
 Readings.schema = new SimpleSchema({
+    ...defaultSchema(),
     value: {
         type: Number,
         decimal: true,
         min: 0
-    },
-    ownerId: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Id
-    },
-    createdAt: {
-        type: Date,
-        autoValue: function () {
-            if (this.isInsert && !this.isSet) {
-                return new Date();
-            }
-        }
     }
 });
 

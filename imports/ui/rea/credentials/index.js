@@ -6,23 +6,23 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 import {ReactiveVar} from "meteor/reactive-var";
 import {_} from "lodash";
 
-import {Notification} from '../../../startup/services/notification.service.js';
-
-import './index.html';
-import '../../components/modals/show-credential.modal.js';
-
 import {Credentials} from '../../../api/credentials/credentials';
 import {remove} from '../../../api/credentials/methods';
+import {NotificationService} from '../../../startup/services';
 import {showMasterPasswordModal, showCredentialModal} from '../../../startup/utilities';
 
-Template["rea.credentials.index"].onCreated(function credentialsCreated() {
+import './index.html';
+import './modals/show-credential.modal.js';
+
+const templateName = 'rea.credentials.index';
+Template[templateName].onCreated(function credentialsCreated() {
     this.subscribe('credentials');
     this.subscribe('favicons');
 
     this.search = new ReactiveVar();
 });
 
-Template["rea.credentials.index"].helpers({
+Template[templateName].helpers({
     countCredentials() {
         return Counts.get('totalCredentials');
     },
@@ -60,7 +60,7 @@ Template["rea.credentials.index"].helpers({
     }
 });
 
-Template["rea.credentials.index"].events({
+Template[templateName].events({
     'click .js-credentials-see'(event) {
         event.preventDefault();
 
@@ -78,9 +78,9 @@ Template["rea.credentials.index"].events({
         if (confirm('Are you sure ?')) {
             remove.call({credentialsId: this._id}, (error) => {
                 if (error) {
-                    Notification.error(error.toString());
+                    NotificationService.error(error.toString());
                 } else {
-                    Notification.success('Credentials successfully removed !')
+                    NotificationService.success('Credentials successfully removed !')
                 }
             });
         }

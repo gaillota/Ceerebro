@@ -1,20 +1,20 @@
 import {Template} from 'meteor/templating';
 import {AutoForm} from 'meteor/aldeed:autoform';
 
-import {Notification} from '../../../startup/services/notification.service.js';
+import {NotificationService} from '../../../startup/services';
+import {RegistrationForm} from '../../../startup/common/forms/auth/registration.form';
 
 import './register.html';
 
-import {RegistrationForm} from '../../../startup/forms/auth/RegistrationForm';
-
-AutoForm.addHooks('public.auth.register', {
-    onSuccess() {
-        Notification.success('Registration successful ! Check your e-mails');
+const templateName = 'public.auth.register';
+Template[templateName].helpers({
+    registrationForm() {
+        return RegistrationForm;
     }
 });
 
-Template["public.auth.register"].helpers({
-    registrationForm() {
-        return RegistrationForm;
+AutoForm.addHooks('public.auth.register.form', {
+    onSuccess() {
+        NotificationService.success('Registration successful ! Check your e-mails');
     }
 });

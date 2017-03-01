@@ -1,16 +1,17 @@
 import {Template} from "meteor/templating";
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import '../components/logo';
-import '../components/footer';
+import '../components/logo.component';
+import '../components/footer.component';
 
 import './index.html';
 
-Template["public.index"].onCreated(function indexOnCreated() {
+const templateName = 'public.index';
+Template[templateName].onCreated(function indexOnCreated() {
     this.subscribe('count.users');
 });
 
-Template["public.index"].helpers({
+Template[templateName].helpers({
     countUsers() {
         return Counts.get('count.users');
     },
