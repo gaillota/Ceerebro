@@ -11,6 +11,7 @@ import {remove} from '../../../api/readings/methods';
 import './index.html';
 
 const templateName = 'rea.readings';
+
 Template[templateName].onCreated(function readingsCreated() {
     this.subscribe('readings');
 });

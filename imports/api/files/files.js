@@ -45,7 +45,7 @@ const schema = _extend(Files.schema, {
         type: Date,
         optional: true
     },
-    "meta.uploadedAt": defaultSchema.createdAt,
+    "meta.uploadedAt": defaultSchema('createdAt').createdAt,
 });
 
 Files.collection.attachSchema(new SimpleSchema(schema));

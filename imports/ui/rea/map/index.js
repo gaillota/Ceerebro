@@ -7,6 +7,7 @@ import './components/popup';
 import './index.html';
 
 const templateName = 'rea.map.index';
+
 Template[templateName].hooks({
     created() {
         this.location = new ReactiveVar();

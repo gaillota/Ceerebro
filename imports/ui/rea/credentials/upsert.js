@@ -10,7 +10,8 @@ import {upsert} from '../../../api/credentials/methods';
 import './upsert.html';
 
 const templateName = 'rea.credentials.upsert';
-Template[templateName].onCreated(function reaCredentialsEditCreated() {
+
+Template[templateName].onCreated(function () {
     this.getCredentialsId = () => FlowRouter.getParam('credentialsId');
 
     this.autorun(() => {

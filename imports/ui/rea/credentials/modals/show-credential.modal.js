@@ -7,15 +7,13 @@ import {hideCredentialModal} from '../../../../startup/utilities';
 
 import './show-credential.modal.html';
 
-const templateName = 'showCredentialModal';
+const templateName = 'show-credentials.modal';
+
 Template[templateName].onCreated(function showCredentialCreated() {
     this.getCredentialId = () => Session.get('credential.modal');
 });
 
 Template[templateName].helpers({
-    isActive() {
-        return Template.instance().getCredentialId() && 'is-active';
-    },
     credentials() {
         const credentials = Credentials.findOne(Template.instance().getCredentialId());
         if (!credentials) {

@@ -7,6 +7,7 @@ import {NotificationService} from "../../../startup/services";
 import './index.html';
 
 const templateName = 'rea.profile';
+
 Template[templateName].events({
     'click .js-harakiri'(event) {
         event.preventDefault();

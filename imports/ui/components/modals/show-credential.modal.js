@@ -7,7 +7,7 @@ import {hideCredentialModal} from '../../../startup/utilities';
 
 import './show-credential.modal.html';
 
-const templateName = 'showCredentialModal';
+const templateName = 'show-credentials.modal';
 Template[templateName].onCreated(function showCredentialCreated() {
     this.getCredentialId = () => Session.get('credential.modal');
 });

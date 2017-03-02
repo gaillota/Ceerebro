@@ -8,6 +8,7 @@ import {ReadingsForm} from '../../../startup/common/forms/readings/readings.form
 import './edit.html';
 
 const templateName = 'rea.readings.edit';
+
 Template[templateName].helpers({
     readingsForm() {
         return ReadingsForm;

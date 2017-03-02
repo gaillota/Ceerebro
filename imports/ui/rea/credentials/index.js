@@ -15,9 +15,9 @@ import './index.html';
 import './modals/show-credential.modal.js';
 
 const templateName = 'rea.credentials.index';
-Template[templateName].onCreated(function credentialsCreated() {
+
+Template[templateName].onCreated(function () {
     this.subscribe('credentials');
-    this.subscribe('favicons');
 
     this.search = new ReactiveVar();
 });

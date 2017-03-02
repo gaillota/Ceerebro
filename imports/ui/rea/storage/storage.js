@@ -9,6 +9,7 @@ import {create} from '../../../api/folders/methods';
 import './storage.html';
 
 const templateName = 'rea.storage';
+
 Template[templateName].onCreated(function () {
     this.getFolderId = () => FlowRouter.getParam('folderId');
 

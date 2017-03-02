@@ -7,6 +7,7 @@ import {schema as ReadingsForm} from '../../../startup/common/forms/readings/rea
 import './add.html';
 
 const templateName = 'rea.readings.add';
+
 Template[templateName].helpers({
     readingsForm() {
         return ReadingsForm;

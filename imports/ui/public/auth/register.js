@@ -7,6 +7,7 @@ import {RegistrationForm} from '../../../startup/common/forms/auth/registration.
 import './register.html';
 
 const templateName = 'public.auth.register';
+
 Template[templateName].helpers({
     registrationForm() {
         return RegistrationForm;

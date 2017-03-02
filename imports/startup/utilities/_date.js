@@ -3,7 +3,7 @@ import {moment} from 'meteor/momentjs:moment';
 /**
  * Date helpers
  */
-export const formatDate = (date) => {
+export const formatDate = (date, format) => {
     if (!date) {
         return '-1';
     }

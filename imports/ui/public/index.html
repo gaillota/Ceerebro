@@ -1,32 +1,5 @@
 <template name="public.index">
     <section class="hero is-dark is-large header-image">
-        <div class="hero-head">
-            <header class="nav">
-                <div class="container">
-                    <div class="nav-left">
-                        <a class="nav-item is-brand" href="{{pathFor 'public.index'}}">
-                            {{> logo}}
-                        </a>
-                    </div>
-                    <span class="nav-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                      </span>
-                    <div class="nav-right nav-menu">
-                        <a href="{{pathFor 'public.auth.login'}}" class="nav-item">
-                            <span>Login</span>
-                        </a>
-                        <span class="nav-item">
-                          <a href="{{pathFor 'public.auth.register'}}"
-                             class="button is-primary is-outlined is-inverted">
-                              <span>Register</span>
-                          </a>
-                        </span>
-                    </div>
-                </div>
-            </header>
-        </div>
         <div class="hero-body">
             <div class="container has-text-centered">
                 <h1 class="title is-2">

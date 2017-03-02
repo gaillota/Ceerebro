@@ -1,46 +1,7 @@
 <template name="public.auth.register">
-    <section class="hero">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns">
-                    <div class="column is-4 is-offset-4">
-                        <h1 class="title">{{> icon name='registered' size='is-medium'}} Register an account</h1>
-                        <div class="box">
-                            {{#autoForm schema=registrationForm id="public.auth.register.form" type="method" meteormethod="user.register"}}
-                                <label class="label">{{afFieldLabelText name="username"}}</label>
-                                <p class="control">
-                                    {{> afFieldInput name="username" class="input"}}
-                                    <span class="help is-danger">{{{afFieldMessage name='username'}}}</span>
-                                </p>
-                                <label class="label">{{afFieldLabelText name="email"}}</label>
-                                <p class="control">
-                                    {{> afFieldInput name="email" class="input"}}
-                                    <span class="help is-danger">{{{afFieldMessage name='email'}}}</span>
-                                </p>
-                                <label class="label">{{afFieldLabelText name="password"}}</label>
-                                <p class="control">
-                                    {{> afFieldInput name="password" class="input"}}
-                                    <span class="help is-danger">{{{afFieldMessage name='password'}}}</span>
-                                </p>
-                                <label class="label">{{afFieldLabelText name="confirm"}}</label>
-                                <p class="control">
-                                    {{> afFieldInput name="confirm" class="input"}}
-                                    <span class="help is-danger">{{{afFieldMessage name='confirm'}}}</span>
-                                </p>
-                                <hr>
-                                <p class="control">
-                                    <button type="submit" class="button is-primary">
-                                        Register
-                                    </button>
-                                    <a href="{{pathFor 'public.index'}}" class="button is-danger">
-                                        Cancel
-                                    </a>
-                                </p>
-                            {{/autoForm}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="container">
+        <h1>Register</h1>
+        <hr>
+        {{> quickForm schema=registrationForm id="public.auth.register.form" type="method" meteormethod="user.register"}}
+    </div>
 </template>

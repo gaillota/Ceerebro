@@ -1,13 +1,16 @@
+import {Meteor} from 'meteor/meteor';
 import {Blaze} from 'meteor/blaze';
-import 'leaflet';
-import 'leaflet-providers';
-import 'leaflet-easybutton';
-import 'leaflet.markercluster';
-import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
-import 'leaflet.markercluster/dist/MarkerCluster.css';
 
 export const MapService = (function () {
     const config = Meteor.settings.public.api.mapBox;
+    if (Meteor.isClient) {
+        require('leaflet');
+        require('leaflet-providers');
+        require('leaflet-easybutton');
+        require('leaflet.markercluster');
+        require('leaflet.markercluster/dist/MarkerCluster.Default.css');
+        require('leaflet.markercluster/dist/MarkerCluster.css');
+    }
 
     /**
      * Load map into the HTML element with {selector} as id

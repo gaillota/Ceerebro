@@ -8,23 +8,9 @@ import {showMasterPasswordModal, removeMasterKey} from '../../startup/utilities'
 
 import './navbar.component.html';
 
-Template["navbar"].onCreated(function onCreatedFunction() {
-    this.state = new ReactiveDict();
-    this.state.set('navbar-toggle', false);
-});
+const templateName = 'navbar';
 
-Template["navbar"].helpers({
-    navbarToggle() {
-        return Template.instance().state.get('navbar-toggle') && 'is-active';
-    }
-});
-
-Template["navbar"].events({
-    'click #nav-toggle'(event, instance) {
-        event.preventDefault();
-
-        instance.state.set('navbar-toggle', !instance.state.get('navbar-toggle'));
-    },
+Template[templateName].events({
     'click .js-set-master-key'(event) {
         event.preventDefault();
 

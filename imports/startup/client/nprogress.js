@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor';
 import {DDP} from 'meteor/ddp-client';
 import {NProgress} from 'meteor/mrt:nprogress';
 import {_} from 'lodash';
@@ -6,9 +7,9 @@ import {_} from 'lodash';
 const isMeteorSubscription = name => name.indexOf("meteor.") === 0 || name.indexOf("meteor_") === 0;
 
 Meteor.startup(() => {
-    Meteor._subscribe = Meteor.subscribe;
+    Meteor.originalSubscribe = Meteor.subscribe;
 
-    Meteor.subscribe = (subscribeName) => {
+    Meteor.subscribe = function (subscribeName) {
         if (subscribeName && !isMeteorSubscription(subscribeName)) {
             //preserves original onReady and onError functions
             let newArgs = arguments;
@@ -64,11 +65,11 @@ Meteor.startup(() => {
                     }
                 }, 80);
             }
-            return Meteor._subscribe.apply(this, newArgs);
+            return Meteor.originalSubscribe.apply(this, newArgs);
         }
     };
 
     Meteor.withoutBar = {
-        subscribe: Meteor._subscribe
+        subscribe: Meteor.originalSubscribe
     };
 });

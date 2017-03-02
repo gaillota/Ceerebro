@@ -5,23 +5,18 @@
     {{#if loggingIn}}
         {{> loading}}
     {{else}}
-        {{#if Template.subscriptionsReady}}
-            <!--Template-->
-            {{> Template.dynamic template=page}}
+        <!--Template-->
+        {{> Template.dynamic template=page}}
 
-            <!--Footer component-->
-            {{> footer}}
-
-            <!--Modals components-->
-            {{#if currentUser}}
-                {{> masterPasswordModal}}
-                {{> showCredentialModal}}
-            {{/if}}
-        {{else}}
-            {{> loading}}
-        {{/if}}
+        <!--Footer component-->
+        {{> footer}}
     {{/if}}
 
     <!--Alerts components-->
     {{> sAlert}}
+
+    <!--Modals components-->
+    {{#each modal in modals}}
+        {{> Template.dynamic template=modal}}
+    {{/each}}
 </template>

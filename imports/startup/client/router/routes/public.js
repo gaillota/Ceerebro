@@ -13,6 +13,6 @@ FlowRouter.route('/', {
         }
     }],
     action() {
-        BlazeLayout.render('public.index');
+        BlazeLayout.render('layout', {page:'public.index'});
     }
 });

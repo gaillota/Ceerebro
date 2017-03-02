@@ -10,6 +10,7 @@ import {LoginForm} from '../../../startup/common/forms/auth/login.form';
 import './login.html';
 
 const templateName = 'public.auth.login';
+
 Template[templateName].helpers({
     loginForm() {
         return LoginForm;

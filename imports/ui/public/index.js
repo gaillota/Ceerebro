@@ -1,13 +1,13 @@
 import {Template} from "meteor/templating";
 import {Counts} from 'meteor/tmeasday:publish-counts';
 
-import '../components/logo.component';
 import '../components/footer.component';
 
 import './index.html';
 
 const templateName = 'public.index';
-Template[templateName].onCreated(function indexOnCreated() {
+
+Template[templateName].onCreated(function () {
     this.subscribe('count.users');
 });
 
