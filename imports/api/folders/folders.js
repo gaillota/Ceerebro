@@ -15,7 +15,7 @@ Folders.schema = new SimpleSchema({
         type: String,
         max: 255
     },
-    ...idSchema("parentId"),
+    ...idSchema("parentId", true),
     foldersCount: countSchema,
     filesCount: countSchema
 });

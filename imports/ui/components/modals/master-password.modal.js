@@ -3,8 +3,6 @@ import {AutoForm} from 'meteor/aldeed:autoform';
 import {Session} from 'meteor/session';
 import {CryptoJS} from 'meteor/jparker:crypto-core';
 
-import './master-password.modal.html';
-
 import {MasterPasswordForm} from '../../../startup/common/forms/global/master-password.form';
 import {EncryptionService} from '../../../startup/services';
 import {
@@ -16,6 +14,8 @@ import {
     hidePasswordError,
     hasPasswordError
 } from '../../../startup/utilities';
+
+import './master-password.modal.html';
 
 const templateName  = 'master-password.modal';
 
