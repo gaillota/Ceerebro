@@ -1,8 +1,10 @@
 <template name="rea.storage">
     <div class="container">
         <h1>
-            {{> icon name='dropbox'}} Storage
-            <small>(size)</small>
+            {{#with folder}}
+                {{> icon name=folderIcon}} {{folderName}}
+                <small>(size)</small>
+            {{/with}}
         </h1>
         <hr>
         <div class="row">
@@ -13,7 +15,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="#">{{> icon name='file-o'}} File</a></li>
-                        <li><a href="#">{{> icon name='folder-o'}} Folder</a></li>
+                        <li><a href="#" class="js-new-folder">{{> icon name='folder-o'}} Folder</a></li>
                         <li><a href="#">{{> icon name='pencil'}} Note</a></li>
                     </ul>
                 </div>
@@ -25,4 +27,6 @@
             </div>
         </div>
     </div>
+
+    {{> folderModal}}
 </template>

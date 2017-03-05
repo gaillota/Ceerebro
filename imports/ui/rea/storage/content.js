@@ -1,39 +1,54 @@
 import {Template} from "meteor/templating";
 
-import {Folders} from '../../../api/folders/folders';
 import {Files} from '../../../api/files/files';
+import {FolderRepository} from '../../../startup/repositories';
+import {remove} from '../../../api/folders/methods';
+import {showModal} from '../../../startup/utilities';
 
 import './content.html';
 
 const templateName = 'rea.storage.content';
 
+Template[templateName].hooks({
+    created() {
+        this.getFolderId = () => Template.currentData().folderId;
+    }
+});
+
 Template[templateName].helpers({
-    folderName() {
-        const folderId = Template.currentData().folderId;
-        const folder = Folders.findOne(folderId);
-
-        return (folder && folder.name) || 'Root';
-    },
     folders() {
-        const folderId = Template.currentData().folderId;
-
-        console.log('folderId', folderId);
-        console.log('parentId', folderId || {$exists: false});
-        console.log('folders count', Folders.find().count());
-
-        return Folders.find({
-            parentId: folderId || {$exists: false}
-        }, {
-            sort: {
-                name: 1
+        return FolderRepository.findFoldersIn({
+            folderId: Template.instance().getFolderId(),
+            ownerId: Meteor.userId(),
+            projection: {
+                sort: {
+                    name: 1
+                }
             }
         });
     },
     files() {
-        const folderId = Template.currentData().folderId;
+        const folderId = Template.instance().getFolderId();
 
         return Files.collection.find({
             "meta.folderId": folderId || {$exists: false}
         });
+    }
+});
+
+Template[templateName].events({
+    'click .js-folder-edit'(event) {
+        event.preventDefault();
+
+        showModal('folderModal', {folderId: this._id});
+    },
+    'click .js-folder-remove'(event) {
+        event.preventDefault();
+
+        if (confirm('Are you sure ?')) {
+            remove.call({
+                folderId: this._id
+            });
+        }
     }
 });

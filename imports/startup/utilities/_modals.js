@@ -19,5 +19,5 @@ export const hideCredentialModal = () => Modal.hide(credentialsModalName);
 /**
  * Modal helpers
  */
-// export const toggleModal = (modal, data) => Session.set(`${modal}.active`, data || !getModalData(modal));
-// export const getModalData = modal => Session.get(`${modal}.active`);
+export const showModal = (modal, data) => Modal.show(modal, data);
+export const hideModal = modal => Modal.hide(modal);

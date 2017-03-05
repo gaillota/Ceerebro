@@ -3,15 +3,18 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {AutoForm} from 'meteor/aldeed:autoform';
 
 import {Folders} from '../../../api/folders/folders';
-// import {create} from '../../../api/folders/methods';
+import {showModal} from '../../../startup/utilities';
 
 import './content';
+import './modals/folder.modal';
+
 import './storage.html';
 
 const templateName = 'rea.storage';
 
 Template[templateName].onCreated(function () {
     this.getFolderId = () => FlowRouter.getParam('folderId');
+    this.getFolder = () => Folders.findOne(this.getFolderId());
 
     this.autorun(() => {
         this.subscribe('folder', this.getFolderId());
@@ -21,11 +24,20 @@ Template[templateName].onCreated(function () {
 });
 
 Template[templateName].helpers({
+    folder() {
+        const template = Template.instance();
+        const folder = template.getFolder();
+
+        return {
+            folderName: folder && folder.name || 'Storage',
+            folderIcon: (folder && 'folder') || 'dropbox'
+        }
+    },
     folderIdArray() {
         const template = Template.instance();
         const folderId = template.getFolderId();
 
-        return Folders.findOne(folderId) ? [folderId] : [0];
+        return folderId ? [folderId] : [0];
     },
     folderData(folderId) {
         const template = Template.instance();
@@ -36,16 +48,11 @@ Template[templateName].helpers({
         }
     }
 });
-//
-// AutoForm.addHooks('rea.storage.folder', {
-//     onSubmit(doc) {
-//         this.event.preventDefault();
-//
-//         const folderId = FlowRouter.getParam('folderId');
-//         if (folderId) {
-//             doc.folderId = folderId;
-//         }
-//
-//         create.call(doc, this.done);
-//     }
-// });
+
+Template[templateName].events({
+    'click .js-new-folder'(event) {
+        event.preventDefault();
+
+        showModal('folderModal');
+    }
+});

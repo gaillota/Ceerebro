@@ -6,14 +6,15 @@ import {FolderForm} from '../../startup/common/forms/storage/folder.form';
 import {idSchema} from '../helpers';
 
 const mixins = ValidatedMethod.mixins;
-const FOLDER_ID_REQUIRED = idSchema("folderId");
-const PARENT_ID_REQUIRED = idSchema("parentId");
+const FOLDER_ID = idSchema('folderId', true);
+const FOLDER_ID_REQUIRED = idSchema('folderId');
+const PARENT_ID = idSchema('parentId', true);
 
-export const create = new ValidatedMethod({
-    name: 'folders.create',
+export const upsert = new ValidatedMethod({
+    name: 'folders.upsert',
     mixins: [mixins.isLoggedIn, mixins.schema],
-    schema: [FolderForm, idSchema("parentId", true)],
-    run({name, parentId}) {
+    schema: [FOLDER_ID, PARENT_ID, FolderForm],
+    run({folderId, parentId, name}) {
         const folder = {
             name
         };
@@ -22,40 +23,25 @@ export const create = new ValidatedMethod({
             folder.parentId = parentId
         }
 
-        return Folders.insert(folder);
-    }
-});
+        // Separated insert and update (instead of a single upsert) because of schema cleaning
+        if (folderId) {
+            if (!Folders.findOne(folderId).isOwner(this.userId)) {
+                throw new Meteor.Error("not-authorized", "You can only update your own folders");
+            }
 
-export const update = new ValidatedMethod({
-    name: 'folders.update',
-    mixins: [mixins.isLoggedIn, mixins.schema, mixins.restrict, mixins.provide],
-    schema: [FOLDER_ID_REQUIRED, FolderForm],
-    provide: function({folderId}) {
-        return Folders.findOne(folderId);
-    },
-    restrictions: [
-        {
-            condition: function(args, folder) {
-                return folder.ownerId !== this.userId;
-            },
-            error: function() {
-                return new Meteor.Error("not-authorized", "You can only modify your own folders");
-            }
+            return Folders.update(folderId, {
+                $set: folder
+            });
         }
-    ],
-    run({folderId, name}) {
-        return Folders.update(folderId, {
-            $set: {
-                name
-            }
-        });
+
+        return Folders.insert(folder);
     }
 });
 
 export const move = new ValidatedMethod({
     name: 'folders.move',
     mixins: [mixins.isLoggedIn, mixins.schema, mixins.restrict, mixins.provide],
-    schema: [FOLDER_ID_REQUIRED, PARENT_ID_REQUIRED],
+    schema: [FOLDER_ID_REQUIRED],
     provide: function({folderId}) {
         return Folders.findOne(folderId);
     },

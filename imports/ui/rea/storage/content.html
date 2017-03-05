@@ -1,5 +1,5 @@
 <template name="rea.storage.content">
-    <p>{{folderName}} (Options bar goes here)</p>
+    <p>(Options bar goes here)</p>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -24,11 +24,39 @@
                     </td>
                     <td>0 Mo</td>
                     <td>{{formatDate createdAt}}</td>
-                    <td></td>
+                    <td>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                    {{> icon name='cogs'}}<span class="hidden-xs"> Actions</span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a href="#" class="js-folder-edit">
+                                            {{> icon name='edit'}}
+                                            <span class="hidden-xs">Edit</span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="#" class="js-folder-remove">
+                                            {{> icon name='trash'}}
+                                            <span class="hidden-xs">Remove</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             {{/each}}
         {{else}}
-            {{> loading}}
+            <tr>
+                <td colspan="5">
+                    {{> loading}}
+                </td>
+            </tr>
         {{/if}}
         </tbody>
     </table>
