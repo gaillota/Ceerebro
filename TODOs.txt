@@ -1,6 +1,7 @@
-- Update templates with BT
+- Update templates with BT X
 - Refactor publish with repositories
-- Use service for modals
+- Use service for modals X
 - Use templateName X
 - Template helpers X
 - Change password
+- SearchEngine

@@ -1,79 +1,51 @@
 import {Meteor} from 'meteor/meteor';
 import {AutoForm} from 'meteor/aldeed:autoform';
-import {Session} from 'meteor/session';
-import {CryptoJS} from 'meteor/jparker:crypto-core';
+import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 
 import {MasterPasswordForm} from '../../../startup/common/forms/global/master-password.form';
 import {EncryptionService} from '../../../startup/services';
 import {
     setMasterKey,
-    hideMasterPasswordModal,
-    showCredentialModal,
-    isMasterPasswordModalVisible,
-    showPasswordError,
-    hidePasswordError,
-    hasPasswordError
+    getCredentialsOnHold,
+    setCredentialsOnHold,
+    showCredentialModalFor
 } from '../../../startup/utilities';
 
 import './master-password.modal.html';
 
-const templateName  = 'master-password.modal';
-
-Template[templateName].onRendered(function masterPasswordModalRendered() {
-    // Add focus on input
-});
+const templateName  = 'masterPasswordModal';
 
 Template[templateName].helpers({
-    isActive() {
-        return isMasterPasswordModalVisible() && 'is-active';
+    modalId() {
+        return templateName;
     },
     masterPasswordForm() {
         return MasterPasswordForm;
-    },
-    hasPasswordError() {
-        return hasPasswordError();
     }
 });
 
-Template[templateName].events({
-    'click .modal-background, click .modal-close'(event) {
-        event.preventDefault();
-
-        hideMasterPasswordModal();
-    },
-    'click .js-notification-delete'() {
-        hidePasswordError();
-    }
-});
+// Template[templateName].events({
+//     'click .modal-background, click .modal-close'(event) {
+//         event.preventDefault();
+//
+//         hideMasterPasswordModal();
+//     }
+// });
 
 AutoForm.addHooks('masterPasswordForm', {
-    onSubmit(doc) {
+    onSubmit({password}) {
         this.event.preventDefault();
 
-        const keychain = Meteor.user().keychain;
-        const pbk = EncryptionService.generatePasswordBasedKey(doc.password, keychain.salt);
-        const pvaek = EncryptionService.splitKeyInHalf(pbk);
-
-        if (keychain.passwordValidator !== pvaek.passwordValidator) {
-            this.done(new Error("Surprise madafaka !"));
-            showPasswordError();
-            return;
-        }
-
-        const masterKey = CryptoJS.AES.decrypt(keychain.masterKey, pvaek.key).toString(CryptoJS.enc.Utf8);
-
+        EncryptionService.decryptMasterPassword({password}, this.done);
+    },
+    onSuccess(formType, {masterKey}) {
         setMasterKey(masterKey);
-        hideMasterPasswordModal();
-        hidePasswordError();
+        Modal.hide(templateName);
 
-        this.done();
-
-        if (Session.get('passwordOnHold')) {
-            Meteor.setTimeout(function () {
-                const credentialId = Session.get('passwordOnHold');
-
-                showCredentialModal(credentialId);
-                Session.set('passwordOnHold', undefined);
+        if (getCredentialsOnHold()) {
+            Meteor.setTimeout(() => {
+                showCredentialModalFor(getCredentialsOnHold());
+                setCredentialsOnHold(undefined);
             }, 500);
         }
     }

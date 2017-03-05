@@ -4,12 +4,13 @@ import {Counts} from 'meteor/tmeasday:publish-counts';
 import {Roles} from 'meteor/alanning:roles';
 
 import {Credentials} from "../../../api/credentials/credentials";
-import {activate, toggleStatus, makeAdmin} from '../../../api/users/methods';
+import {activate, toggleStatus} from '../../../api/users/methods';
 import {NotificationService} from '../../../startup/services';
 
 import './users.html';
 
 const templateName = 'admin.users';
+
 Template[templateName].onCreated(function adminAccountsCreated() {
     this.subscribe('admin.users');
 });
@@ -32,20 +33,17 @@ Template[templateName].helpers({
         }).count();
     },
     adminTag() {
-        return Roles.userIsInRole(this._id, 'admin') && 'is-info';
+        return Roles.userIsInRole(this._id, 'admin') && 'label-info';
     },
     emailNotVerified() {
         return !this.emails[0].verified;
     },
     statusButtonColor() {
-        return !!this.disabled ? 'is-success' : 'is-danger';
+        return !!this.disabled ? 'btn-success' : 'btn-danger';
     },
     statusButtonText() {
         return !!this.disabled ? 'Unban' : 'Ban';
     },
-    notAdmin() {
-        return !Roles.userIsInRole(this._id, 'admin');
-    }
 });
 
 Template[templateName].events({
@@ -63,11 +61,4 @@ Template[templateName].events({
             }
         });
     },
-    'click .js-make-admin'() {
-        makeAdmin.call({userId: this._id}, (error) => {
-            if (error) {
-                NotificationService.error(error.toString());
-            }
-        });
-    }
 });

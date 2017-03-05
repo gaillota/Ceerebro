@@ -1,7 +1,5 @@
-import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
-import {HTTP} from 'meteor/http';
 
 import {denyAll, defaultSchema} from '../common';
 
@@ -11,7 +9,7 @@ export const Credentials = new Mongo.Collection("credentials");
 Credentials.deny(denyAll);
 
 Credentials.schema = new SimpleSchema({
-    ...defaultSchema(),
+    ...defaultSchema,
     domain: {
         type: String
     },
@@ -32,20 +30,4 @@ Credentials.helpers({
     isOwner(userId) {
         return this.ownerId = userId;
     },
-    favicon() {
-        let url = this.domain;
-        if (!/http/i.test(url)) {
-            url = 'http://' + url;
-        }
-        url = url + '/favicon.ico';
-
-        HTTP.get(url, (error, result) => {
-            // Handle error
-        });
-
-        return {
-            link: url,
-            name: this.domain
-        };
-    }
 });

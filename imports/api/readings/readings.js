@@ -9,7 +9,7 @@ export const Readings = new Mongo.Collection("readings");
 Readings.deny(denyAll);
 
 Readings.schema = new SimpleSchema({
-    ...defaultSchema(),
+    ...defaultSchema,
     value: {
         type: Number,
         decimal: true,

@@ -1,0 +1,35 @@
+<template name="rea.storage.content">
+    <p>{{folderName}} (Options bar goes here)</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Size</th>
+            <th>Uploaded at</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#if foldersReady}}
+            {{#each folders}}
+                <tr>
+                    <td>
+                        {{> icon name='folder'}}
+                    </td>
+                    <td>
+                        <a href="{{pathFor 'rea.storage.folder' folderId=_id}}">
+                            {{name}}
+                        </a>
+                    </td>
+                    <td>0 Mo</td>
+                    <td>{{formatDate createdAt}}</td>
+                    <td></td>
+                </tr>
+            {{/each}}
+        {{else}}
+            {{> loading}}
+        {{/if}}
+        </tbody>
+    </table>
+</template>

@@ -3,12 +3,12 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Accounts} from 'meteor/accounts-base';
 
-import {NotificationService} from '../../../services';
-import {resetDispatcher} from '../../../utilities';
+import {NotificationService} from '../../../../services';
+import {resetDispatcher} from '../../../../utilities';
 
-import '../../../../ui/layout';
-import '../../../../ui/public/auth/register';
-import '../../../../ui/public/auth/login';
+import '../../../../../ui/layout';
+import '../../../../../ui/public/auth/register';
+import '../../../../../ui/public/auth/login';
 
 
 FlowRouter.route('/login', {

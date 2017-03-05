@@ -1,17 +1,17 @@
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 
-import '../../../../ui/layout';
+import '../../../../../ui/layout';
 
-import '../../../../ui/admin/index';
-import '../../../../ui/admin/tabs/index';
+import '../../../../../ui/admin';
+import '../../../../../ui/admin/sections';
 
-export const adminRoutes = [
+export const routes = [
     {
         path: '/users',
         name: 'admin.users',
         template: 'admin.users',
-        text: 'Users',
+        friendlyName: 'Users',
         default: true
     }
 ];
@@ -21,7 +21,7 @@ const adminGroup = FlowRouter.group({
     triggersEnter: [FlowRouter.triggersFunctions.isAdmin]
 });
 
-adminRoutes.forEach((route) => {
+routes.forEach((route) => {
     if (route.default) {
         adminGroup.route('/', {
             name: 'admin.index',

@@ -1,10 +1,10 @@
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 
-import '../../../../ui/layout';
+import '../../../../../ui/layout';
 
-import '../../../../ui/rea/credentials/index';
-import '../../../../ui/rea/credentials/upsert';
+import '../../../../../ui/rea/credentials/index';
+import '../../../../../ui/rea/credentials/upsert';
 
 const credentialsRoutes = FlowRouter.group({
     prefix: '/credentials',

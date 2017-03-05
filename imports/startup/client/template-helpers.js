@@ -2,6 +2,7 @@ import {Template} from 'meteor/templating';
 import {moment} from 'meteor/momentjs:moment';
 import {_} from 'lodash';
 
+import {userStatusIcons as icons} from './constants';
 import {hasRole, formatDate, formatDateRelative} from '../utilities';
 
 const helpers = {
@@ -35,24 +36,6 @@ const helpers = {
         return count > 1 ? singular + 's' : singular;
     },
     userStatus(user = this) {
-        const icons = {
-            DISABLED: {
-                type: 'danger',
-                icon: 'user-times',
-                text: 'Banned'
-            },
-            VERIFIED: {
-                type: 'success',
-                icon: 'check',
-                text: 'Active'
-            },
-            WAITING: {
-                type: 'warning',
-                icon: 'clock-o',
-                text: 'Waiting...'
-            }
-        };
-
         return user.disabled ? icons.DISABLED : user.emails[0].verified ? icons.VERIFIED : icons.WAITING;
     },
     connectionStatusColor() {

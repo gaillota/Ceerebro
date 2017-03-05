@@ -16,7 +16,7 @@ FlowRouter.triggersFunctions = {
     isAdmin(context, redirect) {
         if (!Meteor.loggingIn() && !Roles.userIsInRole(Meteor.userId(), 'ADMIN')) {
             NotificationService.error('You must be admin to access this section.');
-            redirect('rea.index');
+            redirect('public.index');
         }
     }
 };

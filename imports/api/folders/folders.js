@@ -10,7 +10,7 @@ export const Folders = new Mongo.Collection("folders");
 Folders.deny(denyAll);
 
 Folders.schema = new SimpleSchema({
-    ...defaultSchema(),
+    ...defaultSchema,
     name: {
         type: String,
         max: 255
@@ -38,7 +38,11 @@ Folders.helpers({
     folders() {
         return Folders.find({
             ownerId: this.ownerId,
-            parentId: this._id
+            parentId: this._id || {$exists: false}
+        }, {
+            sort: {
+                name: 1
+            }
         });
     }
 });

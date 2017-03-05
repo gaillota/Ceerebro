@@ -1,31 +1,23 @@
 import {Meteor} from 'meteor/meteor';
 import {Session} from 'meteor/session';
+import {Modal} from 'meteor/peppelg:bootstrap-3-modal';
 
 /**
  * Master password modal helpers
  */
-const masterPasswordModalName = 'master-password.modal';
-export const showMasterPasswordModal = () => toggleModal(masterPasswordModalName);
-export const hideMasterPasswordModal = () => toggleModal(masterPasswordModalName);
-export const isMasterPasswordModalVisible = () => getModalData(masterPasswordModalName);
-
-export const showPasswordError = () => {
-    Session.set('master-password.error', true);
-    Meteor.setTimeout(hidePasswordError, 5000);
-};
-
-export const hidePasswordError = () => Session.set('master-password.error', undefined);
-
-export const hasPasswordError = () => Session.get('master-password.error');
+const masterPasswordModalName = 'masterPasswordModal';
+export const showMasterPasswordModal = () => Modal.show(masterPasswordModalName);
+export const hideMasterPasswordModal = () => Modal.hide(masterPasswordModalName);
 
 /**
  * Credential modal helpers
  */
-export const showCredentialModal = (credentialId) => toggleModal('credential.modal', credentialId);
-export const hideCredentialModal = () => toggleModal('credential.modal');
+const credentialsModalName = 'credentialsModal';
+export const showCredentialModalFor = (credentialId) => Modal.show(credentialsModalName, credentialId);
+export const hideCredentialModal = () => Modal.hide(credentialsModalName);
 
 /**
  * Modal helpers
  */
-export const toggleModal = (modal, data) => Session.set(`${modal}.active`, data || !getModalData(modal));
-export const getModalData = modal => Session.get(`${modal}.active`);
+// export const toggleModal = (modal, data) => Session.set(`${modal}.active`, data || !getModalData(modal));
+// export const getModalData = modal => Session.get(`${modal}.active`);

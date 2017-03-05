@@ -1,20 +1,6 @@
 <template name="admin.index">
     <section class="section">
-        <div class="container">
-            <h1 class="title">
-                {{> icon name='terminal'}}
-                <span>Administration</span>
-            </h1>
-            <div class="tabs is-centered">
-                <ul>
-                    {{#each tabs}}
-                        <li class="{{isActiveTab}}">
-                            <a href="{{pathFor name}}">{{text}} {{count}}</a>
-                        </li>
-                    {{/each}}
-                </ul>
-            </div>
-            {{> Template.dynamic template=tab}}
-        </div>
+        {{> Template.dynamic template='admin.component.menu'}}
+        {{> Template.dynamic template=tab}}
     </section>
 </template>

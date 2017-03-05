@@ -1,0 +1,66 @@
+<template name="admin.users">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>Email address</th>
+                    <th>Created at</th>
+                    <th>Status</th>
+                    <th>Last conn.</th>
+                    <th># cred.</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each users}}
+                    <tr>
+                        <td class="text-center">
+                            <i class="fa fa-circle" style="color: {{connectionStatusColor}};"></i>
+                        </td>
+                        <td>
+                        <span class="label {{adminTag}}">
+                            {{username}}
+                        </span>
+                        </td>
+                        <td>{{emails.[0].address}}</td>
+                        <td>{{formatDate createdAt}}</td>
+                        <td>
+                            {{#with userStatus}}
+                                <span class="label label-{{type}}">
+                                    {{> icon name=icon}} {{text}}
+                                </span>
+                            {{/with}}
+                        </td>
+                        <td>
+                            {{formatDate lastConnectionAt}}
+                        </td>
+                        <td>{{credentialsCount}}</td>
+                        <td>
+                            <div class="pull-right">
+                                {{#if emailNotVerified}}
+                                    <button type="button" class="btn btn-success btn-xs js-activate">
+                                        {{> icon name='check'}}
+                                        <span class="hidden-xs">Activate</span>
+                                    </button>
+                                {{/if}}
+                                <button type="button" class="{{statusButtonColor}}                          ">
+                                    {{> icon name='user-times'}}
+                                    <span class="hidden-xs">{{statusButtonText}}</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{#if isEmpty users}}
+            <h5 class="text-center">
+                No users for now...
+            </h5>
+        {{/if}}
+    </div>
+</template>

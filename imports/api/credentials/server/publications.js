@@ -18,3 +18,9 @@ Meteor.publishComposite('credential', (credentialsId) => {
         }
     };
 });
+
+Meteor.publish('credentials.count', function() {
+    this.ready();
+
+    Counts.publish(this, 'credentials.count', Credentials.find({ownerId: this.userId}));
+});

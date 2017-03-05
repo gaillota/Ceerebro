@@ -38,13 +38,14 @@ export const register = new ValidatedMethod({
     run(doc) {
         // Create new user
         const newUserId = Accounts.createUser(doc);
+        const {password} = doc;
 
         if (!this.isSimulation) {
             // Send verification e-mail
             Accounts.sendVerificationEmail(newUserId);
         }
 
-        EncryptionService.setupUserKeychain(doc.password, (keychain) => {
+        EncryptionService.setupUserKeychain({password}, (keychain) => {
             // Set the user's keychain
             Meteor.users.update({
                 _id: newUserId
@@ -67,8 +68,8 @@ export const harakiri = new ValidatedMethod({
             type: String
         }
     },
-    run({ digest }) {
-        const result = Accounts._checkPassword(this.userId, { digest: digest, algorithm: 'sha-256' });
+    run({digest}) {
+        const result = Accounts._checkPassword(this.userId, {digest: digest, algorithm: 'sha-256'});
         if (result.error) {
             throw new Meteor.Error(403, 'Wrong password');
         }

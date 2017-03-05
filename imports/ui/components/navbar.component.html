@@ -19,28 +19,28 @@
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
                         <li class="{{isActiveRoute regex='storage'}}">
-                            <a href="{{pathFor 'storage.root'}}">
+                            <a href="{{pathFor 'rea.storage.index'}}">
                                 {{> icon name='folder'}}
-                                <span class="is-hidden-mobile">Files</span>
+                                <span class="hidden-xs">Files</span>
                             </a>
                         </li>
                         <li class="{{isActiveRoute regex='credentials'}}">
                             <a href="{{pathFor 'rea.credentials.index'}}">
                                 {{> icon name='key'}}
-                                <span class="is-hidden-mobile">Credentials</span>
+                                <span class="hidden-xs">Credentials</span>
                             </a>
                         </li>
                         <li class="{{isActiveRoute regex='map'}}">
                             <a href="{{pathFor 'rea.map.index'}}">
                                 {{> icon name='map'}}
-                                <span class="is-hidden-mobile">Map</span>
+                                <span class="hidden-xs">Map</span>
                             </a>
                         </li>
                         {{#if isInRole 'admin'}}
                             <li class="{{isActiveRoute regex='admin'}}">
                                 <a href="{{pathFor 'admin.index'}}">
                                     {{> icon name='terminal'}}
-                                    <span class="hidden-mobile">Administration</span>
+                                    <span class="hidden-xs">Administration</span>
                                 </a>
                             </li>
                         {{/if}}
@@ -51,12 +51,12 @@
                     {{#with currentUser}}
                         <li>
                             {{#if masterKeyIsSet}}
-                                <a href="#" class="js-remove-master-key">
+                                <a href="#" type="button" class="js-remove-master-key">
                                     {{> icon name='times'}}
                                     <span>Remove master key</span>
                                 </a>
                             {{else}}
-                                <a href="#" class="js-set-master-key">
+                                <a href="#" type="button" class="js-set-master-key">
                                     {{> icon name='unlock-alt'}}
                                     <span>Set master key</span>
                                 </a>

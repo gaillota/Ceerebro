@@ -1,0 +1,14 @@
+<template name="admin.component.menu">
+    <div class="container">
+        <h1>
+            {{> icon name='terminal'}} Administration
+        </h1>
+        <ul class="nav nav-tabs nav-justified">
+            {{#each tabs}}
+                <li class="{{activeTab}}">
+                    <a href="{{pathFor name}}">{{friendlyName}}</a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</template>

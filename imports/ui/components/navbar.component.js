@@ -4,11 +4,18 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
 
 import {NotificationService} from '../../startup/services';
-import {showMasterPasswordModal, removeMasterKey} from '../../startup/utilities';
+import {LoginForm} from '../../startup/common/forms/auth/login.form';
+import {showMasterPasswordModal, setMasterKey} from '../../startup/utilities';
 
 import './navbar.component.html';
 
 const templateName = 'navbar';
+
+Template[templateName].helpers({
+    loginForm() {
+        return LoginForm;
+    }
+});
 
 Template[templateName].events({
     'click .js-set-master-key'(event) {
@@ -19,7 +26,7 @@ Template[templateName].events({
     'click .js-remove-master-key'(event) {
         event.preventDefault();
 
-        removeMasterKey();
+        setMasterKey(undefined);
     },
     'click .js-logout'(event) {
         event.preventDefault();
@@ -28,7 +35,7 @@ Template[templateName].events({
             if (error) {
                 NotificationService.error(error.toString());
             } else {
-                removeMasterKey();
+                setMasterKey(undefined);
                 FlowRouter.go('public.index');
             }
         });

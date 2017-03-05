@@ -1,69 +1,52 @@
 <template name="public.index">
-    <section class="hero is-dark is-large header-image">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title is-2">
-                    Safely store your credentials
-                </h1>
-                <h2 class="subtitle is-5">
-                    Ceerebro allows you to store every credentials used on your daily life.
-                </h2>
-                <p>
-                    <a href="{{pathFor 'public.auth.register'}}" class="button is-outlined is-large register-button">
-                        {{> icon name='registered'}}
-                        <span>
-                            Register
-                        </span>
-                    </a>
-                </p>
-            </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>
+                Safely store your credentials
+            </h1>
+            <h3>
+                Ceerebro allows you to store every credentials used on your daily life.
+            </h3>
+            <p>
+                <a href="{{pathFor 'public.auth.register'}}" class="btn btn-success btn-large">
+                    {{> icon name='registered'}}
+                    Register
+                </a>
+            </p>
         </div>
-    </section>
-    <section class="hero is-primary is-bold">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <p class="title">{{> icon name='users' size='is-medium'}} {{countUsers}} {{pluralize countUsers
-                                                                                                     'hooman'}} already
-                    trust Ceerebro.</p>
-            </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns is-multiline">
-                {{#each panelContent}}
-                    <div class="column is-3">
-                        <div class="card">
-                            <div class="card-content section">
-                                <p class="has-text-centered"><i class="fa fa-{{icon}} icon-block"></i></p>
-                                <h1 class="title has-text-centered">{{title}}</h1>
-                                <hr>
-                                <p>{{text}}</p>
-                            </div>
+        <h3 class="well well-lg text-center">
+            {{> icon name='users'}} {{countUsers}} {{pluralize countUsers 'hooman'}} already
+            trust Ceerebro.
+        </h3>
+        <div class="row">
+            {{#each panelContent}}
+                <div class="col-md-3 col-sm-6">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <p class="text-center">
+                                <i class="fa fa-{{icon}} icon-block"></i>
+                            </p>
+                            <h1 class="text-center">{{title}}</h1>
+                            <hr>
+                            <p>{{text}}</p>
                         </div>
                     </div>
-                {{/each}}
-            </div>
+                </div>
+            {{/each}}
         </div>
-    </section>
-    <section class="hero is-dark is-large algorithm-image">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <h1 class="title is-2">
-                    Curious about how Ceerebro works ?
-                </h1>
-                <h2 class="subtitle is-5">
-                    Ceerebro uses an open algorithm to encrypt every credentials stored.
-                </h2>
-                <p>
-                    <a href="{{pathFor 'public.about'}}" class="button is-info">
-                        <span>
-                          Find out more
-                        </span>
-                    </a>
-                </p>
-            </div>
+        <hr>
+        <div class="jumbotron text-center">
+            <h2>
+                Curious about how Ceerebro works ?
+            </h2>
+            <h4>
+                Ceerebro uses an open algorithm to encrypt every credentials stored.
+            </h4>
+            <p>
+                <a href="{{pathFor 'public.about'}}" class="btn btn-info">
+                    Find out more
+                </a>
+            </p>
         </div>
-    </section>
-    {{> footer}}
+    </div>
 </template>

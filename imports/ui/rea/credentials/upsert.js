@@ -20,6 +20,9 @@ Template[templateName].onCreated(function () {
 });
 
 Template[templateName].helpers({
+    action() {
+        return Template.instance().getCredentialsId() && 'Edit' || 'Add'
+    },
     credentialsForm() {
         return CredentialsForm;
     },
@@ -28,7 +31,7 @@ Template[templateName].helpers({
         if (!credentials) {
             return;
         }
-        credentials.password = EncryptionService.decrypt(credentials.password, credentials.iv);
+        credentials.password = EncryptionService.decryptPassword({encryptedPassword: credentials.password, iv: credentials.iv});
 
         return credentials;
     }
@@ -38,8 +41,8 @@ AutoForm.addHooks('rea.credentials.upsert.form', {
     onSubmit(doc) {
         this.event.preventDefault();
 
-        doc.iv = doc.iv || EncryptionService.generateKey(128);
-        doc.password = EncryptionService.encrypt(doc.password, doc.iv);
+        doc.iv = doc.iv || EncryptionService.generateKey({size: 128});
+        doc.password = EncryptionService.encryptPassword({password: doc.password, iv: doc.iv});
         doc.credentialsId = FlowRouter.getParam('credentialsId');
 
         upsert.call(doc, this.done);

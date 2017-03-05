@@ -1,8 +1,9 @@
+import {Meteor} from 'meteor/meteor';
 import {FilesCollection} from 'meteor/ostrio:files';
 import {SimpleSchema} from 'meteor/aldeed:simple-schema';
 import _extend from 'lodash/extend';
 
-import {denyAll, defaultSchema} from '../common';
+import {denyAll} from '../common';
 
 export const Files = new FilesCollection({
     collectionName: 'files',
@@ -23,7 +24,10 @@ export const Files = new FilesCollection({
     }
 });
 
-Files.deny(denyAll);
+if (Meteor.isServer) {
+    Files.deny(denyAll);
+}
+
 
 const schema = _extend(Files.schema, {
     // Overriding meta property
@@ -45,7 +49,15 @@ const schema = _extend(Files.schema, {
         type: Date,
         optional: true
     },
-    "meta.uploadedAt": defaultSchema('createdAt').createdAt,
+    "meta.uploadedAt": {
+        type: Date,
+        autoValue: function () {
+            if (this.isInsert && !this.isSet) {
+                return new Date();
+            }
+        },
+        denyUpdate: true
+    },
 });
 
 Files.collection.attachSchema(new SimpleSchema(schema));

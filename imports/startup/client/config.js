@@ -7,8 +7,6 @@ import {NProgress} from 'meteor/mrt:nprogress';
 
 import {NotificationService} from '../services';
 
-import './nprogress';
-
 // SimpleSchema errors overridden
 SimpleSchema.messages({
     required: "[label] is required",
@@ -49,9 +47,9 @@ AutoForm.addHooks(null, {
     }
 });
 
-// ActiveRoute.configure({
-//     activeClass: 'is-active'
-// });
+ActiveRoute.configure({
+    activeClass: 'active'
+});
 
 // Alerts configuration
 sAlert.config({

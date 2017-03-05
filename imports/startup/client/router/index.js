@@ -5,10 +5,10 @@ import './config';
 import './security';
 
 // Application's routes
-import './routes/admin';
-import './routes/auth';
-import './routes/credentials';
-import './routes/map';
-import './routes/profile';
-import './routes/public';
-import './routes/storage';
+import './routes/admin/admin';
+import './routes/public/auth';
+import './routes/public/public';
+import './routes/rea/credentials';
+import './routes/rea/map';
+import './routes/rea/profile';
+import './routes/rea/storage';
