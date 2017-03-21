@@ -10,7 +10,7 @@ export const routes = [
     {
         path: '/users',
         name: 'admin.users',
-        template: 'admin.users',
+        template: 'Admin_users',
         friendlyName: 'Users',
         default: true
     }
@@ -37,7 +37,7 @@ routes.forEach((route) => {
     adminGroup.route(route.path, {
         name: route.name,
         action() {
-            BlazeLayout.render('layout', {page: 'admin.index', tab: route.template});
+            BlazeLayout.render('layout', {page: 'Admin_index', tab: route.template});
         }
     });
 });

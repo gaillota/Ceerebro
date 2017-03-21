@@ -47,7 +47,7 @@ export const defaultSchema = {
     }
 };
 
-// Default schema for "count" fields
+// Default schema for denormalized "count" fields
 export const countSchema = {
     type: Number,
     min: 0,

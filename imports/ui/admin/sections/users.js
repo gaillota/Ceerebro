@@ -9,7 +9,7 @@ import {NotificationService} from '../../../startup/services';
 
 import './users.html';
 
-const templateName = 'admin.users';
+const templateName = 'Admin_users';
 
 Template[templateName].onCreated(function adminAccountsCreated() {
     this.subscribe('admin.users');

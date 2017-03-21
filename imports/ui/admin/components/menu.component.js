@@ -5,7 +5,7 @@ import {routes} from '../../../startup/client/router/routes/admin/admin';
 
 import './menu.component.html';
 
-const templateName = 'admin.component.menu';
+const templateName = 'Admin_menu';
 
 Template[templateName].onCreated(function () {
     this.getCurrentRoute = new ReactiveVar();
